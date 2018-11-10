@@ -2,17 +2,16 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-
-import java.awt.*;
 
 public class LoginController {
 
     @FXML
-    TextField userNameField;
+    PasswordField passwordField;
 
     @FXML
-    PasswordField passwordField;
+    TextField userNameField;
 
     @FXML
     Button login;
@@ -22,4 +21,6 @@ public class LoginController {
 
     @FXML
     Button guestAccess;
+
+
 }
