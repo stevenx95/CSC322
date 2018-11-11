@@ -31,7 +31,7 @@
       </VBox>
       <HBox spacing="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="350.0">
          <children>
-            <Button fx:id="signUp" mnemonicParsing="false" style="-fx-background-color: #27F915; -fx-text-fill: #ffffff; -fx-font-weight: 700;" text="Sign Up" />
+            <Button fx:id="signUp" defaultButton="true" mnemonicParsing="false" stylesheets="@styles.css" text="Sign Up" />
             <Button fx:id="guestAccess" defaultButton="true" mnemonicParsing="false" text="Enter as Guest">
                <HBox.margin>
                   <Insets left="20.0" />
