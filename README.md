@@ -1,2 +1,2 @@
-# CSC322
+# CSC322 Gucci Gang
 Project
