@@ -1,4 +1,4 @@
-package sample;
+package org.guccigang.mini_google_docs;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

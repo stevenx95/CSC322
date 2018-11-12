@@ -1,7 +1,7 @@
 /*
     This class will be handling basic database utilities like connecting to the database.
  */
-package sample;
+package org.guccigang.mini_google_docs;
 import java.sql.*;
 import javax.swing.JOptionPane; // this class comes from the swing library it produces a pop up windows
 //I use it hear instead of JavaFX becasue it is quicker to code and use.
