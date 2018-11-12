@@ -20,7 +20,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                </VBox.margin></PasswordField>
-          <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="27.0" prefWidth="93.0" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#loginAction" prefHeight="27.0" prefWidth="93.0" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <VBox.margin>
                   <Insets bottom="10.0" left="40.0" top="10.0" />
                </VBox.margin></Button>
@@ -31,7 +31,7 @@
       </VBox>
       <HBox spacing="20.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="350.0">
          <children>
-            <Button fx:id="signUp" defaultButton="true" mnemonicParsing="false" stylesheets="@styles.css" text="Sign Up" />
+            <Button fx:id="signUp" mnemonicParsing="false" stylesheets="@styles.css" text="Sign Up" />
             <Button fx:id="guestAccess" defaultButton="true" mnemonicParsing="false" text="Enter as Guest">
                <HBox.margin>
                   <Insets left="20.0" />
