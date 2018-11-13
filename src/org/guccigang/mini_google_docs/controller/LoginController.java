@@ -36,11 +36,16 @@ public class LoginController {
     private Scene scene;
 
     //these variables are used to query from database;
-    private Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322Project","root","starpoint29");//DbUtil.connectDB();
+    private Connection connection;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    public LoginController() throws SQLException {
+    public LoginController() {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322Project", "root", "Starpoint29");//DbUtil.connectDB();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
