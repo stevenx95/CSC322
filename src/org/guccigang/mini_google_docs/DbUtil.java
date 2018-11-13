@@ -10,7 +10,7 @@ public class DbUtil {
      public static Connection connectDB() {
          try {
             Class.forName("com.mysql.jdbc.Driver");
-             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/testdb", "root", "5342");
+             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/322project", "root", "starpoint29");
              return conn;
          } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);

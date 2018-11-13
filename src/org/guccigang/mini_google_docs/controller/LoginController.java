@@ -1,10 +1,7 @@
 package org.guccigang.mini_google_docs.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,9 +36,12 @@ public class LoginController {
     private Scene scene;
 
     //these variables are used to query from database;
-    private Connection connection = null;//DbUtil.connectDB();
+    private Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322Project","root","starpoint29");//DbUtil.connectDB();
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+
+    public LoginController() throws SQLException {
+    }
 
 
     public void loginAction (ActionEvent event) {
@@ -49,8 +49,8 @@ public class LoginController {
         String password = passwordField.getText();
         String sql = "SELECT * FROM users WHERE email= ? and password= ?";
         try {
-            //resultSet = processQuery(sql, userName, password);
-            if(true/*!resultSet.next()*/) {
+            resultSet = processQuery(sql, userName, password);
+            if(!resultSet.next()) {
                 popupWindow("Please enter correct username and password", "Wrong username or password", "Failed");
             } else {
                 popupWindow("Login Successful!", null, "Success");
