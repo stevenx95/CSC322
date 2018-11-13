@@ -1,4 +1,4 @@
-package sample;
+package org.guccigang.mini_google_docs;
 
 import java.io.File;
 import java.io.FileNotFoundException;
