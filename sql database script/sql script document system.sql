@@ -3,7 +3,6 @@ drop table if exists sharedDocs;
 drop table if exists documents;
 drop table if exists users;
 
-
 CREATE TABLE users (userName varchar(20) PRIMARY KEY, password varchar(20) NOT NULL, firstName varchar(20) NOT NULL, 
 lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar(20) NOT NULL, interest2 varchar(20) NOT NULL);
 
