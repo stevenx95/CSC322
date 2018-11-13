@@ -50,8 +50,8 @@ public class LoginController {
         String password = passwordField.getText();
         String sql = "SELECT * FROM users WHERE email= ? and password= ?";
         try {
-            resultSet = processQuery(sql, userName, password);
-            if(!resultSet.next()) {
+            //resultSet = processQuery(sql, userName, password);
+            if(true/*!resultSet.next()*/) {
                 popupWindow("Please enter correct username and password", "Wrong username or password", "Failed");
             } else {
                 popupWindow("Login Successful!", null, "Success");
