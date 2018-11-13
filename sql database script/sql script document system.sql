@@ -4,7 +4,8 @@ drop table if exists documents;
 drop table if exists users;
 
 CREATE TABLE users (userName varchar(20) PRIMARY KEY, password varchar(20) NOT NULL, firstName varchar(20) NOT NULL, 
-lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar(20) NOT NULL, interest2 varchar(20) NOT NULL);
+lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar(20) NOT NULL, interest2 varchar(20) NOT NULL,
+membershipLevel int(10));
 
 CREATE TABLE documents (userName varchar(20) NOT NULL, docID int(50), 
 version int(50), content text, public int(1) NOT NULL, resticted int(1) NOT NULL,
