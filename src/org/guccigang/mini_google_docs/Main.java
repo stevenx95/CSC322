@@ -14,19 +14,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/signUp.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
         //for testing purposes.
-        showViewDocumentWindow();
+        //showViewDocumentWindow("views/signUp.fxml");
     }
 
-    public void showViewDocumentWindow(){
+    public void showViewDocumentWindow(String file){
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/ViewDocuments.fxml"));
+            loader.setLocation(Main.class.getResource(file));
             AnchorPane viewDocumentPage = (AnchorPane) loader.load();
 
             //Create the view document stage.
@@ -35,9 +35,9 @@ public class Main extends Application {
             Scene scene = new Scene(viewDocumentPage);
             viewDocumentStage.setScene(scene);
 
-            //Set the controller
-            ViewDocumentsController controller = loader.getController();
-            viewDocumentStage.show();
+//            //Set the controller
+//            ViewDocumentsController controller = loader.getController();
+//            viewDocumentStage.show();
 
         }catch (IOException e){
             e.printStackTrace();
