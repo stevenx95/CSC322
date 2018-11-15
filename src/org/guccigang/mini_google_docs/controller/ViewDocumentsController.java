@@ -34,8 +34,8 @@ public class ViewDocumentsController {
     private void initialize(){
         int columnIncrementor = 0;
         int rowIncrementor = 0;
-        for(int i = 0; i < 15; i++){
-            documentLayout.add(new Label("Hello World"),columnIncrementor,rowIncrementor);
+        for(int i = 0; i < 200; i++){
+            documentLayout.add(new VBox(new ImageView(),new Label("untitle.txt")),columnIncrementor,rowIncrementor);
             columnIncrementor++;
             if((i + 1) % 5 == 0){
                 rowIncrementor ++;
@@ -43,6 +43,7 @@ public class ViewDocumentsController {
                 documentLayout.addRow(1);
             }
         }
+
 
 
     }

@@ -8,7 +8,7 @@ lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar
 membershipLevel int(10));
 
 CREATE TABLE documents (userName varchar(20) NOT NULL,docName varchar(20), docID int(50), 
-version int(50), content text, public int(1) NOT NULL, resticted int(1) NOT NULL,
+version int(50), content text, public int(1) NOT NULL, resticted int(1) NOT NULL, counter int(32),
 PRIMARY KEY (docID, version),
 FOREIGN KEY (userName) REFERENCES users(userName));    
 

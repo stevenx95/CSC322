@@ -42,7 +42,8 @@ public class LoginController {
 
     public LoginController() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322Project", "root", "Starpoint29");//DbUtil.connectDB();
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/document_system", "root", "password");//DbUtil.connectDB();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +53,7 @@ public class LoginController {
     public void loginAction (ActionEvent event) {
         String userName = userNameField.getText();
         String password = passwordField.getText();
-        String sql = "SELECT * FROM users WHERE email= ? and password= ?";
+        String sql = "SELECT * FROM users WHERE userName= ? and password= ?";
         try {
             resultSet = processQuery(sql, userName, password);
             if(!resultSet.next()) {
