@@ -51,6 +51,9 @@ public class LoginController {
 
 
     public void loginAction (ActionEvent event) {
+        //Event listener for pressing the login button
+        //precondition: userNamefield.getText() != null && passwordField.getText() != null;
+        //postcondition: user is sent to a profile screen
         String userName = userNameField.getText();
         String password = passwordField.getText();
         String sql = "SELECT * FROM users WHERE userName= ? and password= ?";
