@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.controller.ViewDocumentsController;
 
@@ -19,7 +20,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
         //for testing purposes.
-        showViewDocumentWindow();
+       // showViewDocumentWindow();
     }
 
     public void showViewDocumentWindow(){
@@ -27,7 +28,7 @@ public class Main extends Application {
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/ViewDocuments.fxml"));
-            AnchorPane viewDocumentPage = (AnchorPane) loader.load();
+            GridPane viewDocumentPage = (GridPane) loader.load();
 
             //Create the view document stage.
             Stage viewDocumentStage = new Stage();

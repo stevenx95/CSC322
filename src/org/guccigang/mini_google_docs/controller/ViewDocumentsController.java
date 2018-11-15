@@ -24,7 +24,6 @@ public class ViewDocumentsController {
      * The constructor is called before the initialize() method.
      */
     public ViewDocumentsController(){
-
     }
     /**
      * Initializes the controller class. This method is automatically called
@@ -32,10 +31,12 @@ public class ViewDocumentsController {
      */
     @FXML
     private void initialize(){
+        System.out.println("HELLO");
+
         int columnIncrementor = 0;
         int rowIncrementor = 0;
         for(int i = 0; i < 200; i++){
-            documentLayout.add(new VBox(new ImageView(),new Label("untitle.txt")),columnIncrementor,rowIncrementor);
+            documentLayout.add(new Label("untitle.txt"),columnIncrementor,rowIncrementor);
             columnIncrementor++;
             if((i + 1) % 5 == 0){
                 rowIncrementor ++;
