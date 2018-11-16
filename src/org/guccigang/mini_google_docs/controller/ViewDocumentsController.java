@@ -52,14 +52,7 @@ public class ViewDocumentsController {
      */
     @FXML
     private void initialize(){
-        try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
-            System.out.println(documentFileTable.getItems().get(0).contentProperty());
-        }catch (SQLException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }
+        fillTable();
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
@@ -68,6 +61,15 @@ public class ViewDocumentsController {
          *while document is highlighted then that exact document should open.
          */
         documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
+    }
+    public void fillTable(){
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     /**

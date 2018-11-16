@@ -42,6 +42,7 @@ public class TextEditorController {
 
     public void setAreaText(String content) {
         this.areaText.setText(content);
+        this.areaText.setEditable(false);
     }
 
     /**
