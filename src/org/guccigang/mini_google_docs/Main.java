@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.guccigang.mini_google_docs.controller.TextEditorController;
 import org.guccigang.mini_google_docs.controller.ViewDocumentsController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
@@ -46,6 +47,7 @@ public class Main extends Application {
 
             //Set the controller
             ViewDocumentsController controller = loader.getController();
+            controller.setMainApp(this);
             //Gives a connection with main app and view documents controller
             viewDocumentStage.show();
 
@@ -53,7 +55,30 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    public void openTextEditor(String content){
+        try{
+            //Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/TextEditor.fxml"));
+            AnchorPane textEditor = (AnchorPane) loader.load();
 
+            //Create the view document stage.
+            Stage textEditorStage = new Stage();
+            textEditorStage.setTitle("Text Editor");
+            Scene scene = new Scene(textEditor);
+            textEditorStage.setScene(scene);
+
+            //Set the controller
+            TextEditorController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setAreaText(content);
+            //Gives a connection with main app and view documents controller
+            textEditorStage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     public Main(){
 
     }
