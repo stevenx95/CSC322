@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -99,6 +100,21 @@ public class LoginController {
         alert.setHeaderText(header);
         alert.setTitle(title);
         alert.showAndWait();
+    }
+
+    public void signUpAction(ActionEvent event) {
+        try {
+            final Stage dialog = new Stage();
+            Node node = (Node) event.getSource();
+            stage = (Stage) node.getScene().getWindow();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(stage);
+            scene = new Scene(FXMLLoader.load(getClass().getResource("signUp.fxml")));
+            dialog.setScene(scene);
+            dialog.showAndWait();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
