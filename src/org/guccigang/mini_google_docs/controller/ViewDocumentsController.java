@@ -1,29 +1,46 @@
 package org.guccigang.mini_google_docs.controller;
 
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import org.guccigang.mini_google_docs.model.DocumentDAO;
+import org.guccigang.mini_google_docs.model.DocumentFile;
+import org.guccigang.mini_google_docs.Main;
+
+import java.sql.SQLException;
 
 public class ViewDocumentsController {
     @FXML
     private Button homeButton;
-
     @FXML
-    private GridPane documentLayout;
+    private Button openDocButton;
+    @FXML
+    private TableView<DocumentFile> documentFileTable;
+    @FXML
+    private TableColumn<DocumentFile, String> documentNameColumn;
+    @FXML
+    private TableColumn<DocumentFile, String> documentOwnerColumn;
 
+    //Reference to the main application.
+    private Main mainApp;
     private Stage viewDocumentStage;
+
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public ViewDocumentsController(){
+
+    }
+
+    /**
+     * This function is called when the user clicks open document.
+     */
+    public void handleOpenDocument(){
+
     }
     /**
      * Initializes the controller class. This method is automatically called
@@ -31,23 +48,30 @@ public class ViewDocumentsController {
      */
     @FXML
     private void initialize(){
-        System.out.println("HELLO");
-
-        int columnIncrementor = 0;
-        int rowIncrementor = 0;
-        for(int i = 0; i < 200; i++){
-            documentLayout.add(new Label("untitle.txt"),columnIncrementor,rowIncrementor);
-            columnIncrementor++;
-            if((i + 1) % 5 == 0){
-                rowIncrementor ++;
-                columnIncrementor = 0;
-                documentLayout.addRow(1);
-            }
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+            System.out.println(documentFileTable.getItems().get(0).contentProperty());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
 
+        // Initialize the person table with the two columns.
+        documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
+        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
+
+
+        /**Listens for selection changes and when the user clicks open document on while
+         *while document is highlighted then that exact document should open.
+         */
+        documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
 
 
     }
+
+
+
 
 
 }

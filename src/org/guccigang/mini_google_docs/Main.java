@@ -1,17 +1,22 @@
 package org.guccigang.mini_google_docs;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.controller.ViewDocumentsController;
+import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class Main extends Application {
+    //List of documents for table view in view document controller.
+    private ObservableList<DocumentFile> documentFilesData = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,15 +25,18 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
         //for testing purposes.
-       // showViewDocumentWindow();
+        showViewDocumentWindow();
     }
 
+    /**
+     * This function displays Jonathan's view document fxml file for testing purposes.
+     */
     public void showViewDocumentWindow(){
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/ViewDocuments.fxml"));
-            GridPane viewDocumentPage = (GridPane) loader.load();
+            AnchorPane viewDocumentPage = (AnchorPane) loader.load();
 
             //Create the view document stage.
             Stage viewDocumentStage = new Stage();
@@ -38,6 +46,7 @@ public class Main extends Application {
 
             //Set the controller
             ViewDocumentsController controller = loader.getController();
+            //Gives a connection with main app and view documents controller
             viewDocumentStage.show();
 
         }catch (IOException e){
@@ -45,7 +54,14 @@ public class Main extends Application {
         }
     }
 
+    public Main(){
+
+    }
+
+
+
     public static void main(String[] args) {
         launch(args);
     }
+
 }
