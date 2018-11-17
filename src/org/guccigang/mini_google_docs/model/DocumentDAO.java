@@ -3,7 +3,6 @@ package org.guccigang.mini_google_docs.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.guccigang.mini_google_docs.DbUtil;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

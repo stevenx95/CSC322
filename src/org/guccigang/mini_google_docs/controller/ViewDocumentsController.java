@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,7 +26,6 @@ public class ViewDocumentsController {
     private TableColumn<DocumentFile, String> documentOwnerColumn;
 
     //Reference to the main application.
-    private Main mainApp;
     private Stage viewDocumentStage;
 
     /**
@@ -43,7 +43,14 @@ public class ViewDocumentsController {
     public void handleOpenDocument(){
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
-            mainApp.openTextEditor(documentFileTable.getItems().get(selectedIndex).getContent());
+            Main.openTextEditor(documentFileTable.getItems().get(selectedIndex).getContent());
+        }else {
+            //Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Document Selected");
+            alert.setContentText("Please select a document in the table.");
+            alert.showAndWait();
         }
     }
     /**
@@ -62,6 +69,10 @@ public class ViewDocumentsController {
          */
         documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
     }
+
+    /**
+     * This function acesses the data base and fills the table with all the documents of the data base.
+     */
     public void fillTable(){
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
@@ -72,14 +83,14 @@ public class ViewDocumentsController {
         }
     }
 
-    /**
-     * Is called by the main application to give a reference ack to itself
-     *
-     * @param mainApp
-     */
-    public void setMainApp(Main mainApp){
-        this.mainApp = mainApp;
-    }
+//    /**
+//     * Is called by the main application to give a reference ack to itself
+//     *
+//     * @param mainApp
+//     */
+//    public void setMainApp(Main mainApp){
+//        this.mainApp = mainApp;
+//    }
 
 
 
