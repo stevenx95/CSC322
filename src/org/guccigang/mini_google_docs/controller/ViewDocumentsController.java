@@ -59,7 +59,7 @@ public class ViewDocumentsController {
      */
     @FXML
     private void initialize(){
-        fillTable();
+        //fillTable();
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
@@ -73,15 +73,15 @@ public class ViewDocumentsController {
     /**
      * This function acesses the data base and fills the table with all the documents of the data base.
      */
-    public void fillTable(){
-        try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
-        }catch (SQLException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }
-    }
+//    public void fillTable(){
+//        try{
+//            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }catch (ClassNotFoundException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 //    /**
 //     * Is called by the main application to give a reference ack to itself

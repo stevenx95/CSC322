@@ -83,6 +83,7 @@ public class LoginController {
 
     public void visitorAction(ActionEvent event) {
         try {
+
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/visitorUI.fxml"));
@@ -97,6 +98,11 @@ public class LoginController {
             ControllerVisitorUI controller = loader.getController();
             //Gives a connection with main app and view documents controller
             visitorStage.show();
+
+            //destroy current window
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
