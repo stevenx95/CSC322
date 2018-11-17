@@ -10,18 +10,18 @@ import java.sql.SQLException;
 public class DocumentDAO {
 
 
-    public static ObservableList<DocumentFile> getAllDocumentFilesData() throws SQLException, ClassNotFoundException{
-        String selectStatement = "SELECT * FROM documents";
-        //Execute select statment
-        try{
-            ResultSet resultSet = DbUtil.executQueryDB(selectStatement);
-            ObservableList<DocumentFile> documentFilesData = getDocumentList(resultSet);
-            return documentFilesData;
-        }catch (SQLException e){
-            System.out.println("SQL query has failed" + e);
-            throw e;
-        }
-    }
+//    public static ObservableList<DocumentFile> getAllDocumentFilesData() throws SQLException, ClassNotFoundException{
+//        String selectStatement = "SELECT * FROM documents";
+//        //Execute select statment
+//        try{
+//            //ResultSet resultSet = DbUtil.executQueryDB(selectStatement);
+//            ObservableList<DocumentFile> documentFilesData = getDocumentList(resultSet);
+//            return documentFilesData;
+//        }catch (SQLException e){
+//            System.out.println("SQL query has failed" + e);
+//            throw e;
+//        }
+//    }
 
     //Use ResultSet from DB as parameter and set Document attributes as such then returns every document from database.
     private static ObservableList<DocumentFile> getDocumentList(ResultSet resultSet)throws SQLException{

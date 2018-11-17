@@ -11,9 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.guccigang.mini_google_docs.DbUtil;
+import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.Main;
 
 public class LoginController {
 
@@ -23,28 +25,19 @@ public class LoginController {
     @FXML
     private TextField userNameField;
 
-    @FXML
-    private Button login;
-
-    @FXML
-    private Button signup;
-
-    @FXML
-    private Button guestAccess;
-
     //this variables will be used to change scene
     private Stage stage;
     private Scene scene;
 
     //these variables are used to query from database;
     private Connection connection;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+    private DbUtil dbUtil;
 
     public LoginController() {
         try {
+            dbUtil = new DbUtil();
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/document_system", "root", "password");//DbUtil.connectDB();
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/document_system", "root", "password");//DBUtil.connectDB();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,16 +48,15 @@ public class LoginController {
         //Event listener for pressing the login button
         //precondition: userNamefield.getText() != null && passwordField.getText() != null;
         //postcondition: user is sent to a profile screen
-        String userName = userNameField.getText();
-        String password = passwordField.getText();
-        String sql = "SELECT * FROM users WHERE userName= ? and password= ?";
+        dbUtil.setSqlParams(userNameField.getText(), passwordField.getText());
+        dbUtil.setSqlStatement( "SELECT * FROM users WHERE userName= ? and password= ?");
         try {
-            resultSet = processQuery(sql, userName, password);
+            ResultSet resultSet = dbUtil.processQuery(connection);
             if(!resultSet.next()) {
-                popupWindow("Please enter correct username and password", "Wrong username or password", "Failed");
+                GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION,"Please enter correct username and password", "Wrong username or password", "Failed");
             } else {
-                popupWindow("Login Successful!", null, "Success");
-                changeScene(event, "visitor.fxml");
+                GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION,"Login Successful!", null, "Success");
+                changeScene(event, "visitorUI.fxml");
 
             }
         } catch (Exception e ) {
@@ -72,14 +64,42 @@ public class LoginController {
         }
     }
 
-    private ResultSet processQuery(String sql, String param1, String param2) throws SQLException {
-        //precondition: sql is a valid SQL statement  with ? for param1, param2;
-        //param1 and param2 two can be inserted into sql for execution.
-        //postcondition: a resultset object is returned containing the results from the query as a set or it is null.
-        preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, param1);
-        preparedStatement.setString(2, param2);
-        return preparedStatement.executeQuery();
+    public void signUpAction(ActionEvent event) {
+        //post-condition: A new window opens on top of the sign in with sign up form.
+        //Tis new window is MODAL meaning that it will block all other windows of the application until it is closed.
+        try {
+            final Stage dialog = new Stage();
+            Node node = (Node) event.getSource();
+            stage = (Stage) node.getScene().getWindow();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(stage);
+            scene = new Scene(FXMLLoader.load(Main.class.getResource("views/signUp.fxml")));
+            dialog.setScene(scene);
+            dialog.showAndWait();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void visitorAction(ActionEvent event) {
+        try {
+            //Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/visitorUI.fxml"));
+
+            //Create the view document stage.
+            Stage visitorStage = new Stage();
+            visitorStage.setTitle("Guest Profile");
+            Scene scene = new Scene(loader.load());
+            visitorStage.setScene(scene);
+
+            //Set the controller
+            ControllerVisitorUI controller = loader.getController();
+            //Gives a connection with main app and view documents controller
+            visitorStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void changeScene(ActionEvent event, String dest) throws IOException {
@@ -88,33 +108,8 @@ public class LoginController {
         Node node = (Node) event.getSource();
         stage = (Stage) node.getScene().getWindow();
         stage.close();
-        scene = new Scene(FXMLLoader.load(getClass().getResource(dest)));
+        scene = new Scene(FXMLLoader.load(Main.class.getResource(dest)));
         stage.setScene(scene);
         stage.show();
     }
-
-    public static void popupWindow(String message, String header, String title) {
-        //postcondition: a new pop up window is shown with 'message' as body, 'header' as header and 'title' as title.
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(message);
-        alert.setHeaderText(header);
-        alert.setTitle(title);
-        alert.showAndWait();
-    }
-
-    public void signUpAction(ActionEvent event) {
-        try {
-            final Stage dialog = new Stage();
-            Node node = (Node) event.getSource();
-            stage = (Stage) node.getScene().getWindow();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(stage);
-            scene = new Scene(FXMLLoader.load(getClass().getResource("signUp.fxml")));
-            dialog.setScene(scene);
-            dialog.showAndWait();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }
