@@ -32,7 +32,7 @@ public class Main extends Application {
     /**
      * This function displays Jonathan's view document fxml file for testing purposes.
      */
-    public void showViewDocumentWindow(){
+    public static void showViewDocumentWindow(){
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -47,15 +47,15 @@ public class Main extends Application {
 
             //Set the controller
             ViewDocumentsController controller = loader.getController();
-            controller.setMainApp(this);
             //Gives a connection with main app and view documents controller
+            //controller.setMainApp(this);
             viewDocumentStage.show();
 
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-    public void openTextEditor(String content){
+    public static void openTextEditor(String content){
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -70,9 +70,8 @@ public class Main extends Application {
 
             //Set the controller
             TextEditorController controller = loader.getController();
-            controller.setMainApp(this);
+            //Takes the string and loads it in text editor.
             controller.setAreaText(content);
-            //Gives a connection with main app and view documents controller
             textEditorStage.show();
 
         }catch (IOException e){
