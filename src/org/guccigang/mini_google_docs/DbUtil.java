@@ -34,7 +34,7 @@ public class DbUtil {
         System.out.println("JDBC driver detected...");
         //Establishing a connection to database using connection string
         try {
-            connection = DriverManager.getConnection(connString, "root", "password");
+            connection = DriverManager.getConnection(connString, "root", "Jose9821C02");
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();
@@ -63,8 +63,6 @@ public class DbUtil {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            disconnectDB();
         }
         return (preparedStatement == null) ? 0: preparedStatement.executeUpdate();
     }
@@ -78,8 +76,6 @@ public class DbUtil {
             preparedStatement = connection.prepareStatement(sqlStatement);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            disconnectDB();
         }
         return (preparedStatement == null) ? null: preparedStatement.executeQuery();
     }
@@ -96,8 +92,6 @@ public class DbUtil {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            disconnectDB();
         }
         return (preparedStatement == null) ? null: preparedStatement.executeQuery();
     }
