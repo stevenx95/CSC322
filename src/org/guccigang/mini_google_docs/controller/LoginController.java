@@ -24,16 +24,10 @@ public class LoginController {
     private Stage stage;
     private Scene scene;
 
-    //these variables are used to query from database;
-    private Connection connection;
+
 
     public LoginController() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/document_system", "root", "password");//DBUtil.connectDB();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        DbUtil.connectDB();
     }
 
 
@@ -45,18 +39,16 @@ public class LoginController {
         try {
             ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
             if(resultSet.next()) {
-                if(resultSet.next()) {
-                    GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
-                   int x = resultSet.getInt("membershipLevel");
-                   String name = resultSet.getString("firstname");
+                GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
+               int x = resultSet.getInt("membershipLevel");
+               String name = resultSet.getString("firstname");
 
-                    if (x == 1) {
-                        GuiUtil.createWindow(event, "views/originalUser.fxml", name);
-                    }
+                if (x == 1) {
+                    GuiUtil.createWindow(event, "views/originalUserUI.fxml", name);
+                }
 
-                    if (x == 2) {
-                        GuiUtil.createWindow(event, "views/superUser.fxml", name);
-                    }
+                if (x == 2) {
+                    GuiUtil.createWindow(event, "views/superUserUI.fxml", name);
                 }
             } else {
                 GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION,

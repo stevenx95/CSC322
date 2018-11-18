@@ -3,7 +3,6 @@ package org.guccigang.mini_google_docs.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -36,7 +35,7 @@ public class SignUpController {
             return;
         }
 
-       String sql = "INSERT INTO users VALUES (?,?,?,?,?,?,?,1)";
+       String sql = "INSERT INTO users VALUES (?,?,?,?,?,?,?,0)";
         try {
           int result =  DbUtil.executeUpdateDB(sql, userName.getText(), passwordField.getText(), firstName.getText(),
                   lastName.getText(), interest1.getText(), interest2.getText(), interest3.getText());
