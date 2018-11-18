@@ -15,9 +15,6 @@ import javax.swing.JOptionPane; // this class comes from the swing library it pr
 //I use it here instead of JavaFX becasue it is quicker to code and use.
 
 public class DbUtil {
-    private String sqlStatement;
-    private String[] sqlParams;
-    private PreparedStatement preparedStatement;
 
     //Declare JDBC Driver
     private static final String JDBC_Driver = "com.mysql.jdbc.Driver";
@@ -28,13 +25,12 @@ public class DbUtil {
     //Connection String  YOU GUYS WILL HAVE TO KEEP CHANGING THIS CRAP DEPENDING ON THE NAME OF YOUR DATABASE
     private static final String connString = "jdbc:mysql://localhost/document_system";
 
-    public static void connectDB() throws SQLException, ClassNotFoundException {
+    public static void connectDB() {
         try {
             Class.forName(JDBC_Driver);
         } catch (ClassNotFoundException e) {
             System.out.println("Please get the JDBC drive installed...");
             e.printStackTrace();
-            throw e;
         }
 
         System.out.println("JDBC driver detected...");
@@ -44,18 +40,17 @@ public class DbUtil {
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();
-            throw e;
         }
     }
 
     //Close Connection
-    public static void disconnectDB() throws SQLException {
+    public static void disconnectDB() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
         } catch (Exception e) {
-            throw e;
+            e.printStackTrace();
         }
     }
 
@@ -99,46 +94,52 @@ public class DbUtil {
 //    }
 
     //Execute update for (insert,update,delete) operations
-    public static void executeUpdateDB(String queryStatement) throws SQLException, ClassNotFoundException {
-        //Declare statment as null
-        Statement statement = null;
+    public static int executeUpdateDB(String sqlStatement, String... sqlParams) throws SQLException  {
+        connectDB();
+        PreparedStatement preparedStatement = null;
         try {
-            connectDB();
-            statement = connection.createStatement();
-            statement.executeUpdate(queryStatement);
-        } catch (SQLException e) {
-            System.out.println("Problem occurred at in execute update. Please check statment" + e);
-            throw e;
-        } finally {
-            if (statement != null) {
-                statement.close();
+            preparedStatement = connection.prepareStatement(sqlStatement);
+            for (int i = 0; i < sqlParams.length; i++) {
+                preparedStatement.setString(i + 1, sqlParams[i]);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             disconnectDB();
         }
-    }
-    public void setSqlParams(String... params) {
-        sqlParams = params;
+        return (preparedStatement == null) ? 0: preparedStatement.executeUpdate();
     }
 
-    public String[] getSqlParams() {
-        return sqlParams;
-    }
-
-    public String getSqlStatement() {
-        return sqlStatement;
-    }
-
-    public void setSqlStatement(String sqlStatement) {
-        this.sqlStatement = sqlStatement;
-    }
-
-    public ResultSet processQuery(Connection connection) throws SQLException {
+    public static ResultSet processQuery(String sqlStatement) throws SQLException {
         //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
         //post-condition: a result set object is returned containing the results from the query as a set or it is null.
-        preparedStatement = connection.prepareStatement(sqlStatement);
-        for (int i = 0; i < sqlParams.length; i++) {
-            preparedStatement.setString(i + 1, sqlParams[i]);
+        connectDB();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sqlStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnectDB();
         }
-        return preparedStatement.executeQuery();
+        return (preparedStatement == null) ? null: preparedStatement.executeQuery();
+    }
+
+    public static ResultSet processQuery(String sqlStatement, String... sqlParams) throws SQLException {
+        //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
+        //post-condition: a result set object is returned containing the results from the query as a set or it is null.
+        connectDB();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sqlStatement);
+            for (int i = 0; i < sqlParams.length; i++) {
+                preparedStatement.setString(i + 1, sqlParams[i]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnectDB();
+        }
+        return (preparedStatement == null) ? null: preparedStatement.executeQuery();
     }
 }
