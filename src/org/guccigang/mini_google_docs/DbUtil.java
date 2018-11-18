@@ -54,7 +54,9 @@ public class DbUtil {
 
     //Execute update for (insert,update,delete) operations
     public static int executeUpdateDB(String sqlStatement, String... sqlParams) throws SQLException  {
-        connectDB();
+        if (connection == null) {
+            connectDB();
+        }
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(sqlStatement);
@@ -70,7 +72,9 @@ public class DbUtil {
     public static ResultSet processQuery(String sqlStatement) throws SQLException {
         //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
         //post-condition: a result set object is returned containing the results from the query as a set or it is null.
-        connectDB();
+        if (connection == null) {
+            connectDB();
+        }
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(sqlStatement);
@@ -83,7 +87,9 @@ public class DbUtil {
     public static ResultSet processQuery(String sqlStatement, String... sqlParams) throws SQLException {
         //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
         //post-condition: a result set object is returned containing the results from the query as a set or it is null.
-        connectDB();
+        if (connection == null) {
+            connectDB();
+        }
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(sqlStatement);
