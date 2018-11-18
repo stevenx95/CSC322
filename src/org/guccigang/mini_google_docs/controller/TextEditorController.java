@@ -5,12 +5,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import org.guccigang.mini_google_docs.Main;
+import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import java.io.File;
 import java.util.Arrays;
 
 public class TextEditorController {
     private Main mainApp;
+    private DocumentFile selectedDocument;
 
     @FXML
     private TextArea areaText;
@@ -39,9 +41,12 @@ public class TextEditorController {
     private void initialize(String content){
 
     }
+    public void setSelectedDocument(DocumentFile selectedDocument){
+        this.selectedDocument = selectedDocument;
+    }
 
-    public void setAreaText(String content) {
-        this.areaText.setText(content);
+    public void setAreaText(String docContent) {
+        this.areaText.setText(docContent);
         this.areaText.setEditable(false);
     }
 

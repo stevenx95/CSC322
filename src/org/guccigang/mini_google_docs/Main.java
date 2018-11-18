@@ -3,6 +3,7 @@ package org.guccigang.mini_google_docs;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,7 +37,7 @@ public class Main extends Application {
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/ViewDocuments.fxml"));
+            loader.setLocation(Main.class.getResource("views/VisitorViewDocuments.fxml"));
             AnchorPane viewDocumentPage = (AnchorPane) loader.load();
 
             //Create the view document stage.
@@ -55,11 +56,11 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    public static void openTextEditor(String content){
+    public static void openTextEditor(DocumentFile selectedDocument, String docContent){
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/TextEditor.fxml"));
+            loader.setLocation(Main.class.getResource("views/VisitorTextEditor.fxml"));
             AnchorPane textEditor = (AnchorPane) loader.load();
 
             //Create the view document stage.
@@ -71,7 +72,8 @@ public class Main extends Application {
             //Set the controller
             TextEditorController controller = loader.getController();
             //Takes the string and loads it in text editor.
-            controller.setAreaText(content);
+            controller.setAreaText(docContent);
+            controller.setSelectedDocument(selectedDocument);
             textEditorStage.show();
 
         }catch (IOException e){

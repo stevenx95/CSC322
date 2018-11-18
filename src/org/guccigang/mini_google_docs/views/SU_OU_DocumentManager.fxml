@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.17725752508361203" layoutX="143.0" layoutY="111.0" prefHeight="351.0" prefWidth="647.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="0.0">
+               <children>
+                  <Button fx:id="homeButton" layoutX="42.0" layoutY="14.0" mnemonicParsing="false" text="Home" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="694.0">
+               <children>
+                  <TableView fx:id="documentFileTable" layoutX="144.0" layoutY="99.0" prefHeight="433.0" prefWidth="688.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="99.0">
+                     <columns>
+                        <TableColumn fx:id="documentNameColumn" prefWidth="343.0" text="Document Name" />
+                        <TableColumn fx:id="documentOwnerColumn" prefWidth="344.0" text="Document Owner" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="142.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
+                  <TextField layoutX="8.0" layoutY="14.0" prefHeight="31.0" prefWidth="213.0" />
+                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" text="Search" />
+                  <Button layoutX="8.0" layoutY="55.0" mnemonicParsing="false" text="New Document" />
+                  <Button layoutX="284.0" layoutY="55.0" mnemonicParsing="false" text="My Documents" />
+                  <Button layoutX="557.0" layoutY="55.0" mnemonicParsing="false" text="All Documents" />
+                  <Button layoutX="412.0" layoutY="55.0" mnemonicParsing="false" text="Public Documents" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -43,7 +43,9 @@ public class ViewDocumentsController {
     public void handleOpenDocument(){
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
-            Main.openTextEditor(documentFileTable.getItems().get(selectedIndex).getContent());
+            DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
+            String docContent = documentFileTable.getItems().get(selectedIndex).getContent();
+            Main.openTextEditor(selectedDocument, docContent);
         }else {
             //Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);

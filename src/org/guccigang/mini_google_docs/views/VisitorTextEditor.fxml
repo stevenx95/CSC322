@@ -13,9 +13,9 @@
     <BorderPane prefHeight="600.0" prefWidth="800.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
-                <Menu text="File">
-                    <MenuItem onAction="#onSave" text="Save" />
-                    <MenuItem onAction="#onLoad" text="Load" />
+                <Menu text="Options">
+                    <MenuItem onAction="#onSave" text="Retrieve Old Documents" />
+                    <MenuItem onAction="#onLoad" text="File Compaint" />
                     <MenuItem onAction="#onClose" text="Close" />
                 </Menu>
                 <Menu text="Help">
