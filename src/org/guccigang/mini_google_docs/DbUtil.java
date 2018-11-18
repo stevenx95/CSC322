@@ -34,7 +34,7 @@ public class DbUtil {
         System.out.println("JDBC driver detected...");
         //Establishing a connection to database using connection string
         try {
-            connection = DriverManager.getConnection(connString, "root", "Jose9821C02");
+            connection = DriverManager.getConnection(connString, "root", "");
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();
