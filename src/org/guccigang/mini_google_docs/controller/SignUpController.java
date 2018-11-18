@@ -62,7 +62,7 @@ public class SignUpController {
           if (!resultSet.next()) {
               GuiUtil.popupWindow(Alert.AlertType.ERROR, null, "Something went wrong. Please try again", "error");
           }else {
-                openNextScene(event);
+               GuiUtil.createWindow(event, "views/visitorUI.fxml", "visitor");
           }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,16 +75,5 @@ public class SignUpController {
         passwordField.clear();
         passwordCheck.clear();
 
-    }
-    private void openNextScene (ActionEvent event) throws IOException  {
-        //precondition: visitorUI.fxml and its controller exist
-        //postcondition: we are redirected to visitorUI.fxml
-        GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION, null, "Account Sucessfully created. Welcome!", "success");
-        Node node = (Node) event.getSource();
-        window = (Stage) node.getScene().getWindow();
-        window.close();
-        scene = new Scene(FXMLLoader.load(getClass().getResource("visitorUI.fxml")));
-        window.setScene(scene);
-        window.show();
     }
 }
