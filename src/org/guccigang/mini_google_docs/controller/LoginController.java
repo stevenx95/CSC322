@@ -4,11 +4,9 @@ import java.sql.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.DbUtil;
 import org.guccigang.mini_google_docs.GuiUtil;
 
@@ -19,17 +17,6 @@ public class LoginController {
 
     @FXML
     private TextField userNameField;
-
-    //this variables will be used to change scene
-    private Stage stage;
-    private Scene scene;
-
-
-
-    public LoginController() {
-        DbUtil.connectDB();
-    }
-
 
     public void loginAction (ActionEvent event) {
         //Event listener for pressing the login button
