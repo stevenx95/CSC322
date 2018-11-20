@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.ControllerVisitorUI">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.ControllerVisitorUI">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -50,11 +53,20 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
+                        <Button layoutX="5.0" layoutY="643.0" mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" textFill="#1389a7" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextArea layoutX="14.0" layoutY="14.0" prefHeight="516.0" prefWidth="557.0" text="Document Manager&#10;      All actions related to with Documents within &#10;      the UI.&#10;&#10;Report Commands&#10;       Report taboo words&#10;&#10;Upgrade Membership&#10;       Upgrade from a peasant Visitor account&#10;       to a regular Original User Account&#10;&#10;" />
+                        <TextArea layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="558.0" text="Document Manager&#10;      &gt;All actions related to with Documents within the UI.&#10;&#10;Report Commands&#10;      &gt;Report taboo words&#10;&#10;Upgrade Membership&#10;      &gt;Upgrade from a peasant Visitor account to a regular Original User Account&#10;&#10;" />
+                        <TableView layoutX="12.0" layoutY="354.0" prefHeight="307.0" prefWidth="558.0" AnchorPane.rightAnchor="12.800000000000068">
+                          <columns>
+                            <TableColumn prefWidth="85.59994506835938" text="Title" />
+                            <TableColumn prefWidth="85.59994506835938" text="Owner" />
+                              <TableColumn prefWidth="85.59994506835938" text="View Amount" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="13.0" layoutY="336.0" text="Top 3 Documents" />
                      </children>
                   </AnchorPane>
               </items>

@@ -58,6 +58,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
+                        <Button layoutX="3.0" layoutY="643.0" mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" textFill="#1389a7" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CSC322.iml" filepath="$PROJECT_DIR$/CSC322.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.iml" filepath="$PROJECT_DIR$/lib/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.iml" />
     </modules>
   </component>
 </project>

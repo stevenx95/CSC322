@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 
 import org.guccigang.mini_google_docs.GuiUtil;
 
+import java.io.IOException;
+
 public class ControllerVisitorUI {
 
     public void signUpAction(ActionEvent event) {
@@ -15,4 +17,15 @@ public class ControllerVisitorUI {
             e.printStackTrace();
         }
     }
+
+
+    public void signOutButton(ActionEvent event){
+        try {
+
+            GuiUtil.createWindow(event,"views/login.fxml", "Gucci Gang");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
