@@ -63,6 +63,8 @@ public class DbUtil {
             for (int i = 0; i < sqlParams.length; i++) {
                 preparedStatement.setString(i + 1, sqlParams[i]);
             }
+            result = preparedStatement.executeUpdate();
+            System.out.println(result);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
