@@ -24,7 +24,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE interests (
-    userName varchar(20) NOT NULL,
+    FOREIGN KEY (userName) REFERENCES users(userName),
     interest varchar(20)
 );
 
@@ -50,10 +50,14 @@ CREATE TABLE sharedDocs (
 );
 /*Does sharedDoc table need the version number also? */
 
-CREATE TABLE revisions (userName varchar(20) NOT NULL,
-docID int(50) NOT NULL, version int NOT NULL, dateOfEdit date NOT NULL,
-FOREIGN KEY (userName) REFERENCES users(userName),
-FOREIGN KEY (docID, version) REFERENCES documents(docID, version));
+CREATE TABLE revisions (
+    userName varchar(20) NOT NULL,
+    docID int(50) NOT NULL,
+    version int NOT NULL,
+    dateOfEdit date NOT NULL,
+    FOREIGN KEY (userName) REFERENCES users(userName),
+    FOREIGN KEY (docID, version) REFERENCES documents(docID, version)
+);
 
 insert into users value("Jon", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);
 insert into users value("Peter", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);
