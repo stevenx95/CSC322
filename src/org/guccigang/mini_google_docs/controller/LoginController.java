@@ -18,6 +18,7 @@ public class LoginController {
     @FXML
     private TextField userNameField;
 
+
     public void loginAction (ActionEvent event) {
         //Event listener for pressing the login button
         //precondition: userNamefield.getText() != null && passwordField.getText() != null;

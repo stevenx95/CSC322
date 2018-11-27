@@ -48,7 +48,6 @@ public class DocumentFile {
         if(restricted == 0){
             this.restricted = false;
         }else this.restricted = true;
-
     }
 
     public String getDocumentName(){
