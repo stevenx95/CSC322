@@ -54,7 +54,7 @@ docID int(50) NOT NULL, version int NOT NULL, dateOfEdit date NOT NULL,
 FOREIGN KEY (userName) REFERENCES users(userName),
 FOREIGN KEY (docID, version) REFERENCES documents(docID, version));
 
-insert into users value("Jon", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 3);
+insert into users value("Jon", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);
 insert into users value("Peter", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);
 insert into users value("Ant", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);
 insert into users value("Kelly", "password", "Jonathan", "Tran", "working out", "sleeping", "eating", 1);

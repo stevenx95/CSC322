@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.DbUtil;
 import org.guccigang.mini_google_docs.GuiUtil;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -61,17 +60,17 @@ public class SignUpController {
             passwordError();
             correct = false;
         }
-        if (userName.getText() == null) {
+        if (userName.getText().isEmpty()) {
             GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please enter a username",
                     "username field is empty", "Error");
             correct = false;
         }
-        if (userName.getText() != null && isTaken(userName.getText())) {
+        if (!userName.getText().isEmpty() && isTaken(userName.getText())) {
             GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please choose a different username",
                     "Username is taken", "Error");
             correct = false;
         }
-        if (firstName.getText() == null || lastName.getText() == null) {
+        if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
             GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please enter your first and last name.",
                     "First name or Last name is missing", "Error");
             correct = false;
