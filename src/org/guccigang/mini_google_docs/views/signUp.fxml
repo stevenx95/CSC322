@@ -39,13 +39,13 @@
       <Button mnemonicParsing="false" onAction="#submitAction" text="Submit" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
       <Label alignment="CENTER_RIGHT" text="Username:" textAlignment="RIGHT" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
       <Label text="Password:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+       <PasswordField fx:id="passwordCheck" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="First Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
       <Label text="Last Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
       <Label text="Interest 1:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
       <Label text="Interest 2:" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
       <Label text="Interest 3:" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
       <Label text="Re-enter password" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-      <PasswordField fx:id="passwordCheck" GridPane.columnIndex="1" GridPane.rowIndex="3" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
