@@ -2,6 +2,7 @@ drop table if exists revisions;
 drop table if exists sharedDocs;
 drop table if exists documents;
 drop table if exists users;
+drop table if exists interests;
 
 CREATE TABLE application (
     userName varchar(20) PRIMARY KEY,
