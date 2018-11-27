@@ -14,21 +14,24 @@ public class VersionUtil
      */
     public static String getChanges(String str1, String str2)
     {
+        String result = "";
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<String> list2 = new ArrayList<>();
         list1.addAll( Arrays.asList(str1.split("\n")));
         list2.addAll( Arrays.asList(str2.split("\n")));
 
-        if(list1.size() > list2.size()){
-            for (int i = 0; i < list1.size()-list2.size(); i++){
+        int listSize1 = list1.size();
+        int listSize2 = list2.size();
+
+        if(listSize1 > listSize2){
+            for (int i = 0; i < listSize1-listSize2; i++){
                 list2.add("");
             }
         }else {
-            for (int i = 0; i < list2.size()-list1.size(); i++){
+            for (int i = 0; i < listSize2-listSize1; i++){
                 list1.add("");
             }
         }
-        String result = "";
 
         for(int i = 0; i < list1.size(); i ++){
             if(!list2.get(i).equals(list1.get(i))){
