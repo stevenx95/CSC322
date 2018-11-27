@@ -3,26 +3,54 @@ drop table if exists sharedDocs;
 drop table if exists documents;
 drop table if exists users;
 
-CREATE TABLE application (userName varchar(20) PRIMARY KEY, password varchar(20) NOT NULL, firstName varchar(20) NOT NULL,
-lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar(20) NOT NULL, interest2 varchar(20) NOT NULL,
-membershipLevel int(10));
+CREATE TABLE application (
+    userName varchar(20) PRIMARY KEY,
+    password varchar(20) NOT NULL,
+    firstName varchar(20) NOT NULL,
+    lastName varchar(50) NOT NULL,
+    interest0 varchar(20) NOT NULL,
+    interest1 varchar(20) NOT NULL,
+    interest2 varchar(20) NOT NULL,
+    membershipLevel int
+);
 
-CREATE TABLE users (userName varchar(20) PRIMARY KEY, password varchar(20) NOT NULL, firstName varchar(20) NOT NULL,
-lastName varchar(50) NOT NULL, interest0 varchar(20) NOT NULL, interest1 varchar(20) NOT NULL, interest2 varchar(20) NOT NULL,
-membershipLevel int(10));
+CREATE TABLE users (
+    userName varchar(20) PRIMARY KEY,
+    password varchar(20) NOT NULL,
+    firstName varchar(20) NOT NULL,
+    lastName varchar(50) NOT NULL,
+    membershipLevel int
+);
 
-CREATE TABLE documents (userName varchar(20) NOT NULL,docName varchar(20), docID int(50), 
-version int(50), content text, isLocked int(1) NOT NULL, resticted int(1) NOT NULL, createdDate date, counter int(32),
-PRIMARY KEY (docID, version),
-FOREIGN KEY (userName) REFERENCES users(userName));    
+CREATE TABLE interests (
+    userName varchar(20) NOT NULL,
+    interest varchar(20)
+);
 
-CREATE TABLE sharedDocs (userName varchar(20) NOT NULL, docID int(50) NOT NULL,
-FOREIGN KEY(userName) REFERENCES users(userName),
-FOREIGN KEY(docID) REFERENCES documents(docID));
+CREATE TABLE documents (
+    userName varchar(20) NOT NULL,
+    docName varchar(20), docID int,
+    version int,
+    content text,
+    isLocked int NOT NULL,
+    resticted int NOT NULL,
+    createdDate date,
+    counter int,
+    tabooFlag int,
+    PRIMARY KEY (docID, version),
+    FOREIGN KEY (userName) REFERENCES users(userName)
+);
+
+CREATE TABLE sharedDocs (
+    userName varchar(20) NOT NULL,
+    docID int NOT NULL,
+    FOREIGN KEY(userName) REFERENCES users(userName),
+    FOREIGN KEY(docID) REFERENCES documents(docID)
+);
 /*Does sharedDoc table need the version number also? */
 
-CREATE TABLE revisions (userName varchar(20) NOT NULL, 
-docID int(50) NOT NULL, version int(50) NOT NULL, dateOfEdit date NOT NULL,
+CREATE TABLE revisions (userName varchar(20) NOT NULL,
+docID int(50) NOT NULL, version int NOT NULL, dateOfEdit date NOT NULL,
 FOREIGN KEY (userName) REFERENCES users(userName),
 FOREIGN KEY (docID, version) REFERENCES documents(docID, version));
 
