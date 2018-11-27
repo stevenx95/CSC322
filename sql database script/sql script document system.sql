@@ -3,6 +3,17 @@ drop table if exists sharedDocs;
 drop table if exists interests;
 drop table if exists documents;
 drop table if exists users;
+drop table if exists complaints;
+drop table if exists tabooWords;
+
+CREATE TABLE complaints (
+    complaintID int PRIMARY KEY,
+    DocID int,
+    version int,
+    owner varchar(20),
+    complainer varchar(20),
+    message text
+);
 
 
 CREATE TABLE application (
@@ -46,6 +57,8 @@ CREATE TABLE revisions (
     docID int(50) NOT NULL,
     version int NOT NULL,
     dateOfEdit date NOT NULL,
+    author varchar(20),
+    FOREIGN KEY (author) REFERENCES users(userName)
     FOREIGN KEY (docID) REFERENCES documents(docID)
 );
 
