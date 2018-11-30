@@ -28,12 +28,23 @@ public class DocumentDAO {
 
         while(resultSet.next()){
             DocumentFile document = new DocumentFile();
-            document.setOwner(resultSet.getString("owner").toString());
-            document.setDocumentName(resultSet.getString("docName"));
+//            document.setOwner(resultSet.getString("owner").toString());
+//            document.setDocumentName(resultSet.getString("docName"));
+//            document.setID(resultSet.getInt("docID"));
+//            document.setContent(resultSet.getString("content"));
+//            document.setLock(resultSet.getInt("isLocked"));
+//            document.setRestricted(resultSet.getInt("resticted"));
+
+
+            //Stevens glorious fix
+            document.setUserName(resultSet.getString("userName").toString());
             document.setID(resultSet.getInt("docID"));
+            document.setVersion(resultSet.getInt("version"));
             document.setContent(resultSet.getString("content"));
-            document.setLock(resultSet.getInt("isLocked"));
+            document.setPublicFlag(resultSet.getInt("public"));
             document.setRestricted(resultSet.getInt("resticted"));
+
+
             //DATE will be commented out because I dont have time for this shit.
            // document.setDate(resultSet.getDate("createdDate"));
             //document.setCounter(resultSet.getInt("counter"));

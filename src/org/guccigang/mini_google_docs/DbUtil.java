@@ -82,12 +82,12 @@ public class DbUtil {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
             resultSet = preparedStatement.executeQuery();
+
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            disconnectDB();
-        }
+       }
         return resultSet;
+        //steven fix: removed finally close connection... original problem
     }
 
     public static ResultSet processQuery(String sqlStatement, String... sqlParams) {

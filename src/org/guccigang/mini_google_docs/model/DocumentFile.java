@@ -4,13 +4,14 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 import java.util.Date;
 
 public class DocumentFile {
 
 
-    private StringProperty documentName;
+    private StringProperty userName;
     private StringProperty content;
     private IntegerProperty iD;
     private boolean isLock;
@@ -19,10 +20,18 @@ public class DocumentFile {
     private StringProperty owner;
     private IntegerProperty counter;
 
+    //steven fix
+    private IntegerProperty publicFlag;
+    private IntegerProperty version;
+
+
+
     public DocumentFile(){
-        documentName = new SimpleStringProperty("");
-        content = new SimpleStringProperty("");;
-        iD = new SimpleIntegerProperty(0);;
+        userName = new SimpleStringProperty("");
+        publicFlag = new SimpleIntegerProperty(0);
+        content = new SimpleStringProperty("");
+        iD = new SimpleIntegerProperty(0);
+        version = new SimpleIntegerProperty(0);
         isLock = false;
         restricted = new SimpleIntegerProperty(0);
         date = null;
@@ -30,8 +39,8 @@ public class DocumentFile {
         counter = new SimpleIntegerProperty(0);;
     }
 
-    public DocumentFile(String owner, String documentName, int iD, int version, String content, int isLock, int restricted, Date date, int counter){
-        this.documentName = new SimpleStringProperty(documentName);
+    public DocumentFile(String owner, String userName, int iD, int version, String content, int isLock, int restricted, Date date, int counter){
+        this.userName = new SimpleStringProperty(userName);
         this.content = new SimpleStringProperty(content);
         this.iD = new SimpleIntegerProperty(iD);
         this.date = date;
@@ -45,14 +54,14 @@ public class DocumentFile {
         this.restricted = new SimpleIntegerProperty(restricted);
     }
 
-    public String getDocumentName(){
-        return documentName.get();
+    public String getUserName(){
+        return userName.get();
     }
-    public void setDocumentName(String name){
-        this.documentName.set(name);
+    public void setUserName(String name){
+        this.userName.set(name);
     }
-    public StringProperty documentNameProperty(){
-        return this.documentName;
+    public StringProperty userNameProperty(){
+        return this.userName;
     }
 
     public String getContent(){
@@ -116,4 +125,58 @@ public class DocumentFile {
     }
 
 
+
+
+//steven fix
+    public int getiD() {
+        return iD.get();
+    }
+
+    public IntegerProperty iDProperty() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD.set(iD);
+    }
+
+    public boolean isLock() {
+        return isLock;
+    }
+
+    public void setLock(boolean lock) {
+        isLock = lock;
+    }
+
+    public IntegerProperty restrictedProperty() {
+        return restricted;
+    }
+
+    public int getPublicFlag() {
+        return publicFlag.get();
+    }
+
+    public IntegerProperty publicFlagProperty() {
+        return publicFlag;
+    }
+
+    public void setPublicFlag(int publicFlag) {
+        this.publicFlag.set(publicFlag);
+    }
+
+    public int getVersion() {
+        return version.get();
+    }
+
+    public IntegerProperty versionProperty() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version.set(version);
+    }
+
+    public ObservableValue<String> documentNameProperty() {
+        return userName;
+    }
 }
