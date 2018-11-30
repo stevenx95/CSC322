@@ -28,8 +28,6 @@ public class VisitorViewDocumentsController {
     @FXML
     private TableColumn<DocumentFile, String> documentOwnerColumn;
 
-    //Reference to the main application.
-    private Stage viewDocumentStage;
 
     /**
      * The constructor.
@@ -43,7 +41,7 @@ public class VisitorViewDocumentsController {
      * This function is called when the user clicks open document.
      */
     @FXML
-    public void handleOpenDocument(){
+    private void handleOpenDocument(){
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
@@ -71,11 +69,11 @@ public class VisitorViewDocumentsController {
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
          */
-        documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
+       // documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
     }
 
     @FXML
-    public void handleHome(ActionEvent event){
+    private void handleHome(ActionEvent event){
         try{
             GuiUtil.createWindow(event, "views/visitorUI.fxml","Visitor");
         }catch (IOException e){
@@ -85,7 +83,7 @@ public class VisitorViewDocumentsController {
     /**
      * This function acesses the data base and fills the table with all the documents of the data base.
      */
-    public void fillTable(){
+    private void fillTable(){
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
         }catch (SQLException e){

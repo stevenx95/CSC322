@@ -94,7 +94,6 @@ public class DbUtil {
             disconnectDB();
         }
         return cachedRowSet;
-        //steven fix: removed finally close connection... original problem
     }
 
     public static ResultSet processQuery(String sqlStatement, String... sqlParams) {

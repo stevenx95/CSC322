@@ -6,6 +6,7 @@ drop table if exists users;
 drop table if exists complaints;
 drop table if exists tabooList;
 drop table if exists tabooSuggestions;
+drop table if exists application;
 
 CREATE TABLE complaints (
     complaintID int PRIMARY KEY,
@@ -43,7 +44,7 @@ CREATE TABLE interests (
 
 CREATE TABLE documents (
     docID int PRIMARY KEY,
-    userName varchar(20),
+    owner varchar(20),
     FOREIGN KEY (owner) REFERENCES users(userName),
     docName varchar(20),
     content text,
@@ -98,5 +99,9 @@ insert into interests value("Kelly", "Doing Nothing");
 insert into interests value("Kelly", "Lifting");
 
 insert into documents value(1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0);
-insert into documents value(2,"Jon","My Shopping List","World\nGood\nThree",0,1,"2011-08-12",0);
-insert into documents value(3,"Jon","My Shopping List","MAN\nWar\nThree",0,1,"2011-08-12",0);
+insert into documents value(2,"Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0);
+insert into documents value(3,"Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0);
+
+insert into documents value(4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0);
+insert into documents value(5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0);
+insert into documents value(6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
