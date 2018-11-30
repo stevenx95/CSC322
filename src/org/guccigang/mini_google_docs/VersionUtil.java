@@ -20,7 +20,7 @@ public class VersionUtil
         return dmp.patch_toText(dmp.patch_make(str1,str2));
     }
 
-    public static String apply(String originalString, String listOfChanges)
+    public static String applyChanges(String originalString, String listOfChanges)
     {
         List<diff_match_patch.Patch> pList = dmp.patch_fromText(listOfChanges);
         LinkedList<diff_match_patch.Patch> p = new LinkedList<>();
