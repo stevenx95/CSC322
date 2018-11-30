@@ -14,10 +14,9 @@ public class DocumentFile {
     private StringProperty content;
     private IntegerProperty iD;
     private boolean isLock;
-    private boolean restricted;
+    private IntegerProperty restricted;
     private Date date;
-    private StringProperty userName;
-    private IntegerProperty version;
+    private StringProperty owner;
     private IntegerProperty counter;
 
     public DocumentFile(){
@@ -25,29 +24,25 @@ public class DocumentFile {
         content = new SimpleStringProperty("");;
         iD = new SimpleIntegerProperty(0);;
         isLock = false;
-        restricted = false;
+        restricted = new SimpleIntegerProperty(0);
         date = null;
-        userName = new SimpleStringProperty("");;
-        version = new SimpleIntegerProperty(0);;
+        owner = new SimpleStringProperty("");;
         counter = new SimpleIntegerProperty(0);;
     }
 
-    public DocumentFile(String userName, String documentName, int iD, int version, String content, int isLock, int restricted, Date date, int counter){
+    public DocumentFile(String owner, String documentName, int iD, int version, String content, int isLock, int restricted, Date date, int counter){
         this.documentName = new SimpleStringProperty(documentName);
         this.content = new SimpleStringProperty(content);
         this.iD = new SimpleIntegerProperty(iD);
-        this.version = new SimpleIntegerProperty(version);
         this.date = date;
-        this.userName = new SimpleStringProperty(userName);
+        this.owner = new SimpleStringProperty(owner);
         this.counter = new SimpleIntegerProperty(counter);
 
         if(isLock == 0){
             this.isLock = false;
         }else this.isLock = true;
 
-        if(restricted == 0){
-            this.restricted = false;
-        }else this.restricted = true;
+        this.restricted = new SimpleIntegerProperty(restricted);
     }
 
     public String getDocumentName(){
@@ -87,12 +82,10 @@ public class DocumentFile {
     }
 
     public void setRestricted(int restricted){
-        if(restricted == 0){
-            this.restricted = false;
-        }else this.restricted = true;
+        this.restricted.set(restricted);
     }
-    public boolean getRestricted(){
-        return this.restricted;
+    public int getRestricted(){
+        return this.restricted.get();
     }
 
     public void setDate(Date date){
@@ -102,14 +95,14 @@ public class DocumentFile {
         return this.date;
     }
 
-    public String getUserName(){
-        return this.userName.get();
+    public String getOwner(){
+        return this.owner.get();
     }
-    public void setUserName(String userName){
-        this.userName.set(userName);
+    public void setOwner(String owner){
+        this.owner.set(owner);
     }
-    public StringProperty userNameProperty(){
-        return this.userName;
+    public StringProperty ownerProperty(){
+        return this.owner;
     }
 
     public int getCounter() {
@@ -122,14 +115,5 @@ public class DocumentFile {
         this.counter.set(counter);
     }
 
-    public int getVersion(){
-        return this.version.get();
-    }
 
-    public IntegerProperty versionProperty() {
-        return version;
-    }
-    public void setVersion(int version){
-        this.version.set(version);
-    }
 }

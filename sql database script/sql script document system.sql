@@ -97,7 +97,6 @@ insert into interests value("Kelly", "Sleeping");
 insert into interests value("Kelly", "Doing Nothing");
 insert into interests value("Kelly", "Lifting");
 
-insert into documents value("Jon","my shoping list",1111,1,"GEARS OF WAR, HALO 2, WAR Z",0,0,'2008-11-11',2);
-insert into documents value("Peter","gun control?",2222,1,"nah",0,0,'2008-11-11',2);
-insert into documents value("Ant","Dont do it",3333,1,"Dont fucking delete me bro.",0,0,'2008-11-11',2);
-insert into documents value("Kelly","Why so serious?",4444,1,"oh hai mark. hahahahha what a funny story.",0,0,'2008-11-11',2);
+insert into documents value(1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0);
+insert into documents value(2,"Jon","My Shopping List","World\nGood\nThree",0,1,"2011-08-12",0);
+insert into documents value(3,"Jon","My Shopping List","MAN\nWar\nThree",0,1,"2011-08-12",0);

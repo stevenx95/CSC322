@@ -1,16 +1,19 @@
 package org.guccigang.mini_google_docs.controller;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.Main;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class ViewDocumentsController {
@@ -61,10 +64,10 @@ public class ViewDocumentsController {
      */
     @FXML
     private void initialize(){
-        //fillTable();
+        fillTable();
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
-        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
+        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
 
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
@@ -72,18 +75,26 @@ public class ViewDocumentsController {
         documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
     }
 
+    @FXML
+    public void handleHome(ActionEvent event){
+        try{
+            GuiUtil.createWindow(event, "views/visitorUI.fxml","Visitor");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
     /**
      * This function acesses the data base and fills the table with all the documents of the data base.
      */
-//    public void fillTable(){
-//        try{
-//            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }catch (ClassNotFoundException e){
-//            e.printStackTrace();
-//        }
-//    }
+    public void fillTable(){
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 
 //    /**
 //     * Is called by the main application to give a reference ack to itself
