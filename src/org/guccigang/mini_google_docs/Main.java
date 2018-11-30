@@ -6,13 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.guccigang.mini_google_docs.controller.TextEditorController;
-import org.guccigang.mini_google_docs.controller.VisitorViewDocumentsController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
-
-import java.io.IOException;
 
 public class Main extends Application {
     //List of documents for table view in view document controller.

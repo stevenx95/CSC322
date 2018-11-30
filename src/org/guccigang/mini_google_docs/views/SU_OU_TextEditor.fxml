@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.views.OUTextEditor">
    <children>
       <BorderPane prefHeight="600.0" prefWidth="800.0">
@@ -17,11 +16,10 @@
                <menus>
                   <Menu text="Options">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Lock Document" />
-                        <MenuItem mnemonicParsing="false" text="Restrict Document" />
-                        <MenuItem mnemonicParsing="false" text="Share Document" />
+                        <MenuItem mnemonicParsing="false" text="Change Document Type" />
                         <MenuItem onAction="#onSave" text="Retrieve Old Documents" />
                         <MenuItem onAction="#onLoad" text="File Compaint" />
+                        <MenuItem mnemonicParsing="false" text="Submit Changes" />
                         <MenuItem onAction="#onClose" text="Close" />
                      </items>
                   </Menu>
@@ -34,7 +32,7 @@
             </MenuBar>
          </top>
          <bottom>
-            <HBox prefHeight="46.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="43.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
             <TextArea fx:id="areaText" prefHeight="264.0" prefWidth="601.0" BorderPane.alignment="CENTER" />

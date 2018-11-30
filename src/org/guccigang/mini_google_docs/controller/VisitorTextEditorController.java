@@ -10,7 +10,7 @@ import org.guccigang.mini_google_docs.model.DocumentFile;
 import java.io.File;
 import java.util.Arrays;
 
-public class TextEditorController {
+public class VisitorTextEditorController {
     private DocumentFile selectedDocument;
 
     @FXML

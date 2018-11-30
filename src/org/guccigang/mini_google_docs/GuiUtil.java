@@ -10,11 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.guccigang.mini_google_docs.controller.TextEditorController;
+import org.guccigang.mini_google_docs.controller.VisitorTextEditorController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import java.io.IOException;
@@ -98,7 +97,7 @@ public class GuiUtil {
 
 
             //Set the controller
-            TextEditorController controller = loader.getController();
+            VisitorTextEditorController controller = loader.getController();
             //Takes the string and loads it in text editor.
             controller.setSelectedDocument(selectedDocumentFile);
             controller.setAreaText();

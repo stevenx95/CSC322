@@ -1,6 +1,6 @@
 package org.guccigang.mini_google_docs.model;
 
-public class originalUser extends visitorUser {
+public class OriginalUser extends VisitorUser {
 
    private int lock = 0;
    private int restriction = 0;

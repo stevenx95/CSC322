@@ -1,6 +1,6 @@
 package org.guccigang.mini_google_docs.model;
 
-public class visitorUser {
+public class VisitorUser {
 
     private int id = 0;
     private int securityLevel = 0;

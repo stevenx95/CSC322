@@ -1,6 +1,6 @@
 package org.guccigang.mini_google_docs.model;
 
-public class superUser extends originalUser {
+public class SuperUser extends OriginalUser {
 
     //update membership
 
