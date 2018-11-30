@@ -1,12 +1,16 @@
 package org.guccigang.mini_google_docs.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.Main;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Arrays;
 
