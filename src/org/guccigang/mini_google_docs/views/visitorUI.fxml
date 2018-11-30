@@ -48,7 +48,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="401.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="265.0" text="Sign Up" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="401.0" mnemonicParsing="false" onAction="#signUpAction" prefHeight="65.0" prefWidth="265.0" text="Sign Up" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>

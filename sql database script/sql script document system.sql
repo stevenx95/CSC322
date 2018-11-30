@@ -4,7 +4,8 @@ drop table if exists interests;
 drop table if exists documents;
 drop table if exists users;
 drop table if exists complaints;
-drop table if exists tabooWords;
+drop table if exists tabooList;
+drop table if exists tabooSuggestions;
 
 CREATE TABLE complaints (
     complaintID int PRIMARY KEY,
@@ -14,7 +15,6 @@ CREATE TABLE complaints (
     complainer varchar(20),
     message text
 );
-
 
 CREATE TABLE application (
     userName varchar(20) PRIMARY KEY,
@@ -60,6 +60,15 @@ CREATE TABLE revisions (
     author varchar(20),
     FOREIGN KEY (author) REFERENCES users(userName)
     FOREIGN KEY (docID) REFERENCES documents(docID)
+);
+
+CREATE TABLE tabooList (
+    tabooWord varchar(20) NOT NULL
+);
+
+CREATE TABLE tabooSuggestions(
+    userName varchar(20) NOT NULL,
+    tabooWord varchar(20) NOT NULL
 );
 
 CREATE TABLE sharedDocs (
