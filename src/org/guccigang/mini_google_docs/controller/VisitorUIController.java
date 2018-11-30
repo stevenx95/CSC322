@@ -13,11 +13,10 @@ public class VisitorUIController {
         //Tis new window is MODAL meaning that it will block all other windows of the application until it is closed.
         try {
             GuiUtil.createModalWindow(event, "views/signUp.fxml");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public void signOutButton(ActionEvent event){
         try {

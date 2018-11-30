@@ -36,6 +36,18 @@ public class VisitorViewDocumentsController {
     }
 
     /**
+     *  This method is an event handler for the home button in the document manager
+     *  It send you back to the visitor profile
+     */
+    public void homeAction(ActionEvent event) {
+        try {
+            GuiUtil.changeScene(event,"views/visitorUI.fxml", "Visitor");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * This function is called when the user clicks open document.
      */
     @FXML
