@@ -16,7 +16,7 @@ import org.guccigang.mini_google_docs.Main;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class ViewDocumentsController {
+public class VisitorViewDocumentsController {
     @FXML
     private Button homeButton;
     @FXML
@@ -35,7 +35,7 @@ public class ViewDocumentsController {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public ViewDocumentsController(){
+    public VisitorViewDocumentsController(){
 
     }
 
@@ -47,8 +47,7 @@ public class ViewDocumentsController {
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
-            String docContent = documentFileTable.getItems().get(selectedIndex).getContent();
-            Main.openTextEditor(selectedDocument, docContent);
+            GuiUtil.openVisitorTextReader(selectedDocument);
         }else {
             //Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -67,7 +66,7 @@ public class ViewDocumentsController {
         fillTable();
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
-        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
+        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
 
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
@@ -95,18 +94,5 @@ public class ViewDocumentsController {
             e.printStackTrace();
         }
     }
-
-//    /**
-//     * Is called by the main application to give a reference ack to itself
-//     *
-//     * @param mainApp
-//     */
-//    public void setMainApp(Main mainApp){
-//        this.mainApp = mainApp;
-//    }
-
-
-
-
 
 }

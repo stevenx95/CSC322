@@ -43,7 +43,7 @@ CREATE TABLE interests (
 
 CREATE TABLE documents (
     docID int PRIMARY KEY,
-    owner varchar(20),
+    userName varchar(20),
     FOREIGN KEY (owner) REFERENCES users(userName),
     docName varchar(20),
     content text,

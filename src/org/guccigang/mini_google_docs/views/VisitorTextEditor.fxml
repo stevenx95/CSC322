@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.TextEditorController">
 
-    <BorderPane prefHeight="600.0" prefWidth="857.0">
+    <BorderPane prefHeight="600.0" prefWidth="857.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
                 <Menu text="Options">
@@ -27,7 +27,7 @@
             <HBox prefHeight="46.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <TextArea fx:id="areaText" prefHeight="376.0" prefWidth="723.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="areaText" prefHeight="219.0" prefWidth="466.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
 </AnchorPane>

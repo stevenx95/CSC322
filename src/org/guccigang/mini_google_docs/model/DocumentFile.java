@@ -10,48 +10,43 @@ import java.util.Date;
 
 public class DocumentFile {
 
-
-    private StringProperty userName;
-    private StringProperty content;
     private IntegerProperty iD;
+    private StringProperty userName;
+    private StringProperty documentName;
+    private StringProperty content;
     private boolean isLock;
     private IntegerProperty restricted;
-    private Date date;
-    private StringProperty owner;
+   // private Date dateCreated;
+    private boolean tabooFlag;
     private IntegerProperty counter;
-
-    //steven fix
-    private IntegerProperty publicFlag;
-    private IntegerProperty version;
-
 
 
     public DocumentFile(){
-        userName = new SimpleStringProperty("");
-        publicFlag = new SimpleIntegerProperty(0);
-        content = new SimpleStringProperty("");
         iD = new SimpleIntegerProperty(0);
-        version = new SimpleIntegerProperty(0);
+        userName = new SimpleStringProperty("");
+        documentName = new SimpleStringProperty("");
+        content = new SimpleStringProperty("");
         isLock = false;
         restricted = new SimpleIntegerProperty(0);
-        date = null;
-        owner = new SimpleStringProperty("");;
+//        dateCreated = new Date("");
         counter = new SimpleIntegerProperty(0);;
     }
 
-    public DocumentFile(String owner, String userName, int iD, int version, String content, int isLock, int restricted, Date date, int counter){
-        this.userName = new SimpleStringProperty(userName);
-        this.content = new SimpleStringProperty(content);
+    public DocumentFile(String owner, String userName, int iD, String documentName, String content, int isLock, int restricted, Date dateCreated, int counter){
         this.iD = new SimpleIntegerProperty(iD);
-        this.date = date;
-        this.owner = new SimpleStringProperty(owner);
-        this.counter = new SimpleIntegerProperty(counter);
-
+        this.userName = new SimpleStringProperty(userName);
+        this.documentName = new SimpleStringProperty(documentName);
+        this.content = new SimpleStringProperty(content);
         if(isLock == 0){
             this.isLock = false;
-        }else this.isLock = true;
-
+        }else
+            this.isLock = true;
         this.restricted = new SimpleIntegerProperty(restricted);
+       // this.dateCreated = dateCreated;
+        this.counter = new SimpleIntegerProperty(counter);
+
+
+
     }
 
     public String getUserName(){
@@ -97,22 +92,12 @@ public class DocumentFile {
         return this.restricted.get();
     }
 
-    public void setDate(Date date){
-        this.date = date;
-    }
-    public Date getDate(){
-        return this.date;
-    }
-
-    public String getOwner(){
-        return this.owner.get();
-    }
-    public void setOwner(String owner){
-        this.owner.set(owner);
-    }
-    public StringProperty ownerProperty(){
-        return this.owner;
-    }
+//    public void setDate(Date date){
+//        this.date = date;
+//    }
+//    public Date getDate(){
+//        return this.date;
+//    }
 
     public int getCounter() {
         return this.counter.get();
@@ -124,16 +109,25 @@ public class DocumentFile {
         this.counter.set(counter);
     }
 
+    public void setDocumentName(String documentName) {
+        this.documentName.set(documentName);
+    }
 
+    public String getDocumentName() {
+        return documentName.get();
+    }
 
+    public StringProperty documentNameProperty() {
+        return documentName;
+    }
 
-//steven fix
+    //steven fix
     public int getiD() {
         return iD.get();
     }
 
     public IntegerProperty iDProperty() {
-        return iD;
+        return this.iD;
     }
 
     public void setiD(int iD) {
@@ -141,42 +135,19 @@ public class DocumentFile {
     }
 
     public boolean isLock() {
-        return isLock;
+        return this.isLock;
     }
-
-    public void setLock(boolean lock) {
-        isLock = lock;
-    }
-
     public IntegerProperty restrictedProperty() {
-        return restricted;
+        return this.restricted;
     }
 
-    public int getPublicFlag() {
-        return publicFlag.get();
+    public void setTabooFlag(int tabooFlag) {
+        if(tabooFlag == 0){
+            this.tabooFlag = false;
+        }else this.tabooFlag = true;    }
+
+    public boolean isTabooFlag() {
+        return tabooFlag;
     }
 
-    public IntegerProperty publicFlagProperty() {
-        return publicFlag;
-    }
-
-    public void setPublicFlag(int publicFlag) {
-        this.publicFlag.set(publicFlag);
-    }
-
-    public int getVersion() {
-        return version.get();
-    }
-
-    public IntegerProperty versionProperty() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version.set(version);
-    }
-
-    public ObservableValue<String> documentNameProperty() {
-        return userName;
-    }
 }

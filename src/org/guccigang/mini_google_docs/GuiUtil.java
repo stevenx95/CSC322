@@ -11,8 +11,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.guccigang.mini_google_docs.controller.TextEditorController;
+import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import java.io.IOException;
 
@@ -72,6 +75,38 @@ public class GuiUtil {
         window.setScene(FXMLLoader.load(Main.class.getResource(sourceUI)));
         window.setTitle(title);
         window.show();
+    }
+
+    /*
+    Opens Visitor Text Editor
+    @param selectedDocument
+    Takes in a DocumentFile object and sets the text editor to it.
+     */
+    public static void openVisitorTextReader(DocumentFile selectedDocumentFile){
+        try{
+            //Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/VisitorTextEditor.fxml"));
+            AnchorPane textEditor = (AnchorPane) loader.load();
+
+            //Create the view document stage.
+            Stage textEditorStage = new Stage();
+            textEditorStage.setTitle("Text Editor");
+            Scene scene = new Scene(textEditor);
+            textEditorStage.setScene(scene);
+            textEditorStage.initModality(Modality.APPLICATION_MODAL);
+
+
+            //Set the controller
+            TextEditorController controller = loader.getController();
+            //Takes the string and loads it in text editor.
+            controller.setSelectedDocument(selectedDocumentFile);
+            controller.setAreaText();
+            textEditorStage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

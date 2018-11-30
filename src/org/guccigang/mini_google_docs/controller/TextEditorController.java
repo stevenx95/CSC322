@@ -11,7 +11,6 @@ import java.io.File;
 import java.util.Arrays;
 
 public class TextEditorController {
-    private Main mainApp;
     private DocumentFile selectedDocument;
 
     @FXML
@@ -28,7 +27,9 @@ public class TextEditorController {
     }
     @FXML
     private void onClose(){
+
     }
+
     @FXML
     private void onAbout(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -38,24 +39,14 @@ public class TextEditorController {
         alert.show();
     }
     @FXML
-    private void initialize(String content){
-
+    private void initialize(){
+        this.areaText.setEditable(false);
     }
     public void setSelectedDocument(DocumentFile selectedDocument){
         this.selectedDocument = selectedDocument;
     }
-
-    public void setAreaText(String docContent) {
-        this.areaText.setText(docContent);
-        this.areaText.setEditable(false);
+    public void setAreaText() {
+        this.areaText.setText(selectedDocument.getContent());
     }
 
-    /**
-     * Is called by the main application to give a reference ack to itself
-     *
-     * @param mainApp
-     */
-    public void setMainApp(Main mainApp){
-        this.mainApp = mainApp;
-    }
 }
