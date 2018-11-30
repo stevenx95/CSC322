@@ -85,7 +85,7 @@ insert into users value("Jon", "password", "Jonathan", "Tran", 1);
 insert into interests value("Jon", "Sleeping");
 insert into interests value("Jon", "Eating");
 insert into interests value("Jon", "Lifting");
-insert into users value("Peter", "password", "Peter", "Phung", 1);
+insert into users value("Peter", "password", "Peter", "Phung", 2);
 insert into interests value("Peter", "Filming");
 insert into interests value("Peter", "Engineering");
 insert into interests value("Peter", "Photography");

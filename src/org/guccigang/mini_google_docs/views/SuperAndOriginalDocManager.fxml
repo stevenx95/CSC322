@@ -7,13 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.SuperAndOriginalDocManagerController">
    <children>
       <SplitPane dividerPositions="0.17" layoutX="143.0" layoutY="111.0" prefHeight="351.0" prefWidth="647.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="0.0">
                <children>
-                  <Button fx:id="homeButton" layoutX="42.0" layoutY="14.0" mnemonicParsing="false" text="Home" />
+                  <Button fx:id="homeButton" layoutX="42.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="694.0">
@@ -25,7 +25,7 @@
                         <TableColumn fx:id="documentRestrictionColumn" prefWidth="289.0" text="Restriction" />
                      </columns>
                   </TableView>
-                  <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
+                  <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" text="Open Document" />
                   <TextField layoutX="8.0" layoutY="14.0" prefHeight="31.0" prefWidth="213.0" />
                   <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" text="Search All Documents" />
                   <Button layoutX="8.0" layoutY="93.0" mnemonicParsing="false" text="New Document" />

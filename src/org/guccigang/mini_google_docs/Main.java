@@ -1,14 +1,13 @@
 package org.guccigang.mini_google_docs;
 
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyCode;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
 public class Main extends Application {
@@ -18,29 +17,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
-        Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Mini Google Docs Login");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
-        //Debug escape character
-        scene.setOnKeyPressed(e ->
-        {
-            Scanner keyboard = new Scanner(System.in);
-            if (e.getCode() == KeyCode.BACK_QUOTE) {
-                System.out.println("Enter debug command:\n");
-                debugHandler(keyboard.nextLine().split(" "));
-            }
-        });
     }
 
-    private void debugHandler(String[] args)
-    {
-        for (String a:args) {
-            System.out.println(a);
-        }
-        //Stub
-    }
+
 
 
     public static void main(String[] args) {

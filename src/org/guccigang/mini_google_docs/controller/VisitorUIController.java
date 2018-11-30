@@ -6,7 +6,7 @@ import org.guccigang.mini_google_docs.GuiUtil;
 
 import java.io.IOException;
 
-public class ControllerVisitorUI {
+public class VisitorUIController {
 
     public void signUpAction(ActionEvent event) {
         //post-condition: A new window opens on top of the sign in with sign up form.

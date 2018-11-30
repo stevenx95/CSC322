@@ -136,8 +136,8 @@ public class DocumentFile {
     public boolean isLock() {
         return this.isLock;
     }
-    public IntegerProperty restrictedProperty() {
-        return this.restricted;
+    public StringProperty restrictedProperty() {
+        return new SimpleStringProperty(restricted.toString());
     }
 
     public void setTabooFlag(int tabooFlag) {
