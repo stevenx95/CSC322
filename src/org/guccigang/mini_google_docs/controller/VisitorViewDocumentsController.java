@@ -7,11 +7,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.Main;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -61,10 +59,11 @@ public class VisitorViewDocumentsController {
      */
     @FXML
     private void initialize(){
+        //Files the TableView with documents.
         fillTable();
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
-        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
+        documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
 
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.

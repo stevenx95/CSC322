@@ -18,10 +18,11 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="694.0">
                <children>
-                  <TableView fx:id="documentFileTable" layoutX="144.0" layoutY="171.0" prefHeight="327.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="171.0">
+                  <TableView fx:id="documentFileTable" fixedCellSize="0.0" layoutX="144.0" layoutY="171.0" prefHeight="327.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="171.0">
                      <columns>
-                        <TableColumn fx:id="documentNameColumn" prefWidth="343.0" text="Document Name" />
-                        <TableColumn fx:id="documentOwnerColumn" prefWidth="344.0" text="Document Owner" />
+                        <TableColumn fx:id="documentNameColumn" prefWidth="226.0" text="Document Name" />
+                        <TableColumn fx:id="documentOwnerColumn" prefWidth="247.0" text="Document Owner" />
+                        <TableColumn fx:id="documentRestrictionColumn" prefWidth="289.0" text="Restriction" />
                      </columns>
                   </TableView>
                   <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />

@@ -11,7 +11,7 @@ import java.util.Date;
 public class DocumentFile {
 
     private IntegerProperty iD;
-    private StringProperty userName;
+    private StringProperty owner;
     private StringProperty documentName;
     private StringProperty content;
     private boolean isLock;
@@ -23,7 +23,7 @@ public class DocumentFile {
 
     public DocumentFile(){
         iD = new SimpleIntegerProperty(0);
-        userName = new SimpleStringProperty("");
+        owner = new SimpleStringProperty("");
         documentName = new SimpleStringProperty("");
         content = new SimpleStringProperty("");
         isLock = false;
@@ -32,9 +32,9 @@ public class DocumentFile {
         counter = new SimpleIntegerProperty(0);;
     }
 
-    public DocumentFile(String owner, String userName, int iD, String documentName, String content, int isLock, int restricted, Date dateCreated, int counter){
+    public DocumentFile(String owner, int iD, String documentName, String content, int isLock, int restricted, Date dateCreated, int counter){
         this.iD = new SimpleIntegerProperty(iD);
-        this.userName = new SimpleStringProperty(userName);
+        this.owner = new SimpleStringProperty(owner);
         this.documentName = new SimpleStringProperty(documentName);
         this.content = new SimpleStringProperty(content);
         if(isLock == 0){
@@ -49,14 +49,14 @@ public class DocumentFile {
 
     }
 
-    public String getUserName(){
-        return userName.get();
+    public String getOwner(){
+        return owner.get();
     }
-    public void setUserName(String name){
-        this.userName.set(name);
+    public void setOwner(String owner){
+        this.owner.set(owner);
     }
-    public StringProperty userNameProperty(){
-        return this.userName;
+    public StringProperty ownerProperty(){
+        return this.owner;
     }
 
     public String getContent(){

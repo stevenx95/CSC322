@@ -43,7 +43,7 @@ public class DocumentDAO {
         while(resultSet.next()){
             DocumentFile document = new DocumentFile();
             document.setiD(resultSet.getInt("docID"));
-            document.setUserName(resultSet.getString("owner").toString());
+            document.setOwner(resultSet.getString("owner").toString());
             document.setDocumentName(resultSet.getString("docName"));
             document.setContent(resultSet.getString("content"));
             document.setLock(resultSet.getInt("isLocked"));
@@ -71,7 +71,7 @@ public class DocumentDAO {
             if(resultSet.getInt("restricted") >= 2){
                 DocumentFile document = new DocumentFile();
                 document.setiD(resultSet.getInt("docID"));
-                document.setUserName(resultSet.getString("owner").toString());
+                document.setOwner(resultSet.getString("owner").toString());
                 document.setDocumentName(resultSet.getString("docName"));
                 document.setContent(resultSet.getString("content"));
                 document.setLock(resultSet.getInt("isLocked"));
