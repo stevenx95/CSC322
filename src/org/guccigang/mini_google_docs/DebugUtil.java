@@ -6,8 +6,6 @@ public class DebugUtil
 {
     public static void execCommand(String[] args)
     {
-        for(int i=0;i<args.length;i++)
-            System.out.println(args[i]);
         if(args[0].equals("patch"))
             System.out.println(VersionUtil.getChanges(args[1], args[2]));
         else if(args[0].equals("apply"))
@@ -23,6 +21,15 @@ public class DebugUtil
             else
             {
                 System.out.println("It doesn't work! " + args[2] + " = " + tempPatched);
+            }
+        }
+        else if(args[0].equals("save"))
+        {
+            try {
+                VersionUtil.save(args[1], args[2], args[3]);
+            }catch (java.sql.SQLException e)
+            {
+                System.out.println(e);
             }
         }
     }
