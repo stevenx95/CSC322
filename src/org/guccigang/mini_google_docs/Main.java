@@ -29,7 +29,7 @@ public class Main extends Application {
         {
             Scanner keyboard = new Scanner(System.in);
             if (e.getCode() == KeyCode.BACK_QUOTE) {
-                System.out.println("Enter debug command:\n");
+                System.out.println("Enter debug command:");
                 DebugUtil.execCommand(keyboard.nextLine().split(" "));
             }
         });
