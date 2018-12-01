@@ -20,7 +20,19 @@ import java.io.IOException;
 
 
 public class GuiUtil {
-    public static void createPopupWindow(AlertType alertType, String message, String header, String title) {
+    /**
+     *
+     * @param alertType
+     *  An enum object from Alert class's AlertType enum array.
+     * @param message
+     *  Message to be display next to ok Button
+     * @param header
+     *  Text to be displayed on top of header and next to the AlertType logo
+     * @param title
+     *  title of newly create window.
+     */
+
+    public static void createAlertWindow(AlertType alertType, String message, String header, String title) {
         //postcondition: a new pop up window is shown with 'message' as body, 'header' as header and 'title' as title.
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
@@ -29,9 +41,19 @@ public class GuiUtil {
         alert.showAndWait();
     }
 
+    /**
+     *
+     * @param event
+     *  click event comming from user interaction wiht UI.
+     * @param designatedUI
+     *  this must be a an existing fxml file
+     * @param title
+     *  it will be display on top of the window
+     * @throws IOException
+     *   Postcondition: A new Modal window is created. meaning a window that block access to other windows until closed.
+     */
+
     public static void createWindow(ActionEvent event, String designatedUI, String title) throws IOException {
-        //Precondition: designatedUI exists as an fxml file
-        //Postcondition: A new Modal window is created. meaning a window that block access to other windows until closed.
 
         //create new window
         final Stage dialog = new Stage();
@@ -82,15 +104,25 @@ public class GuiUtil {
         stage.close();
     }
 
+    /**
+     *
+     * @param event
+     * @param sourceUI
+     * @param title
+     * @throws IOException
+     */
+
     public static void changeScene(ActionEvent event, String sourceUI, String title) throws IOException {
         Node node = (Node) event.getSource();
-        Scene window = (Scene) node.getScene();
-        window.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI)));
+        Scene scene = node.getScene();
+        Stage window = (Stage) node.getScene().getWindow();
+        window.setTitle(title);
+        scene.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI)));
     }
 
-    /*
+    /**
     Opens Visitor Text Editor
-    @param selectedDocument
+    @param selectedDocumentFile
     Takes in a DocumentFile object and sets the text editor to it.
      */
     public static void openVisitorTextReader(DocumentFile selectedDocumentFile){

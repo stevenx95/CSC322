@@ -83,27 +83,41 @@ CREATE TABLE sharedDocs (
 
 
 insert into users value("Jon", "password", "Jonathan", "Tran", 1);
-insert into interests value("Jon", "Sleeping");
-insert into interests value("Jon", "Eating");
-insert into interests value("Jon", "Lifting");
+insert into interests values
+("Jon", "Sleeping"),
+("Jon", "Eating"),
+("Jon", "Lifting");
+
 insert into users value("Peter", "password", "Peter", "Phung", 2);
-insert into interests value("Peter", "Filming");
-insert into interests value("Peter", "Engineering");
-insert into interests value("Peter", "Photography");
-insert into users value("Ant", "password", "Ant", "Hony", 1);
-insert into interests value("Ant", "Youtubing");
-insert into interests value("Ant", "Gaming");
-insert into interests value("Ant", "Writing Sketches");
+insert into interests values
+("Peter", "Filming"),
+("Peter", "Engineering"),
+("Peter", "Photography");
+
+insert into users values("Ant", "password", "Ant", "Hony", 1);
+insert into interests values
+("Ant", "Youtubing"),
+("Ant", "Gaming"),
+("Ant", "Writing Sketches");
+
 insert into users value("Kelly", "password", "Kelly", "Tran", 1);
-insert into interests value("Kelly", "Sleeping");
-insert into interests value("Kelly", "Doing Nothing");
-insert into interests value("Kelly", "Lifting");
+insert into interests values
+("Kelly", "Sleeping"),
+("Kelly", "Doing Nothing"),
+("Kelly", "Lifting");
 
 insert into documents values
 (1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
 (2,"Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
 (3,"Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
-4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
+(4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
 (5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
 (6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
+
+insert into tabooList values
+ ('fuck'),
+ ('cunt'),
+ ('moffo'),
+ ('fegit'),
+ ('shit');
 
