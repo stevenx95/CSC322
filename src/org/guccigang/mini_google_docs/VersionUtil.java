@@ -8,7 +8,7 @@ import org.guccigang.mini_google_docs.diff_match_patch;
 
 public class VersionUtil
 {
-    private static diff_match_patch dmp;
+    private static diff_match_patch dmp = new diff_match_patch();
     /**This function takes in two strings and returns the list of differences.
      *
      * @param str1 first string
@@ -17,7 +17,9 @@ public class VersionUtil
      */
     public static String getChanges(String str1, String str2)
     {
-        return dmp.patch_toText(dmp.patch_make(str1,str2));
+        System.out.println("In getChanges "+str1+" "+str2);
+        LinkedList<diff_match_patch.Patch> p = dmp.patch_make(str1,str2);
+        return dmp.patch_toText(p);
     }
 
     public static String applyChanges(String originalString, String listOfChanges)
