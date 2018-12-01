@@ -34,7 +34,7 @@ public class SUViewTabooListController {
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            GuiUtil.createWindow(event, "views/superUserUI.fxml","Visitor");
+            GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml","Visitor");
         }catch (IOException e){
             e.printStackTrace();
         }

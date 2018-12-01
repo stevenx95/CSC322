@@ -12,7 +12,7 @@ public class VisitorUIController {
         //post-condition: A new window opens on top of the sign in with sign up form.
         //Tis new window is MODAL meaning that it will block all other windows of the application until it is closed.
         try {
-            GuiUtil.createModalWindow(event, "views/signUp.fxml");
+            GuiUtil.createWindow(event, "views/signUp.fxml", "Sign Up");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,7 +21,7 @@ public class VisitorUIController {
     public void signOutButton(ActionEvent event){
         try {
 
-            GuiUtil.createWindow(event,"views/login.fxml", "Gucci Gang");
+            GuiUtil.createWindowAndDestroy(event,"views/login.fxml", "Gucci Gang");
         } catch (IOException e) {
             e.printStackTrace();
         }

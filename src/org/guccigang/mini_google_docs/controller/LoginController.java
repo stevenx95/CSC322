@@ -27,19 +27,19 @@ public class LoginController {
         try {
             ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
             if(resultSet.next()) {
-                GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
+                GuiUtil.createPopupWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
                int x = resultSet.getInt("membershipLevel");
                String name = resultSet.getString("firstname");
 
                 if (x == 1) {
-                    GuiUtil.createWindow(event, "views/originalUserUI.fxml", name);
+                    GuiUtil.createWindowAndDestroy(event, "views/originalUserUI.fxml", name);
                 }
 
                 if (x == 2) {
-                    GuiUtil.createWindow(event, "views/superUserUI.fxml", name);
+                    GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml", name);
                 }
             } else {
-                GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION,
+                GuiUtil.createPopupWindow(Alert.AlertType.CONFIRMATION,
                         "Please enter correct username and password or login as visitor",
                         "Wrong username or password", "Failed");
             }
@@ -53,7 +53,7 @@ public class LoginController {
         //post-condition: A new window opens on top of the sign in with sign up form.
         //Tis new window is MODAL meaning that it will block all other windows of the application until it is closed.
         try {
-            GuiUtil.createModalWindow(event, "views/signUp.fxml");
+            GuiUtil.createWindow(event, "views/signUp.fxml", "Sign Up");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class LoginController {
 
     public void visitorAction(ActionEvent event) {
         try {
-            GuiUtil.createWindow(event, "views/visitorUI.fxml", "Visitor");
+            GuiUtil.createWindowAndDestroy(event, "views/visitorUI.fxml", "Visitor");
         } catch (Exception e) {
             e.printStackTrace();
         }

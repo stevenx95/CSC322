@@ -43,9 +43,9 @@ public class SignUpController {
                   lastName.getText(), interest1.getText(), interest2.getText(), interest3.getText());
 
           if (result == 0) {
-              GuiUtil.popupWindow(Alert.AlertType.ERROR, null, "Something went wrong. Please try again", "error");
+              GuiUtil.createPopupWindow(Alert.AlertType.ERROR, null, "Something went wrong. Please try again", "error");
           }else {
-               GuiUtil.popupWindow(Alert.AlertType.CONFIRMATION, "Please allow 24 hours for your account to be activated",
+               GuiUtil.createPopupWindow(Alert.AlertType.CONFIRMATION, "Please allow 24 hours for your account to be activated",
                        "Application submitted successfuly!,", "Confirmation");
                cancelAction(event);
           }
@@ -61,17 +61,17 @@ public class SignUpController {
             correct = false;
         }
         if (userName.getText().isEmpty()) {
-            GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please enter a username",
+            GuiUtil.createPopupWindow(Alert.AlertType.ERROR, "Please enter a username",
                     "username field is empty", "Error");
             correct = false;
         }
         if (!userName.getText().isEmpty() && isTaken(userName.getText())) {
-            GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please choose a different username",
+            GuiUtil.createPopupWindow(Alert.AlertType.ERROR, "Please choose a different username",
                     "Username is taken", "Error");
             correct = false;
         }
         if (firstName.getText().isEmpty() || lastName.getText().isEmpty()) {
-            GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please enter your first and last name.",
+            GuiUtil.createPopupWindow(Alert.AlertType.ERROR, "Please enter your first and last name.",
                     "First name or Last name is missing", "Error");
             correct = false;
         }
@@ -93,7 +93,7 @@ public class SignUpController {
 
     private void passwordError() {
         //post-condition: a pop up window appears saying password don't match. passwordField, passwordCheck are cleared
-        GuiUtil.popupWindow(Alert.AlertType.ERROR, "Please re-enter your password", "passwords don't match!", "Error");
+        GuiUtil.createPopupWindow(Alert.AlertType.ERROR, "Please re-enter your password", "passwords don't match!", "Error");
         passwordField.clear();
         passwordCheck.clear();
 

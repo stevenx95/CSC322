@@ -9,7 +9,6 @@ import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class VisitorViewDocumentsController {
     @FXML
@@ -49,7 +48,7 @@ public class VisitorViewDocumentsController {
             GuiUtil.openVisitorTextReader(selectedDocument);
         }else {
             //Nothing selected.
-            GuiUtil.popupWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+            GuiUtil.createPopupWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
                     "No Document Selected", "No Selection");
         }
     }

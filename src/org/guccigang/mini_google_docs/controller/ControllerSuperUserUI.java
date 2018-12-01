@@ -10,7 +10,7 @@ public class ControllerSuperUserUI {
     public void signOutButton(ActionEvent event){
         try {
 
-            GuiUtil.createWindow(event,"views/login.fxml", "Gucci Gang");
+            GuiUtil.createWindowAndDestroy(event,"views/login.fxml", "Gucci Gang");
         } catch (IOException e) {
             e.printStackTrace();
         }

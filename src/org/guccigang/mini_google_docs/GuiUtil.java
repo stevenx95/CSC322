@@ -20,7 +20,7 @@ import java.io.IOException;
 
 
 public class GuiUtil {
-    public static void popupWindow(AlertType alertType, String message, String header, String title) {
+    public static void createPopupWindow(AlertType alertType, String message, String header, String title) {
         //postcondition: a new pop up window is shown with 'message' as body, 'header' as header and 'title' as title.
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
@@ -29,7 +29,7 @@ public class GuiUtil {
         alert.showAndWait();
     }
 
-    public static void createModalWindow(ActionEvent event, String designatedUI) throws IOException {
+    public static void createWindow(ActionEvent event, String designatedUI, String title) throws IOException {
         //Precondition: designatedUI exists as an fxml file
         //Postcondition: A new Modal window is created. meaning a window that block access to other windows until closed.
 
@@ -41,6 +41,7 @@ public class GuiUtil {
         Stage stage = (Stage) node.getScene().getWindow();
 
         //define
+        dialog.setTitle(title);
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(stage);
         Scene scene = new Scene(FXMLLoader.load(Main.class.getResource(designatedUI)));
@@ -48,7 +49,20 @@ public class GuiUtil {
         dialog.showAndWait();
     }
 
-    public static void createWindow(ActionEvent event, String sourceUI, String title) throws IOException {
+    /**
+     *
+     * @param event
+     *  Action event comes from fxml file
+     * @param sourceUI
+     *  Must be a valid fxml file
+     * @param title
+     * @throws IOException
+     *
+     * This method creates a new window and destroys the previously opened window.
+     *
+     */
+
+    public static void createWindowAndDestroy(ActionEvent event, String sourceUI, String title) throws IOException {
         //Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(sourceUI));

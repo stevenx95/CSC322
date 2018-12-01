@@ -99,10 +99,11 @@ insert into interests value("Kelly", "Sleeping");
 insert into interests value("Kelly", "Doing Nothing");
 insert into interests value("Kelly", "Lifting");
 
-insert into documents value(1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0);
-insert into documents value(2,"Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0);
-insert into documents value(3,"Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0);
+insert into documents values
+(1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
+(2,"Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
+(3,"Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
+4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
+(5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
+(6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
 
-insert into documents value(4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0);
-insert into documents value(5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0);
-insert into documents value(6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
