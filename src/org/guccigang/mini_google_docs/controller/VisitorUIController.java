@@ -28,7 +28,7 @@ public class VisitorUIController {
     }
     public void handleViewDocumentManager(ActionEvent event){
         try{
-            GuiUtil.createWindow(event, "views/VisitorViewDocuments.fxml","View Documents");
+            GuiUtil.changeScene(event, "views/VisitorViewDocuments.fxml","View Documents");
         }catch (IOException e){
             e.printStackTrace();
         }

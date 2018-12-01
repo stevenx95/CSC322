@@ -70,10 +70,8 @@ public class GuiUtil {
 
     public static void changeScene(ActionEvent event, String sourceUI, String title) throws IOException {
         Node node = (Node) event.getSource();
-        Stage window = (Stage) node.getScene().getWindow();
-        window.setScene(FXMLLoader.load(Main.class.getResource(sourceUI)));
-        window.setTitle(title);
-        window.show();
+        Scene window = (Scene) node.getScene();
+        window.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI)));
     }
 
     /*

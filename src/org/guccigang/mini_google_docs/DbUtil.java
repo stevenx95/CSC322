@@ -12,7 +12,7 @@ package org.guccigang.mini_google_docs;
 import com.sun.rowset.CachedRowSetImpl;
 
 import java.sql.*;
-//I use it here instead of JavaFX becasue it is quicker to code and use.
+//I use it here instead of JavaFX because it is quicker to code and use.
 
 public class DbUtil {
 
@@ -23,7 +23,7 @@ public class DbUtil {
     private static Connection connection = null;
 
     //Connection String  YOU GUYS WILL HAVE TO KEEP CHANGING THIS CRAP DEPENDING ON THE NAME OF YOUR DATABASE
-    private static final String connString = "jdbc:mysql://localhost:3306/322project";
+    private static final String connString = "jdbc:mysql://localhost:3306/document_system";
 
     public static void connectDB() {
         try {
@@ -36,7 +36,7 @@ public class DbUtil {
         System.out.println("JDBC driver detected...");
         //Establishing a connection to database using connection string
         try {
-            connection = DriverManager.getConnection(connString, "root", "Starpoint29");
+            connection = DriverManager.getConnection(connString, "root", "password");
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();
@@ -80,12 +80,11 @@ public class DbUtil {
         if (connection == null) {
             connectDB();
         }
-        ResultSet resultSet = null;
         CachedRowSetImpl cachedRowSet = null;
         try {
             cachedRowSet = new CachedRowSetImpl();
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             cachedRowSet.populate(resultSet);
 
         } catch (SQLException e) {

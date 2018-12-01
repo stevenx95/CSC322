@@ -3,10 +3,7 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
@@ -16,9 +13,9 @@ import java.sql.SQLException;
 
 public class VisitorViewDocumentsController {
     @FXML
-    private Button homeButton;
+    private TextField searchBar;
     @FXML
-    private Button openDocButton;
+    private Button searchButton;
     @FXML
     private TableView<DocumentFile> documentFileTable;
     @FXML
@@ -36,17 +33,11 @@ public class VisitorViewDocumentsController {
     }
 
     /**
-     *  This method is an event handler for the home button in the document manager
-     *  It send you back to the visitor profile
+     * functions to handle the search bar
      */
-    public void homeAction(ActionEvent event) {
-        try {
-            GuiUtil.changeScene(event,"views/visitorUI.fxml", "Visitor");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+    public void handleSearch(ActionEvent event) {
 
+    }
     /**
      * This function is called when the user clicks open document.
      */
@@ -58,11 +49,8 @@ public class VisitorViewDocumentsController {
             GuiUtil.openVisitorTextReader(selectedDocument);
         }else {
             //Nothing selected.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Document Selected");
-            alert.setContentText("Please select a document in the table.");
-            alert.showAndWait();
+            GuiUtil.popupWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
         }
     }
     /**
@@ -86,7 +74,7 @@ public class VisitorViewDocumentsController {
     @FXML
     private void handleHome(ActionEvent event){
         try{
-            GuiUtil.createWindow(event, "views/visitorUI.fxml","Visitor");
+            GuiUtil.changeScene(event, "views/visitorUI.fxml","Visitor");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -97,9 +85,7 @@ public class VisitorViewDocumentsController {
     private void fillTable(){
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
-        }catch (SQLException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
