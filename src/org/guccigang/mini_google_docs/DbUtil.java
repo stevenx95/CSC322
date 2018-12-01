@@ -36,7 +36,7 @@ public class DbUtil {
         System.out.println("JDBC driver detected...");
         //Establishing a connection to database using connection string
         try {
-            connection = DriverManager.getConnection(connString, "root", "password");
+            connection = DriverManager.getConnection(connString, "root", "Starpoint29");
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();
@@ -90,9 +90,11 @@ public class DbUtil {
 
         } catch (SQLException e) {
             e.printStackTrace();
-       }finally {
-            disconnectDB();
-        }
+       }
+       /*Giving trouble to the Taboo list manager for SU...steven*/
+//       finally {
+//            disconnectDB();
+//        }
         return cachedRowSet;
     }
 
