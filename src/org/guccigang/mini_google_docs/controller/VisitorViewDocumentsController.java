@@ -32,7 +32,8 @@ public class VisitorViewDocumentsController {
     }
 
     /**
-     * functions to handle the search bar
+     *
+     * @param event
      */
     public void handleSearch(ActionEvent event) {
 
@@ -48,7 +49,7 @@ public class VisitorViewDocumentsController {
             GuiUtil.openVisitorTextReader(selectedDocument);
         }else {
             //Nothing selected.
-            GuiUtil.createPopupWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
                     "No Document Selected", "No Selection");
         }
     }

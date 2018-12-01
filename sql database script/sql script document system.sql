@@ -107,3 +107,10 @@ insert into documents values
 (5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
 (6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
 
+insert into tabooList values
+ ('fuck'),
+ ('cunt'),
+ ('moffo'),
+ ('fegit'),
+ ('shit');
+

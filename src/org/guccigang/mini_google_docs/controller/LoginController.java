@@ -27,7 +27,7 @@ public class LoginController {
         try {
             ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
             if(resultSet.next()) {
-                GuiUtil.createPopupWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
                int x = resultSet.getInt("membershipLevel");
                String name = resultSet.getString("firstname");
 
@@ -39,7 +39,7 @@ public class LoginController {
                     GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml", name);
                 }
             } else {
-                GuiUtil.createPopupWindow(Alert.AlertType.CONFIRMATION,
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
                         "Please enter correct username and password or login as visitor",
                         "Wrong username or password", "Failed");
             }
