@@ -49,6 +49,7 @@ public class DbUtil {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
+            connection = null;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -91,9 +92,9 @@ public class DbUtil {
             e.printStackTrace();
        }
        /*Giving trouble to the Taboo list manager for SU...steven*/
-//       finally {
-//            disconnectDB();
-//        }
+       finally {
+            disconnectDB();
+        }
         return cachedRowSet;
     }
 
@@ -103,16 +104,18 @@ public class DbUtil {
         if (connection == null) {
             connectDB();
         }
-        ResultSet resultSet = null;
+        CachedRowSetImpl cachedRowSet = null;
         try {
+            cachedRowSet = new CachedRowSetImpl();
             PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
             for (int i = 0; i < sqlParams.length; i++) {
                 preparedStatement.setString(i + 1, sqlParams[i]);
             }
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            cachedRowSet.populate(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return resultSet;
+        return cachedRowSet;
     }
 }

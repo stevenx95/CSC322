@@ -23,7 +23,7 @@
   </rowConstraints>
    <children>
       <Button defaultButton="true" mnemonicParsing="false" onAction="#loginAction" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-      <Button defaultButton="true" mnemonicParsing="false" onAction="#visitorAction" text="Visitor" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" onAction="#visitorAction" text="Visitor" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
       <Button mnemonicParsing="false" onAction="#signUpAction" text="Sign Up" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="10.0" />
