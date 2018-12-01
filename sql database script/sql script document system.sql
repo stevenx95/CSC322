@@ -59,6 +59,7 @@ CREATE TABLE revisions (
     version int NOT NULL,
     dateOfEdit date NOT NULL,
     author varchar(20),
+    content text,
     FOREIGN KEY (author) REFERENCES users(userName),
     FOREIGN KEY (docID) REFERENCES documents(docID)
 );
