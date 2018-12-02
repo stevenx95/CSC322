@@ -72,7 +72,7 @@ public class DocumentDAO {
                 DocumentFile document = new DocumentFile();
                 document.setiD(resultSet.getInt("docID"));
                 document.setOwner(resultSet.getString("owner").toString());
-                document.setDocumentName(resultSet.getString("docName"));
+                //document.setDocumentName(resultSet.getString("docName"));
                 document.setContent(resultSet.getString("content"));
                 document.setLock(resultSet.getInt("isLocked"));
                 document.setRestricted(resultSet.getInt("restricted"));
