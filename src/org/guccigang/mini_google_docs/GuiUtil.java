@@ -152,4 +152,18 @@ public class GuiUtil {
         }
     }
 
+    /**
+     *
+     * @param event
+     *  An action event that comes from click a button
+     *  post-condition: The window from which the event is called is closed
+     */
+
+    public static void closeWindow(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        //this variable are used to manipulate the IU.
+        Stage window = (Stage) node.getScene().getWindow();
+        window.close();
+    }
+
 }

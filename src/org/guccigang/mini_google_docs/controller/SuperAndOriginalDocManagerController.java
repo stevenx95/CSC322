@@ -7,13 +7,13 @@ import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import javafx.fxml.FXML;
-import org.guccigang.mini_google_docs.model.SuperUser;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
 
 
 public class SuperAndOriginalDocManagerController {
-    private SuperUser currentUser;
+    private UserObject currentUser;
     @FXML
     private TableView<DocumentFile> documentFileTable;
     @FXML
@@ -28,7 +28,7 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            GuiUtil.createWindowAndDestroy(event,"views/originalUserUI.fxml","Home");
+            GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home");
         }catch (IOException e){
             e.printStackTrace();
         }

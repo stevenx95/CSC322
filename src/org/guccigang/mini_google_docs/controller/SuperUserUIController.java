@@ -5,7 +5,7 @@ import org.guccigang.mini_google_docs.GuiUtil;
 
 import java.io.IOException;
 
-public class ControllerSuperUserUI {
+public class SuperUserUIController {
 
     public void signOutButton(ActionEvent event){
         try {
@@ -24,6 +24,11 @@ public class ControllerSuperUserUI {
             e.printStackTrace();
         }
     }
-
-
+    public void handleDocumentManager(ActionEvent event) {
+        try {
+            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml", "Document Manager");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

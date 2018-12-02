@@ -17,7 +17,7 @@ public class OriginalUserUIController {
     }
     public void openDocumentManager(ActionEvent event){
         try{
-            GuiUtil.createWindowAndDestroy(event, "views/SuperAndOriginalDocManager.fxml","Document Manager");
+            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml","Document Manager");
         }catch (IOException e){
             e.printStackTrace();
         }
