@@ -5,8 +5,10 @@ import javafx.collections.ObservableList;
 import org.guccigang.mini_google_docs.DbUtil;
 
 import javax.sql.rowset.CachedRowSet;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TabooWordDAO {
 
@@ -33,5 +35,36 @@ public class TabooWordDAO {
             tabooList.add(tabooWord);
         }
         return tabooList;
+    }
+
+    public static void insertTabooWord(String word) throws SQLException, IOException {
+        String selectStatement = "SELECT * FROM taboolist";
+        ArrayList<String> list = new ArrayList<>();
+
+        try {
+            ResultSet rs = DbUtil.processQuery(selectStatement);
+            while(rs.next()){
+                list.add(rs.getString(1));
+            }
+            if(!list.contains(word)){
+                String selectStatement2 = "INSERT INTO taboolist(tabooWord) VALUES ('"+word+"')";
+                DbUtil.executeUpdateDB(selectStatement2);
+            }
+
+        }catch (SQLException e){
+            throw e;
+        }
+
+
+
+
+
+
+
+    }
+
+    public static void removeTabooWord(String word) throws SQLException{
+        String selectStatement = "DELETE FROM taboolist WHERE tabooWord = '"+word+"'";
+        DbUtil.executeUpdateDB(selectStatement);
     }
 }
