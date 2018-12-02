@@ -2,9 +2,7 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.TabooWord;
 import org.guccigang.mini_google_docs.model.TabooWordDAO;
@@ -18,6 +16,8 @@ public class SUViewTabooListController {
     private Button homeButton;
     @FXML
     private Button addTabooButton;
+    @FXML
+    private TextField addTextBar;
     @FXML
     private Button deleteTabooButton;
     @FXML
@@ -55,6 +55,28 @@ public class SUViewTabooListController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void insertTabooDB(ActionEvent actionEvent) throws SQLException, IOException {
+
+        TabooWordDAO.insertTabooWord(addTextBar.getText());
+    }
+
+    @FXML
+    private void removeTabooFromDB() throws  SQLException{
+        TabooWord tabooWord = new TabooWord();
+        tabooWord= tabooWordTable.getSelectionModel().getSelectedItem();
+
+        if (tabooWord != null){
+            TabooWordDAO.removeTabooWord(tabooWord.toString());
+        }
+        else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a word from the table.",
+                    "No Taboo Word Selected", "No Selection");
+        }
+    }
+
 
 
 

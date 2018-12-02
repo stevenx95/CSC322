@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.VisitorUIController">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.VisitorUIController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -40,7 +40,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="265.0" text="Report Commands" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Report Commands" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>

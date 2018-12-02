@@ -17,10 +17,17 @@ public class OriginalUserUIController {
     }
     public void openDocumentManager(ActionEvent event){
         try{
-            GuiUtil.createWindowAndDestroy(event, "views/SuperAndOriginalDocManager.fxml","Document Manager");
+            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml","Document Manager");
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
+    public void reportTabooWordAction(ActionEvent event){
+        try {
+            GuiUtil.createWindow(event, "views/OriginalAndVisitorReportTabooWord.fxml", "Report Taboo Word");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

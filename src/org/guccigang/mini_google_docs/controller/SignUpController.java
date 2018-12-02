@@ -23,11 +23,7 @@ public class SignUpController {
     PasswordField passwordField, passwordCheck;
 
     public void cancelAction(ActionEvent event) {
-        //post-condition: The window from which the event is called is closed
-        Node node = (Node) event.getSource();
-        //this variable are used to manipulate the IU.
-        Stage window = (Stage) node.getScene().getWindow();
-        window.close();
+        GuiUtil.closeWindow(event);
     }
 
     public void submitAction(ActionEvent event) {
@@ -47,7 +43,7 @@ public class SignUpController {
           }else {
                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Please allow 24 hours for your account to be activated",
                        "Application submitted successfuly!,", "Confirmation");
-               cancelAction(event);
+               GuiUtil.closeWindow(event);
           }
         } catch (Exception e) {
             e.printStackTrace();
