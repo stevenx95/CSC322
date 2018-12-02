@@ -34,12 +34,12 @@ public class VersionUtil
      *
      * @return an int which serves as the docID for the newly created document
      */
-    public static int create(String owner,String title)throws java.sql.SQLException
+    public static String create(String owner,String title)throws java.sql.SQLException
     {
         DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,\"1941-12-07\",0)",owner,title,"");
         java.sql.ResultSet query = DbUtil.processQuery("select max(docID) from documents where docName=? and owner=?;",title,owner);
         query.next();
-        return query.getInt(1);
+        return query.getString(1);
     }
 
     /**This function returns the contents of the current version of the document
