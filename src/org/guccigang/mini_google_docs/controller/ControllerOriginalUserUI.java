@@ -15,4 +15,14 @@ public class ControllerOriginalUserUI {
             e.printStackTrace();
         }
     }
+
+    public void reportTabooWordAction(ActionEvent event){
+        try {
+            GuiUtil.createWindow(event, "views/OriginalAndVisitorReportTabooWord.fxml", "Report Taboo Word");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

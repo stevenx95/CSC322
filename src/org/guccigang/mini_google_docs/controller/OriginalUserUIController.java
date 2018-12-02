@@ -23,4 +23,11 @@ public class OriginalUserUIController {
         }
     }
 
+    public void reportTabooWordAction(ActionEvent event){
+        try {
+            GuiUtil.createWindow(event, "views/OriginalAndVisitorReportTabooWord.fxml", "Report Taboo Word");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
