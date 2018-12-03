@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -43,6 +44,10 @@ public class SearchUsersWindowController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void handleDisplayAllUsers(ActionEvent event){
+        fillTable();
     }
     @FXML
     public void handleSearch(ActionEvent event){
