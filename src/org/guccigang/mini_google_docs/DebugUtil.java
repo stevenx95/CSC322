@@ -35,7 +35,7 @@ public class DebugUtil
         else if(args[0].equals("create"))
         {
             try {
-                int id = VersionUtil.create(args[1], args[2]);//owner,string
+                String id = VersionUtil.create(args[1], args[2]);//owner,string
                 System.out.println("Created docID "+id);
             }catch (java.sql.SQLException e)
             {
