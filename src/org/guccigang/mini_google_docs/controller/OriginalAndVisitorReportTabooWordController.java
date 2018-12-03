@@ -15,10 +15,10 @@ public class OriginalAndVisitorReportTabooWordController {
 
     @FXML
     TextField userNameBar;
+
     @FXML
     TextField tabooWordBar;
-    @FXML
-    Button tabooSuggestionToDB;
+
 
     private void tabooSuggestionToDB() throws IOException, SQLException {
         TabooWordDAO.sendTabooSuggestion(userNameBar.getText(),tabooWordBar.getText());

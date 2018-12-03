@@ -1,5 +1,6 @@
 package org.guccigang.mini_google_docs.controller;
 
+import java.io.IOException;
 import java.sql.*;
 
 import javafx.event.ActionEvent;
@@ -9,8 +10,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.guccigang.mini_google_docs.DbUtil;
 import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 public class LoginController {
+
+    private UserObject currentUser;
 
     @FXML
     private PasswordField passwordField;
@@ -28,16 +32,7 @@ public class LoginController {
             ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
             if(resultSet.next()) {
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
-               int x = resultSet.getInt("membershipLevel");
-               String name = resultSet.getString("firstname");
-
-                if (x == 1) {
-                    GuiUtil.createWindowAndDestroy(event, "views/originalUserUI.fxml", name);
-                }
-
-                if (x == 2) {
-                    GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml", name);
-                }
+                loadUserProfile(event, resultSet);
             } else {
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
                         "Please enter correct username and password or login as visitor",
@@ -46,6 +41,22 @@ public class LoginController {
 
         } catch (Exception e ) {
             e.printStackTrace();
+        }
+    }
+
+    private void loadUserProfile(ActionEvent event, ResultSet resultSet) throws SQLException, IOException {
+        this.currentUser = new UserObject(resultSet.getString("username"), resultSet.getString("password"),
+                resultSet.getString("firstname"), resultSet.getString("lastname"),
+                resultSet.getInt("membershiplevel"));
+
+        if (currentUser.getMembershipLevel() == 1) {
+            OriginalUserUIController controller = new OriginalUserUIController(currentUser);
+            GuiUtil.createWindowAndDestroy(event, "views/originalUserUI.fxml", currentUser.getFirstName(), controller);
+        }
+
+        if (currentUser.getMembershipLevel() == 2) {
+            SuperUserUIController controller = new SuperUserUIController(currentUser);
+            GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml", currentUser.getFirstName(), controller);
         }
     }
 
