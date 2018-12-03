@@ -4,11 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import org.guccigang.mini_google_docs.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 import org.guccigang.mini_google_docs.model.UsersDAO;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class SearchUsersWindowController {
@@ -16,7 +16,7 @@ public class SearchUsersWindowController {
     private UserObject currentUser;
 
     @FXML
-    private TextField searchField;
+    private TextField searchBar;
     @FXML
     private TableView<UserObject> usersTable;
     @FXML
@@ -28,10 +28,6 @@ public class SearchUsersWindowController {
 
     SearchUsersWindowController(UserObject currentUser){
         this.currentUser = currentUser;
-    }
-    @FXML
-    public void handleSearch(ActionEvent event){
-
     }
     @FXML
     private void initialize(){
@@ -47,6 +43,10 @@ public class SearchUsersWindowController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void handleSearch(ActionEvent event){
+        usersTable.setItems(UsersDAO.getSearchedResult(searchBar.getText()));
     }
     @FXML
     public void handleHome(ActionEvent event){
