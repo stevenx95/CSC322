@@ -118,6 +118,6 @@ insert into tabooList values
  ('fuck'),
  ('cunt'),
  ('moffo'),
- ('fegit'),
+ ('faggot'),
  ('shit');
 

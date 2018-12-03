@@ -60,6 +60,11 @@ public class UserObject {
             return "Ordinary User";
         }else return "Super User";
     }
+
+    public StringProperty userNameProperty() {
+        return new SimpleStringProperty(this.userName);
+    }
+
     public StringProperty passwordProperty() {
         return new SimpleStringProperty(this.password);
     }
