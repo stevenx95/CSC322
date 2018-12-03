@@ -65,7 +65,10 @@ public class SUViewTabooListController {
     @FXML
     private void removeTabooFromDB() throws  SQLException{
         TabooWord tabooWord = new TabooWord();
-        tabooWord= tabooWordTable.getSelectionModel().getSelectedItem();
+        int selectedIndex = tabooWordTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >=0){
+         tabooWord = tabooWordTable.getItems().get(selectedIndex);
+        }
 
         if (tabooWord != null){
             TabooWordDAO.removeTabooWord(tabooWord.toString());

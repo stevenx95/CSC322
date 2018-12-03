@@ -35,8 +35,13 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-            GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home", controller);
+            if(currentUser.getMembershipLevel()==1){
+                OriginalUserUIController controller = new OriginalUserUIController(currentUser);
+                GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home", controller);
+            }else {
+                SuperUserUIController controller = new SuperUserUIController(currentUser);
+                GuiUtil.changeScene(event,"views/superUserUI.fxml","Home", controller);
+            }
         }catch (IOException e){
             e.printStackTrace();
         }

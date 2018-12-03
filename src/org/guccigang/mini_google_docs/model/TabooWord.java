@@ -10,7 +10,6 @@ public class TabooWord {
 
 
     public TabooWord() {
-
         tabooText = new SimpleStringProperty("");
     }
 

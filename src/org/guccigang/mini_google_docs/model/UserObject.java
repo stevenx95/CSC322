@@ -23,8 +23,6 @@ public class UserObject {
         this.firstName = firstName;
         this.lastName = lastName;
         this.membershipLevel = membershipLevel;
-        this.interests = new ArrayList<>(3);
-
     }
 
     public String getUserName() {
@@ -43,21 +41,25 @@ public class UserObject {
         return lastName;
     }
 
-    public List getInterests() {
+    public List<String> getInterests() {
         return interests;
     }
     public void addInterest(String interest) {
         interests.add(interest);
     }
 
+    public String getInterest(int i) {
+        return interests.get(i);
+    }
+
     public int getMembershipLevel() {
         return membershipLevel;
     }
-
-    public StringProperty userNameProperty() {
-        return new SimpleStringProperty(this.userName);
+    public String getMembership(){
+        if(getMembershipLevel() == 1){
+            return "Ordinary User";
+        }else return "Super User";
     }
-
     public StringProperty passwordProperty() {
         return new SimpleStringProperty(this.password);
     }

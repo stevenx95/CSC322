@@ -26,7 +26,16 @@ public class OriginalUserUIController {
     }
     public void openDocumentManager(ActionEvent event){
         try{
-            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml","Document Manager");
+            SuperAndOriginalDocManagerController controller = new SuperAndOriginalDocManagerController(user);
+            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml","Document Manager",controller);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public void handleFindUser(ActionEvent event){
+        try{
+            SearchUsersWindowController controller = new SearchUsersWindowController(user);
+            GuiUtil.changeScene(event,"views/SearchUsersWindow.fxml", "Search Users",controller);
         }catch (IOException e){
             e.printStackTrace();
         }
