@@ -7,7 +7,7 @@
         add parameters to such query if needed
         get results of query
  */
-package org.guccigang.mini_google_docs;
+package org.guccigang.mini_google_docs.model;
 
 import com.sun.rowset.CachedRowSetImpl;
 
@@ -36,7 +36,7 @@ public class DbUtil {
         System.out.println("JDBC driver detected...");
         //Establishing a connection to database using connection string
         try {
-            connection = DriverManager.getConnection(connString, "kduggan15", "Timmy2000");
+            connection = DriverManager.getConnection(connString, "root", "password");
         } catch (SQLException e) {
             System.out.println("Connection has failed...");
             e.printStackTrace();

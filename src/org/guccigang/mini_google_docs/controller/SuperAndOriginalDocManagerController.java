@@ -3,7 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
 import javafx.fxml.FXML;

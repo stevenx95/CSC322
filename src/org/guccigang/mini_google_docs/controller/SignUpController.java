@@ -1,14 +1,12 @@
 package org.guccigang.mini_google_docs.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.guccigang.mini_google_docs.DbUtil;
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.DbUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

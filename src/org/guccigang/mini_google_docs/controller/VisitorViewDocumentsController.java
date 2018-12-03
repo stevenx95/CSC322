@@ -4,7 +4,7 @@ package org.guccigang.mini_google_docs.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 

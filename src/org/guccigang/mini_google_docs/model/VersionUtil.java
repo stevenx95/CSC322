@@ -2,10 +2,8 @@
 /*
 This is a utility class for version control
  */
-package org.guccigang.mini_google_docs;
+package org.guccigang.mini_google_docs.model;
 import java.util.*;
-import org.guccigang.mini_google_docs.DbUtil;
-import org.guccigang.mini_google_docs.diff_match_patch;
 
 public class VersionUtil
 {

@@ -1,6 +1,4 @@
-package org.guccigang.mini_google_docs;
-
-import org.guccigang.mini_google_docs.VersionUtil;
+package org.guccigang.mini_google_docs.model;
 
 public class DebugUtil
 {

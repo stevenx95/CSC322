@@ -45,7 +45,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="231.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="265.0" text="Find Users" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleUserManager" prefHeight="65.0" prefWidth="265.0" text="Find Users" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>

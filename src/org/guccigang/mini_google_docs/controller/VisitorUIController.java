@@ -2,7 +2,7 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 
 import java.io.IOException;
 

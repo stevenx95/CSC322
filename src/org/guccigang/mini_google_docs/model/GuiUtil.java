@@ -2,7 +2,7 @@
     GuiUtil is an utilities class that contain methods that can be reused for different sections of our GUI
  */
 
-package org.guccigang.mini_google_docs;
+package org.guccigang.mini_google_docs.model;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
+import org.guccigang.mini_google_docs.Main;
 import org.guccigang.mini_google_docs.controller.VisitorTextEditorController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 

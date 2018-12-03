@@ -1,7 +1,7 @@
 package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
@@ -39,6 +39,15 @@ public class SuperUserUIController {
         try {
             GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml", "Document Manager");
         }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleUserManager(ActionEvent event) {
+        try {
+            UserAppManagerController controller = new UserAppManagerController(currentUser);
+            GuiUtil.changeScene(event, "views/UserAppManager.fxml", "Applications", controller);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

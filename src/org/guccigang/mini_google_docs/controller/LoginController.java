@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.guccigang.mini_google_docs.DbUtil;
-import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.DbUtil;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 
 public class LoginController {
@@ -41,6 +41,7 @@ public class LoginController {
 
         } catch (Exception e ) {
             e.printStackTrace();
+            visitorAction(event);
         }
     }
 

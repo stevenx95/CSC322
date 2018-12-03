@@ -2,9 +2,7 @@ package org.guccigang.mini_google_docs.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.guccigang.mini_google_docs.DbUtil;
 
-import javax.sql.rowset.CachedRowSet;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
