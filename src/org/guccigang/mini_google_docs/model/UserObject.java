@@ -6,13 +6,15 @@ public class UserObject {
     final private String password;
     final private String firstName;
     final private String lastName;
+    final private int membershipLevel;
     private String[] interests;
 
-    public UserObject(String userName, String password, String firstName, String lastName) {
+    public UserObject(String userName, String password, String firstName, String lastName, int membershipLevel) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.membershipLevel = membershipLevel;
     }
 
     public String getUserName() {
@@ -36,5 +38,9 @@ public class UserObject {
     }
     public void addInterests(String... interests) {
         this.interests = interests;
+    }
+
+    public int getMembershipLevel() {
+        return membershipLevel;
     }
 }

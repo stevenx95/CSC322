@@ -25,10 +25,18 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     private Button homeButton;
 
+    public SuperAndOriginalDocManagerController(UserObject currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public SuperAndOriginalDocManagerController() {
+        this(null);
+    }
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home");
+            OriginalUserUIController controller = new OriginalUserUIController(currentUser);
+            GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home", controller);
         }catch (IOException e){
             e.printStackTrace();
         }

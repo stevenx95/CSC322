@@ -2,12 +2,23 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
 
 public class ControllerOriginalUserUI {
 
-    public void signOutButton(ActionEvent event){
+    private UserObject user;
+
+    public ControllerOriginalUserUI(UserObject user) {
+        this.user = user;
+    }
+
+    public ControllerOriginalUserUI() {
+        this(null);
+    }
+
+    public void signOutButton(ActionEvent event) {
         try {
 
             GuiUtil.createWindowAndDestroy(event,"views/login.fxml", "Gucci Gang");
@@ -16,7 +27,7 @@ public class ControllerOriginalUserUI {
         }
     }
 
-    public void reportTabooWordAction(ActionEvent event){
+    public void reportTabooWordAction(ActionEvent event) {
         try {
             GuiUtil.createWindow(event, "views/OriginalAndVisitorReportTabooWord.fxml", "Report Taboo Word");
         } catch (Exception e) {

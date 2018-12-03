@@ -3,11 +3,20 @@ package org.guccigang.mini_google_docs.controller;
 import javafx.event.ActionEvent;
 
 import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
 
 public class OriginalUserUIController {
+    private UserObject user;
 
+    public OriginalUserUIController(UserObject user) {
+        this.user = user;
+    }
+
+    public OriginalUserUIController() {
+        this(null);
+    }
     public void signOutButton(ActionEvent event){
         try {
             GuiUtil.createWindowAndDestroy(event,"views/login.fxml", "Gucci Gang");

@@ -2,10 +2,21 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.GuiUtil;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
 
 public class SuperUserUIController {
+
+    private UserObject currentUser;
+
+    public SuperUserUIController() {
+        this(null);
+    }
+
+    public SuperUserUIController(UserObject currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public void signOutButton(ActionEvent event){
         try {

@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import org.guccigang.mini_google_docs.controller.VisitorTextEditorController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 
@@ -104,6 +105,29 @@ public class GuiUtil {
         stage.close();
     }
 
+    public static <T> void createWindowAndDestroy(ActionEvent event, String sourceUI, String title, T controller) throws IOException {
+        //define FXMLLoader and new Stage
+        FXMLLoader loader = new FXMLLoader();
+        Stage visitorStage = new Stage();
+
+        //set controller
+        loader.setController(controller);
+
+        //create the new window
+        loader.setLocation(Main.class.getResource(sourceUI));
+        visitorStage.setTitle(title);
+        Scene scene = new Scene(loader.load());
+        visitorStage.setScene(scene);
+
+        //Display the newly created window
+        visitorStage.show();
+
+        //destroy current window
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+    }
+
     /**
      *
      * @param event
@@ -118,6 +142,21 @@ public class GuiUtil {
         Stage window = (Stage) node.getScene().getWindow();
         window.setTitle(title);
         scene.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI)));
+    }
+
+    public static <T> void changeScene(ActionEvent event, String sourceUI, String title, T controller)  throws IOException {
+        //define our variables
+        Node node = (Node) event.getSource();
+        Scene scene = node.getScene();
+        Stage window = (Stage) node.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(sourceUI));
+
+        //set controller
+        loader.setController(controller);
+
+        //change the scene
+        scene.setRoot(loader.load());
+        window.setTitle(title);
     }
 
     /**
