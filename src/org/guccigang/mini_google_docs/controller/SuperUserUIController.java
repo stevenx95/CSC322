@@ -37,7 +37,8 @@ public class SuperUserUIController {
     }
     public void handleDocumentManager(ActionEvent event) {
         try {
-            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml", "Document Manager");
+            SuperAndOriginalDocManagerController controller = new SuperAndOriginalDocManagerController(currentUser);
+            GuiUtil.changeScene(event, "views/SuperAndOriginalDocManager.fxml", "Document Manager",controller);
         }catch (IOException e) {
             e.printStackTrace();
         }
