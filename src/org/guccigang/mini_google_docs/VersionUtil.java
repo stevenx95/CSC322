@@ -26,7 +26,7 @@ public class VersionUtil
 
         diff = getChanges(newText,currText);
 
-        DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",\"1941-12-07\",author,?)",diff);
+        DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",\"1941-12-07\",?,?)",author,diff);
         DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",docID);
     }
 
@@ -34,36 +34,59 @@ public class VersionUtil
      *
      * @return an int which serves as the docID for the newly created document
      */
-    public static int create()
+    public static String create(String owner,String title)throws java.sql.SQLException
     {
-        return -1;//STUB
+        DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,\"1941-12-07\",0)",owner,title,"");
+        java.sql.ResultSet query = DbUtil.processQuery("select max(docID) from documents where docName=? and owner=?;",title,owner);
+        query.next();
+        return query.getString(1);
     }
 
     /**This function returns the contents of the current version of the document
      *
      * @return a string representing the contents of the current version of the doc
      */
-    public static String open(String docID)
+    public static String open(String docID) throws java.sql.SQLException
     {
-        return "Stub";//STUB
+        //select content from documents where docID=1;
+        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",docID);
+        query.next();
+        return query.getString(1);
     }
 
     /**This function creates an empty document in the database and
      *
      * @return a string representing the contents of the given version of the doc
      */
-    public static String openVersion(String docID, int version)
+    public static String openVersion(String docID, int version) throws java.sql.SQLException
     {
-        return "Stub";//STUB
+        version++;//account for version off-by-one
+        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",docID);
+        query.next();
+        String currVersion = query.getString(1);
+        ArrayList<String> versions = new ArrayList<>();
+
+        query = DbUtil.processQuery("SELECT content FROM revisions where docID="+docID+";");
+        while(query.next())
+        {
+            String temp = query.getString(1);
+            versions.add(temp);
+            System.out.println(temp);
+        }
+
+
+        for(int i=versions.size()-1; i>version;i--)
+        {
+            currVersion = applyChanges(currVersion,versions.get(i));
+        }
+        return currVersion;
     }
 
     public static int getCurrentVersion(String docID) throws java.sql.SQLException
     {
-        int version;
         java.sql.ResultSet query = DbUtil.processQuery("SELECT COUNT(*) FROM revisions where docID="+docID+";");
         query.next();
-        version = query.getInt(1)+1;//the current version is the number of past versions + 1
-        return version;
+        return query.getInt(1)+1;//the current version is the number of past versions + 1
     }
 
     /**This function takes in two strings and returns the list of differences from the first to the second.

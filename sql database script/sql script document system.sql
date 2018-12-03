@@ -43,7 +43,7 @@ CREATE TABLE interests (
 );
 
 CREATE TABLE documents (
-    docID int PRIMARY KEY,
+    docID int PRIMARY KEY AUTO_INCREMENT,
     owner varchar(20),
     FOREIGN KEY (owner) REFERENCES users(userName),
     docName varchar(20),
@@ -106,13 +106,13 @@ insert into interests values
 ("Kelly", "Doing Nothing"),
 ("Kelly", "Lifting");
 
-insert into documents values
-(1,"Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
-(2,"Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
-(3,"Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
-(4,"Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
-(5,"Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
-(6,"Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
+insert into documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag)values
+("Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
+("Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
+("Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
+("Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
+("Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
+("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
 
 insert into tabooList values
  ('fuck'),
