@@ -58,8 +58,8 @@ public class TabooWordDAO {
     }
 
     public static void removeTabooWord(String word) throws SQLException{
-        String selectStatement = "DELETE FROM taboolist WHERE tabooWord = '"+word+"'";
-        DbUtil.executeUpdateDB(selectStatement);
+        String selectStatement = "DELETE FROM taboolist WHERE tabooWord = ?";
+        DbUtil.executeUpdateDB(selectStatement,word);
     }
 
     public static void sendTabooSuggestion(String userName, String tabooWord) throws SQLException, IOException {
