@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.VisitorUIController">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.VisitorUIController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -50,7 +50,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="5.0" layoutY="643.0" mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" textFill="#1389a7" />
+                        <Button layoutX="5.0" layoutY="643.0" mnemonicParsing="false" onAction="#signOutButton" text="Exit" textFill="#1389a7" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
