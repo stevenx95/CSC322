@@ -1,5 +1,11 @@
 package org.guccigang.mini_google_docs.model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.Arrays;
+
 public class UserObject {
 
     final private String userName;
@@ -42,5 +48,19 @@ public class UserObject {
 
     public int getMembershipLevel() {
         return membershipLevel;
+    }
+    public String getMembership(){
+        if(getMembershipLevel() == 1){
+            return "Ordinary User";
+        }else return "Super User";
+    }
+    public StringProperty userNameProperty(){
+        return new SimpleStringProperty(userName.toString());
+    }
+    public StringProperty membershipProperty(){
+        return new SimpleStringProperty(getMembership());
+    }
+    public StringProperty interestsProperty(){
+        return new SimpleStringProperty(Arrays.toString(getInterests()));
     }
 }

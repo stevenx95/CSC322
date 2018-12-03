@@ -18,11 +18,11 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="documentFileTable" layoutX="144.0" layoutY="91.0" prefHeight="407.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                  <TableView fx:id="usersTable" layoutX="144.0" layoutY="91.0" prefHeight="407.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
                      <columns>
-                        <TableColumn fx:id="documentNameColumn" prefWidth="189.0" text="User Name" />
-                        <TableColumn fx:id="documentOwnerColumn" prefWidth="148.0" text="Interest" />
-                        <TableColumn prefWidth="154.0" text="Membership" />
+                        <TableColumn fx:id="UserNameNameColumn" prefWidth="189.0" text="User Name" />
+                        <TableColumn fx:id="InterestColumn" prefWidth="148.0" text="Interest" />
+                        <TableColumn fx:id="MembershipColumn" prefWidth="154.0" text="Membership" />
                      </columns>
                   </TableView>
                   <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" text="Open User's Profile" />
