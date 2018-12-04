@@ -139,7 +139,16 @@ public class DocumentFile {
     public StringProperty restrictedProperty() {
         return new SimpleStringProperty(restricted.toString());
     }
-
+    public StringProperty restrictionLevelProperty(){
+        //Returns a string representation of the restriction.
+        if(getRestricted() == 0){
+            return new SimpleStringProperty("Private");
+        }else if(getRestricted() == 1){
+            return new SimpleStringProperty("Shared");
+        }else if(getRestricted() == 2){
+            return new SimpleStringProperty("Public");
+        }else return new SimpleStringProperty("Restricted");
+    }
     public void setTabooFlag(int tabooFlag) {
         if(tabooFlag == 0){
             this.tabooFlag = false;

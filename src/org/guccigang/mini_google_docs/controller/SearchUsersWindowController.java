@@ -68,8 +68,8 @@ public class SearchUsersWindowController {
             }
         }else {
             //Nothing selected.
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
-                    "No Document Selected", "No Selection");
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a user in the table.",
+                    "No User Selected", "No Selection");
         }
     }
     @FXML
