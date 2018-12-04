@@ -2,7 +2,7 @@ package org.guccigang.mini_google_docs.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.guccigang.mini_google_docs.DbUtil;
+import org.guccigang.mini_google_docs.model.DbUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ public class UsersDAO {
     public static ObservableList<UserObject> getAllUsers()throws SQLException{
         ObservableList<UserObject> users;
         String selectStatementUsers = "select * from users order by userName";
-        //Execute select statment
+        //Execute select statement
         ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers);
         users = getAllUsersList(resultSetUsers);
         return users;
@@ -29,11 +29,10 @@ public class UsersDAO {
                 String lastName = resultSetUsers.getString("lastName");
                 int membershipLevel = resultSetUsers.getInt("membershipLevel");
                 ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,resultSetUsers.getString("userName"));
-                while (interestsResultSet.next()){
-                    interests.add(interestsResultSet.getString("interest"));
-                }
                 UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
-                user.addInterests(interests.toArray(new String[interests.size()]));
+                while (interestsResultSet.next()){
+                    user.addInterest(interestsResultSet.getString("interest"));
+                }
                 users.add(user);
             }
         }catch (SQLException e){
@@ -62,12 +61,11 @@ public class UsersDAO {
                 String lastName = searchedResultSet.getString("lastName");
                 int membershipLevel = searchedResultSet.getInt("membershipLevel");
                 ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,searchedResultSet.getString("userName"));
-                while (interestsResultSet.next()){
-                    interests.add(interestsResultSet.getString("interest"));
-                }
                 UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
-                user.addInterests(interests.toArray(new String[interests.size()]));
 
+                while (interestsResultSet.next()){
+                    user.addInterest(interestsResultSet.getString("interest"));
+                }
                 if(i == 0){
                     users.add(user);
                     i+=1;

@@ -129,6 +129,24 @@ public class GuiUtil {
         stage.close();
     }
 
+    public static <T> void createWindow(ActionEvent event, String sourceUI, String title, T controller) throws IOException {
+        //define FXMLLoader and new Stage
+        FXMLLoader loader = new FXMLLoader();
+        Stage visitorStage = new Stage();
+
+        //set controller
+        loader.setController(controller);
+
+        //create the new window
+        loader.setLocation(Main.class.getResource(sourceUI));
+        visitorStage.setTitle(title);
+        Scene scene = new Scene(loader.load());
+        visitorStage.setScene(scene);
+
+        //Display the newly created window
+        visitorStage.show();
+    }
+
     /**
      *
      * @param event

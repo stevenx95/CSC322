@@ -2,11 +2,9 @@ package org.guccigang.mini_google_docs.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import org.guccigang.mini_google_docs.GuiUtil;
+import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.model.GuiUtil;
+import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UserObject;
 import org.guccigang.mini_google_docs.model.UsersDAO;
 
@@ -34,7 +32,7 @@ public class SearchUsersWindowController {
     private void initialize(){
         fillTable();
         UserNameNameColumn.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
-        InterestColumn.setCellValueFactory(cellData -> cellData.getValue().interestsProperty());
+        InterestColumn.setCellValueFactory(cellData -> cellData.getValue().interestProperty(1));
         MembershipColumn.setCellValueFactory(cellData -> cellData.getValue().membershipProperty());
 
     }
@@ -52,6 +50,27 @@ public class SearchUsersWindowController {
     @FXML
     public void handleSearch(ActionEvent event){
         usersTable.setItems(UsersDAO.getSearchedResult(searchBar.getText()));
+    }
+    @FXML
+    public void handleOpenUserProfile(ActionEvent event){
+        int selectedIndex = usersTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0){
+            UserObject otherUser = usersTable.getItems().get(selectedIndex);
+            if(currentUser.getMembershipLevel() == 1){
+                try{
+                    OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
+                    GuiUtil.createWindow(event,"views/OUViewOfUsersWindow.fxml",otherUser.getUserName(),controller);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }else {
+
+            }
+        }else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
+        }
     }
     @FXML
     public void handleHome(ActionEvent event){
