@@ -21,6 +21,8 @@ public class SUViewOfUsersController {
     @FXML
     private Label listOfInterests;
     @FXML
+    private Label usersDocumentLabel;
+    @FXML
     private TableView<DocumentFile> documentFileTable;
     @FXML
     private TableColumn<DocumentFile, String> documentNameColumn;
@@ -40,6 +42,7 @@ public class SUViewOfUsersController {
         userNameLabel.setText("User Name: " + otherUser.getUserName());
         firstAndLastName.setText("Full Name: " + otherUser.getFirstName() + " " + otherUser.getLastName());
         listOfInterests.setText(otherUser.getInterests().toString());
+        usersDocumentLabel.setText(otherUser.getUserName() + "' Documents");
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
