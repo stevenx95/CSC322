@@ -4,18 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.model.DbUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UserObject;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * This controller is for when we open another user's profile.
- */
-public class OUViewOfUsersController {
+public class SUViewOfUsersController {
     private UserObject currentUser;
     private UserObject otherUser;
 
@@ -32,11 +27,11 @@ public class OUViewOfUsersController {
     @FXML
     private TableColumn<DocumentFile, String> restrictionLevelColumn;
 
-    OUViewOfUsersController (){
+    SUViewOfUsersController (){
         this.currentUser = null;
         this.otherUser = null;
     }
-    OUViewOfUsersController(UserObject currentUser, UserObject otherUser){
+    SUViewOfUsersController(UserObject currentUser, UserObject otherUser){
         this.currentUser = currentUser;
         this.otherUser = otherUser;
     }
@@ -49,6 +44,7 @@ public class OUViewOfUsersController {
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
     }
+
     private void fillTable(){
         try{
             documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(otherUser.getUserName()));
@@ -58,6 +54,4 @@ public class OUViewOfUsersController {
             e.printStackTrace();
         }
     }
-
-
 }

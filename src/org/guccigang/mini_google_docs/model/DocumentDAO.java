@@ -83,4 +83,54 @@ public class DocumentDAO {
         }
         return documentFiles;
     }
+
+
+    /**
+     * Queries the database for all documents.
+     * @return documentFiles
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static ObservableList<DocumentFile> getSpecificsUsersDocuments(String userName) throws SQLException, ClassNotFoundException{
+        String selectStatement = "SELECT * FROM documents where owner = ?";
+        //Execute select statment
+        try{
+
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ObservableList<DocumentFile> documentFiles = getAllReadableDocuments(resultSet);
+            return documentFiles;
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
+    }
+
+    /**
+     *Use ResultSet from DB as parameter and set Document attributes as such then returns every document from database.
+     * @param resultSet
+     * @return
+     * @throws SQLException
+     */
+    private static ObservableList<DocumentFile> getSpecificUserDocumentsList(ResultSet resultSet)throws SQLException{
+        ObservableList<DocumentFile> documentFiles = FXCollections.observableArrayList();
+
+        while(resultSet.next()){
+            DocumentFile document = new DocumentFile();
+            document.setiD(resultSet.getInt("docID"));
+            document.setOwner(resultSet.getString("owner").toString());
+            document.setDocumentName(resultSet.getString("docName"));
+            document.setContent(resultSet.getString("content"));
+            document.setLock(resultSet.getInt("isLocked"));
+            document.setRestricted(resultSet.getInt("restricted"));
+            //Gonna leave it for now. might just change document date to string unless you guys can fix it.
+            //document.setDate(new Date(resultSet.getString("createdDate")));
+            document.setTabooFlag(resultSet.getInt("tabooFlag"));
+
+            documentFiles.add(document);
+        }
+        return documentFiles;
+    }
+
+
 }

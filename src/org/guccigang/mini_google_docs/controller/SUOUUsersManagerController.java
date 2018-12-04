@@ -10,7 +10,7 @@ import org.guccigang.mini_google_docs.model.UsersDAO;
 
 import java.io.IOException;
 
-public class SearchUsersWindowController {
+public class SUOUUsersManagerController {
 
     private UserObject currentUser;
 
@@ -25,7 +25,7 @@ public class SearchUsersWindowController {
     @FXML
     private TableColumn<UserObject, String> MembershipColumn;
 
-    SearchUsersWindowController(UserObject currentUser){
+    SUOUUsersManagerController(UserObject currentUser){
         this.currentUser = currentUser;
     }
     @FXML
@@ -64,7 +64,12 @@ public class SearchUsersWindowController {
                     e.printStackTrace();
                 }
             }else {
-
+                try{
+                    OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
+                    GuiUtil.createWindow(event,"views/SUViewOfUsersWindow.fxml",otherUser.getUserName(),controller);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
         }else {
             //Nothing selected.

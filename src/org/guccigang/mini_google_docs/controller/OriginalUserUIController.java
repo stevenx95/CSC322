@@ -34,7 +34,7 @@ public class OriginalUserUIController {
     }
     public void handleFindUser(ActionEvent event){
         try{
-            SearchUsersWindowController controller = new SearchUsersWindowController(user);
+            SUOUUsersManagerController controller = new SUOUUsersManagerController(user);
             GuiUtil.changeScene(event,"views/SearchUsersWindow.fxml", "Search Users",controller);
         }catch (IOException e){
             e.printStackTrace();

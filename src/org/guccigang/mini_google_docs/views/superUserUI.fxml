@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -40,12 +40,12 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="386.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="265.0" text="Memebership Manager" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleApplications" prefHeight="65.0" prefWidth="265.0" text="Applications Manager" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleUserManager" prefHeight="65.0" prefWidth="265.0" text="Find Users" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleFindUsers" prefHeight="65.0" prefWidth="265.0" text="Find Users" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>

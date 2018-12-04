@@ -43,8 +43,16 @@ public class SuperUserUIController {
             e.printStackTrace();
         }
     }
+    public void handleFindUsers(ActionEvent event){
+        try{
+            SUOUUsersManagerController controller = new SUOUUsersManagerController(currentUser);
+            GuiUtil.changeScene(event, "views/SearchUsersWindow.fxml","Search Users",controller);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
-    public void handleUserManager(ActionEvent event) {
+    public void handleApplications(ActionEvent event) {
         try {
             UserAppManagerController controller = new UserAppManagerController(currentUser);
             GuiUtil.changeScene(event, "views/UserAppManager.fxml", "Applications", controller);

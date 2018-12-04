@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="105.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="176.0" />
@@ -23,7 +23,6 @@
       <Button mnemonicParsing="false" onAction="#handleHome" text="Home" GridPane.halignment="CENTER" />
       <TextField GridPane.columnIndex="1" />
       <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" />
-      <Button mnemonicParsing="false" text="Review Application" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       <TableView fx:id="applicationsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
         <columns>
           <TableColumn fx:id="userName" prefWidth="75.0" text="Username" />
@@ -35,5 +34,7 @@
           <TableColumn fx:id="interest3" prefWidth="75.0" text="Interest 3" />
         </columns>
       </TableView>
+      <Button mnemonicParsing="false" text="Approve" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" text="Decline" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
