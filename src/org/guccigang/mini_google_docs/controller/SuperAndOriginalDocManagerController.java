@@ -1,10 +1,12 @@
 package org.guccigang.mini_google_docs.controller;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentFile;
+import org.guccigang.mini_google_docs.model.DocumentDAO;
 
 import javafx.fxml.FXML;
 import org.guccigang.mini_google_docs.model.UserObject;
@@ -48,6 +50,28 @@ public class SuperAndOriginalDocManagerController {
     }
 
 
+    @FXML
+    public void handleOpenDocument(ActionEvent event)
+    {
+        int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0){
+            DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
+            SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
+            try
+            {
+                GuiUtil.createWindow(event,"Views/SuperAndOriginalTextEditor.fxml","Text Editor", controller);
+            }catch (java.io.IOException e)
+            {
+                e.printStackTrace();
+            }
+
+        }else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
+        }
+    }
+
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -58,6 +82,14 @@ public class SuperAndOriginalDocManagerController {
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
         documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictedProperty());
+        fillTable();
     }
 
+    private void fillTable(){
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
