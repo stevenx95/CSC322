@@ -1,16 +1,21 @@
-package org.guccigang.mini_google_docs.controller;
+package org.guccigang.mini_google_docs.controller.UsersManager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.guccigang.mini_google_docs.model.DbUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UserObject;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
-public class SUViewOfUsersController {
+/**
+ * This controller is for when we open another user's profile.
+ */
+public class OUViewOfUsersController {
     private UserObject currentUser;
     private UserObject otherUser;
 
@@ -29,11 +34,11 @@ public class SUViewOfUsersController {
     @FXML
     private TableColumn<DocumentFile, String> restrictionLevelColumn;
 
-    SUViewOfUsersController (){
+    OUViewOfUsersController (){
         this.currentUser = null;
         this.otherUser = null;
     }
-    SUViewOfUsersController(UserObject currentUser, UserObject otherUser){
+    OUViewOfUsersController(UserObject currentUser, UserObject otherUser){
         this.currentUser = currentUser;
         this.otherUser = otherUser;
     }
@@ -47,7 +52,6 @@ public class SUViewOfUsersController {
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
     }
-
     private void fillTable(){
         try{
             documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(otherUser.getUserName()));
@@ -57,4 +61,6 @@ public class SUViewOfUsersController {
             e.printStackTrace();
         }
     }
+
+
 }

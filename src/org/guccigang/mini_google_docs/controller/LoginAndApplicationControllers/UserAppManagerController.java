@@ -1,10 +1,11 @@
-package org.guccigang.mini_google_docs.controller;
+package org.guccigang.mini_google_docs.controller.LoginAndApplicationControllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
+import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserDAO;
 import org.guccigang.mini_google_docs.model.UserObject;

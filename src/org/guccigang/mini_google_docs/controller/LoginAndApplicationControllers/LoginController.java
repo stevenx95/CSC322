@@ -1,4 +1,4 @@
-package org.guccigang.mini_google_docs.controller;
+package org.guccigang.mini_google_docs.controller.LoginAndApplicationControllers;
 
 import java.io.IOException;
 import java.sql.*;
@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
+import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.DbUtil;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;

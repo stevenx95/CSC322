@@ -13,10 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import org.guccigang.mini_google_docs.Main;
-import org.guccigang.mini_google_docs.controller.VisitorTextEditorController;
-import org.guccigang.mini_google_docs.model.DocumentFile;
+import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController;
 
 import java.io.IOException;
 

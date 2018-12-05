@@ -1,4 +1,4 @@
-package org.guccigang.mini_google_docs.controller;
+package org.guccigang.mini_google_docs.controller.DocumentControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;

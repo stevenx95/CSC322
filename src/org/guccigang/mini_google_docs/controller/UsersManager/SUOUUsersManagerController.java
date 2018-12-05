@@ -1,10 +1,11 @@
-package org.guccigang.mini_google_docs.controller;
+package org.guccigang.mini_google_docs.controller.UsersManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
+import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
-import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UserObject;
 import org.guccigang.mini_google_docs.model.UsersDAO;
 
@@ -25,7 +26,7 @@ public class SUOUUsersManagerController {
     @FXML
     private TableColumn<UserObject, String> MembershipColumn;
 
-    SUOUUsersManagerController(UserObject currentUser){
+    public SUOUUsersManagerController(UserObject currentUser){
         this.currentUser = currentUser;
     }
     @FXML
