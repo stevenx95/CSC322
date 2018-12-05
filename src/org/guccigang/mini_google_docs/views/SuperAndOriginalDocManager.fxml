@@ -25,7 +25,7 @@
                         <TableColumn fx:id="documentRestrictionColumn" prefWidth="289.0" text="Restriction" />
                      </columns>
                   </TableView>
-                  <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" text="Open Document" />
+                  <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
                   <TextField layoutX="8.0" layoutY="14.0" prefHeight="31.0" prefWidth="213.0" />
                   <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" text="Search All Documents" />
                   <Button layoutX="8.0" layoutY="93.0" mnemonicParsing="false" text="New Document" />
