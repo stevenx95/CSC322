@@ -25,7 +25,9 @@ public class VisitorComplaintFormController {
 
     private DocumentFile docFile;
 
-    public VisitorComplaintFormController(){}
+    public VisitorComplaintFormController(){
+        this(null);
+    }
 
     public VisitorComplaintFormController(DocumentFile docFile) {
         this.docFile = docFile;

@@ -5,14 +5,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.guccigang.mini_google_docs.Main;
-import org.guccigang.mini_google_docs.model.DocumentFile;
+import javafx.event.ActionEvent;
 
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.util.Arrays;
+import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorComplaintFormController;
+import org.guccigang.mini_google_docs.model.DocumentFile;
+import org.guccigang.mini_google_docs.model.GuiUtil;
+
+
 
 public class VisitorTextEditorController {
     private DocumentFile selectedDocument;
@@ -26,11 +26,18 @@ public class VisitorTextEditorController {
 
     }
     @FXML
-    private void onLoad(){
+    private void handleComplaint(ActionEvent event){
+        try {
+            VisitorComplaintFormController controller = new VisitorComplaintFormController(selectedDocument);
+            GuiUtil.createWindow(event, UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     @FXML
     private void onClose(){
+
 
     }
 

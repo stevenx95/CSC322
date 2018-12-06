@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController">
 
     <BorderPane prefHeight="600.0" prefWidth="857.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
                 <Menu text="Options">
                     <MenuItem onAction="#onSave" text="Retrieve Old Documents" />
-                    <MenuItem onAction="#onLoad" text="File Compaint" />
+                    <MenuItem onAction="#handleComplaint" text="File Compaint" />
                     <MenuItem fx:id="closeButton" onAction="#onClose" text="Close" />
                 </Menu>
                 <Menu text="Help">

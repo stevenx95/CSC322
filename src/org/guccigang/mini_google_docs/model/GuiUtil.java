@@ -75,19 +75,20 @@ public class GuiUtil {
     public static <T> void createWindow(ActionEvent event, UILocation sourceUI, String title, T controller) throws IOException {
         //define FXMLLoader and new Stage
         FXMLLoader loader = new FXMLLoader();
-        Stage visitorStage = new Stage();
+        Stage stage = new Stage();
 
         //set controller
         loader.setController(controller);
 
         //create the new window
         loader.setLocation(Main.class.getResource(sourceUI.directory));
-        visitorStage.setTitle(title);
+        stage.setTitle(title);
+        stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(loader.load());
-        visitorStage.setScene(scene);
+        stage.setScene(scene);
 
         //Display the newly created window
-        visitorStage.show();
+        stage.showAndWait();
     }
 
     /**
@@ -186,7 +187,7 @@ public class GuiUtil {
         try{
             //Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/VisitorTextEditor.fxml"));
+            loader.setLocation(Main.class.getResource(UILocation.VISITOR_TEXT_EDITOR.directory));
             AnchorPane textEditor = (AnchorPane) loader.load();
 
             //Create the view document stage.

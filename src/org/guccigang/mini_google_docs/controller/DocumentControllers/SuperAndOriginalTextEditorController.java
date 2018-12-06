@@ -16,4 +16,5 @@ public class SuperAndOriginalTextEditorController {
         this.currentUser = currentUser;
         this.selectedDocument = selectedDocument;
 
+    }
 }
