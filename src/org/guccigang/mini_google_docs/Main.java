@@ -18,7 +18,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/LoginAndApplicationUI/login.fxml"));
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Mini Google Docs Login");
         primaryStage.setScene(scene);

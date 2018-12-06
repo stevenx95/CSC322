@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.DbUtil;
@@ -54,12 +55,12 @@ public class LoginController {
 
         if (currentUser.getMembershipLevel() == 1) {
             OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-            GuiUtil.createWindowAndDestroy(event, "views/originalUserUI.fxml", currentUser.getFirstName(), controller);
+            GuiUtil.createWindowAndDestroy(event, UILocation.ORIGINAL_USER_UI, currentUser.getFirstName(), controller);
         }
 
         if (currentUser.getMembershipLevel() == 2) {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
-            GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml", currentUser.getFirstName(), controller);
+            GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
         }
     }
 
@@ -67,7 +68,7 @@ public class LoginController {
         //post-condition: A new window opens on top of the sign in with sign up form.
         //Tis new window is MODAL meaning that it will block all other windows of the application until it is closed.
         try {
-            GuiUtil.createWindow(event, "views/signUp.fxml", "Sign Up");
+            GuiUtil.createWindow(event, UILocation.SIGNUP, "Sign Up");
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -75,7 +76,7 @@ public class LoginController {
 
     public void visitorAction(ActionEvent event) {
         try {
-            GuiUtil.createWindowAndDestroy(event, "views/visitorUI.fxml", "Visitor");
+            GuiUtil.createWindowAndDestroy(event, UILocation.VISITOR_UI, "Visitor");
         } catch (Exception e) {
             e.printStackTrace();
         }

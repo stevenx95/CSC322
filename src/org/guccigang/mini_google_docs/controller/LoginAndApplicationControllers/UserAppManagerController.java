@@ -5,9 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
-import org.guccigang.mini_google_docs.model.UserDAO;
+import org.guccigang.mini_google_docs.model.UsersDAO;
 import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
@@ -38,8 +39,8 @@ public class UserAppManagerController implements Initializable {
     @FXML
 
     private TableColumn<UserObject, String> interest2;
-    @FXML
 
+    @FXML
     private TableColumn<UserObject, String> interest3;
 
 
@@ -51,31 +52,22 @@ public class UserAppManagerController implements Initializable {
         this.currentUser = currentUser;
     }
 
-//    @FXML
-//    public void initialize() {
-//       applicationsTable.setItems(UserDAO.getAllApplications());
-//        userName.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
-//        password.setCellValueFactory(cellData -> cellData.getValue().passwordProperty());
-//        firstName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-//        lastName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-//        interest1.setCellValueFactory(cellData -> cellData.getValue().interestProperty(1));
-//        interest2.setCellValueFactory(cellData -> cellData.getValue().interestProperty(2));
-//        interest3.setCellValueFactory(cellData -> cellData.getValue().interestProperty(3));
-//    }
 
     @FXML
     public void handleHome(ActionEvent event) {
         try {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
-            GuiUtil.changeScene(event, "views/superUserUI.fxml", currentUser.getFirstName(), controller);
+            GuiUtil.changeScene(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        applicationsTable.setItems(UserDAO.getAllApplications());
+        applicationsTable.setItems(UsersDAO.getAllApplications());
         userName.setCellValueFactory(cellData -> cellData.getValue().userNameProperty());
         password.setCellValueFactory(cellData -> cellData.getValue().passwordProperty());
         firstName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());

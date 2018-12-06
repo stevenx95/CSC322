@@ -4,6 +4,7 @@ package org.guccigang.mini_google_docs.controller.DocumentControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
@@ -74,7 +75,7 @@ public class VisitorViewDocumentsController {
     @FXML
     private void handleHome(ActionEvent event){
         try{
-            GuiUtil.changeScene(event, "views/visitorUI.fxml","Visitor");
+            GuiUtil.changeScene(event, UILocation.VISITOR_UI,"Visitor");
         }catch (IOException e){
             e.printStackTrace();
         }

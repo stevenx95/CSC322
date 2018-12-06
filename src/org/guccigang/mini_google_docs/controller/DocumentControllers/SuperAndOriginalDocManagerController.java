@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
@@ -41,10 +42,10 @@ public class SuperAndOriginalDocManagerController {
         try{
             if(currentUser.getMembershipLevel()==1){
                 OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-                GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home", controller);
+                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
             }else {
                 SuperUserUIController controller = new SuperUserUIController(currentUser);
-                GuiUtil.changeScene(event,"views/superUserUI.fxml","Home", controller);
+                GuiUtil.changeScene(event,UILocation.SUPER_USER_UI,"Home", controller);
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -61,7 +62,7 @@ public class SuperAndOriginalDocManagerController {
             SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
             try
             {
-                GuiUtil.createWindow(event,"Views/SuperAndOriginalTextEditor.fxml","Text Editor", controller);
+                GuiUtil.createWindow(event, UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
             }catch (java.io.IOException e)
             {
                 e.printStackTrace();

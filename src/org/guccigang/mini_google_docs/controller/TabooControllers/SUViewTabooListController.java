@@ -3,6 +3,7 @@ package org.guccigang.mini_google_docs.controller.TabooControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.TabooWord;
 import org.guccigang.mini_google_docs.model.TabooWordDAO;
@@ -34,7 +35,7 @@ public class SUViewTabooListController {
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            GuiUtil.createWindowAndDestroy(event, "views/superUserUI.fxml","Visitor");
+            GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI,"Visitor");
         }catch (IOException e){
             e.printStackTrace();
         }

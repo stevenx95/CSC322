@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.Main;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController;
 
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class GuiUtil {
      *   Postcondition: A new Modal window is created. meaning a window that block access to other windows until closed.
      */
 
-    public static void createWindow(ActionEvent event, String designatedUI, String title) throws IOException {
+    public static void createWindow(ActionEvent event, UILocation designatedUI, String title) throws IOException {
 
         //create new window
         final Stage dialog = new Stage();
@@ -66,9 +67,27 @@ public class GuiUtil {
         dialog.setTitle(title);
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(stage);
-        Scene scene = new Scene(FXMLLoader.load(Main.class.getResource(designatedUI)));
+        Scene scene = new Scene(FXMLLoader.load(Main.class.getResource(designatedUI.directory)));
         dialog.setScene(scene);
         dialog.showAndWait();
+    }
+
+    public static <T> void createWindow(ActionEvent event, UILocation sourceUI, String title, T controller) throws IOException {
+        //define FXMLLoader and new Stage
+        FXMLLoader loader = new FXMLLoader();
+        Stage visitorStage = new Stage();
+
+        //set controller
+        loader.setController(controller);
+
+        //create the new window
+        loader.setLocation(Main.class.getResource(sourceUI.directory));
+        visitorStage.setTitle(title);
+        Scene scene = new Scene(loader.load());
+        visitorStage.setScene(scene);
+
+        //Display the newly created window
+        visitorStage.show();
     }
 
     /**
@@ -84,10 +103,10 @@ public class GuiUtil {
      *
      */
 
-    public static void createWindowAndDestroy(ActionEvent event, String sourceUI, String title) throws IOException {
+    public static void createWindowAndDestroy(ActionEvent event, UILocation sourceUI, String title) throws IOException {
         //Load the fxml file and create a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource(sourceUI));
+        loader.setLocation(Main.class.getResource(sourceUI.directory));
 
         //Create the new  stage.
         Stage visitorStage = new Stage();
@@ -104,7 +123,7 @@ public class GuiUtil {
         stage.close();
     }
 
-    public static <T> void createWindowAndDestroy(ActionEvent event, String sourceUI, String title, T controller) throws IOException {
+    public static <T> void createWindowAndDestroy(ActionEvent event, UILocation sourceUI, String title, T controller) throws IOException {
         //define FXMLLoader and new Stage
         FXMLLoader loader = new FXMLLoader();
         Stage visitorStage = new Stage();
@@ -113,7 +132,7 @@ public class GuiUtil {
         loader.setController(controller);
 
         //create the new window
-        loader.setLocation(Main.class.getResource(sourceUI));
+        loader.setLocation(Main.class.getResource(sourceUI.directory));
         visitorStage.setTitle(title);
         Scene scene = new Scene(loader.load());
         visitorStage.setScene(scene);
@@ -127,24 +146,6 @@ public class GuiUtil {
         stage.close();
     }
 
-    public static <T> void createWindow(ActionEvent event, String sourceUI, String title, T controller) throws IOException {
-        //define FXMLLoader and new Stage
-        FXMLLoader loader = new FXMLLoader();
-        Stage visitorStage = new Stage();
-
-        //set controller
-        loader.setController(controller);
-
-        //create the new window
-        loader.setLocation(Main.class.getResource(sourceUI));
-        visitorStage.setTitle(title);
-        Scene scene = new Scene(loader.load());
-        visitorStage.setScene(scene);
-
-        //Display the newly created window
-        visitorStage.show();
-    }
-
     /**
      *
      * @param event
@@ -153,20 +154,20 @@ public class GuiUtil {
      * @throws IOException
      */
 
-    public static void changeScene(ActionEvent event, String sourceUI, String title) throws IOException {
+    public static void changeScene(ActionEvent event, UILocation sourceUI, String title) throws IOException {
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         Stage window = (Stage) node.getScene().getWindow();
         window.setTitle(title);
-        scene.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI)));
+        scene.setRoot(FXMLLoader.load(Main.class.getResource(sourceUI.directory)));
     }
 
-    public static <T> void changeScene(ActionEvent event, String sourceUI, String title, T controller)  throws IOException {
+    public static <T> void changeScene(ActionEvent event, UILocation sourceUI, String title, T controller)  throws IOException {
         //define our variables
         Node node = (Node) event.getSource();
         Scene scene = node.getScene();
         Stage window = (Stage) node.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(sourceUI));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(sourceUI.directory));
 
         //set controller
         loader.setController(controller);

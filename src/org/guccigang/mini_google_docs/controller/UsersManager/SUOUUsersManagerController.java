@@ -3,6 +3,7 @@ package org.guccigang.mini_google_docs.controller.UsersManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
@@ -60,14 +61,14 @@ public class SUOUUsersManagerController {
             if(currentUser.getMembershipLevel() == 1){
                 try{
                     OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
-                    GuiUtil.createWindow(event,"views/OUViewOfUsersWindow.fxml",otherUser.getUserName(),controller);
+                    GuiUtil.createWindow(event, UILocation.OU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
             }else {
                 try{
                     OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
-                    GuiUtil.createWindow(event,"views/SUViewOfUsersWindow.fxml",otherUser.getUserName(),controller);
+                    GuiUtil.createWindow(event,UILocation.SU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -83,10 +84,10 @@ public class SUOUUsersManagerController {
         try{
             if(currentUser.getMembershipLevel()==1){
                 OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-                GuiUtil.changeScene(event,"views/originalUserUI.fxml","Home", controller);
+                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
             }else {
                 SuperUserUIController controller = new SuperUserUIController(currentUser);
-                GuiUtil.changeScene(event,"views/superUserUI.fxml","Home", controller);
+                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
             }
         }catch (IOException e){
             e.printStackTrace();
