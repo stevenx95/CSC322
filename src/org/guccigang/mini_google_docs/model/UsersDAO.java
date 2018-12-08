@@ -10,11 +10,11 @@ import java.util.ArrayList;
 
 public class UsersDAO {
 
-    public static ObservableList<UserObject> getAllUsers()throws SQLException{
+    public static ObservableList<UserObject> getAllUsers(String currentUserName)throws SQLException{
         ObservableList<UserObject> users;
-        String selectStatementUsers = "select * from users order by userName";
+        String selectStatementUsers = "select * from users where userName <> ? order by userName";
         //Execute select statement
-        ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers);
+        ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers,currentUserName);
         users = getAllUsersList(resultSetUsers);
         return users;
     }
@@ -41,11 +41,11 @@ public class UsersDAO {
         }
         return users;
     }
-    public static ObservableList<UserObject> getSearchedResult(String userInput){
+    public static ObservableList<UserObject> getSearchedResult(String userInput, String currentUserName){
         ObservableList<UserObject> users;
         String modifiedUserInput = "%"+userInput+"%";
-        String selectStatmentUserInput = "select * from users natural join interests where userName like ? OR interest like ?";
-        ResultSet searchedResultSet = DbUtil.processQuery(selectStatmentUserInput,modifiedUserInput,modifiedUserInput);
+        String selectStatmentUserInput = "select * from users natural join interests where (userName like ? OR interest like ?) AND userName <> ?";
+        ResultSet searchedResultSet = DbUtil.processQuery(selectStatmentUserInput,modifiedUserInput,modifiedUserInput,currentUserName);
         users = getAllSearchedUsersList(searchedResultSet);
         return users;
     }

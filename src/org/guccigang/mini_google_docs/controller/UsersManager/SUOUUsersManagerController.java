@@ -40,7 +40,7 @@ public class SUOUUsersManagerController {
     }
     private void fillTable(){
         try{
-            usersTable.setItems(UsersDAO.getAllUsers());
+            usersTable.setItems(UsersDAO.getAllUsers(currentUser.getUserName()));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class SUOUUsersManagerController {
     }
     @FXML
     public void handleSearch(ActionEvent event){
-        usersTable.setItems(UsersDAO.getSearchedResult(searchBar.getText()));
+        usersTable.setItems(UsersDAO.getSearchedResult(searchBar.getText(), currentUser.getUserName()));
     }
     @FXML
     public void handleOpenUserProfile(ActionEvent event){
@@ -87,7 +87,7 @@ public class SUOUUsersManagerController {
                 GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
             }else {
                 SuperUserUIController controller = new SuperUserUIController(currentUser);
-                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
+                GuiUtil.changeScene(event,UILocation.SUPER_USER_UI,"Home", controller);
             }
         }catch (IOException e){
             e.printStackTrace();
