@@ -72,6 +72,16 @@ public class GuiUtil {
         dialog.showAndWait();
     }
 
+    /**
+     * @param event
+     * @param sourceUI
+     * @param title
+     * @param controller
+     * @param <T>
+     * @throws IOException
+     *
+     * Creates new window and prevents interaction with previous window till the current window is taken care off.
+     */
     public static <T> void createWindow(ActionEvent event, UILocation sourceUI, String title, T controller) throws IOException {
         //define FXMLLoader and new Stage
         FXMLLoader loader = new FXMLLoader();
@@ -90,6 +100,8 @@ public class GuiUtil {
         //Display the newly created window
         stage.showAndWait();
     }
+
+
 
     /**
      *

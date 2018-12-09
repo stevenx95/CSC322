@@ -62,6 +62,10 @@ public class LoginController {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
         }
+
+        if(currentUser.getMembershipLevel() == 3){
+
+        }
     }
 
     public void signUpAction(ActionEvent event) {
