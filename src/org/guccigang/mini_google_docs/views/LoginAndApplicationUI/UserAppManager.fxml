@@ -34,7 +34,7 @@
           <TableColumn fx:id="interest3" prefWidth="75.0" text="Interest 3" />
         </columns>
       </TableView>
-      <Button mnemonicParsing="false" text="Approve" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Decline" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#handleAcceptApp" text="Approve" GridPane.rowIndex="1" />
+      <Button mnemonicParsing="false" onAction="#hanldeDeclineApp" text="Decline" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    </children>
 </GridPane>
