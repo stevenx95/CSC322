@@ -18,7 +18,7 @@ public class DocumentDAO {
         //Execute select statement
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            ObservableList<DocumentFile> documentFiles = getDocumentsList(resultSet);
             return documentFiles;
         }catch (SQLException e){
             System.out.println("SQL query has failed" + e);
@@ -31,14 +31,13 @@ public class DocumentDAO {
      * @Params userName
      * @return documentFiles ObservableList
      * @throws SQLException
-     * @throws ClassNotFoundException
      */
     public static ObservableList<DocumentFile> getSpecificsUsersDocuments(String userName) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ?";
-        //Execute select statment
+        //Execute select statement
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            ObservableList<DocumentFile> documentFiles = getDocumentsList(resultSet);
             return documentFiles;
 
         }catch (SQLException e){
@@ -87,7 +86,7 @@ public class DocumentDAO {
      * @return documentFiles ObservableList
      * @throws SQLException
      */
-    private static ObservableList<DocumentFile> getAllDocumentFilesDataList(ResultSet resultSet)throws SQLException{
+    private static ObservableList<DocumentFile> getDocumentsList(ResultSet resultSet)throws SQLException{
         ObservableList<DocumentFile> documentFiles = FXCollections.observableArrayList();
         while(resultSet.next()){
             DocumentFile document = new DocumentFile();
