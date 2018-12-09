@@ -68,7 +68,7 @@ public class DocumentDAO {
     private static ObservableList<DocumentFile> getDocumentsForTabooReviewList(ResultSet resultSet)throws SQLException{
         ObservableList<DocumentFile> documentFiles = FXCollections.observableArrayList();
         while(resultSet.next()){
-            if(TabooUtil.containsTaboo(resultSet.getString("content"))){
+            if(resultSet.getInt("tabooFlag")== 1){
                 DocumentFile document = new DocumentFile();
                 document.setiD(resultSet.getInt("docID"));
                 document.setOwner(resultSet.getString("owner").toString());
