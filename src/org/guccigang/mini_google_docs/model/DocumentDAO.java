@@ -16,7 +16,7 @@ public class DocumentDAO {
      */
     public static ObservableList<DocumentFile> getAllDocumentFilesData() throws SQLException, ClassNotFoundException{
         String selectStatement = "SELECT * FROM documents";
-        //Execute select statment
+        //Execute select statement
         try{
 
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
