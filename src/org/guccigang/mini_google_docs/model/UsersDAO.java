@@ -30,8 +30,9 @@ public class UsersDAO {
                 String firstName = resultSetUsers.getString("firstName");
                 String lastName = resultSetUsers.getString("lastName");
                 int membershipLevel = resultSetUsers.getInt("membershipLevel");
+                int DocumentTabooReviewFlag = resultSetUsers.getInt("DocumentTabooReviewFlag");
                 ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,resultSetUsers.getString("userName"));
-                UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
+                UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel, DocumentTabooReviewFlag);
                 while (interestsResultSet.next()){
                     user.addInterest(interestsResultSet.getString("interest"));
                 }
@@ -62,8 +63,9 @@ public class UsersDAO {
                 String firstName = searchedResultSet.getString("firstName");
                 String lastName = searchedResultSet.getString("lastName");
                 int membershipLevel = searchedResultSet.getInt("membershipLevel");
+                int DocumentTabooReviewFlag = searchedResultSet.getInt("DocumentTabooReviewFlag");
                 ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,searchedResultSet.getString("userName"));
-                UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
+                UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel,DocumentTabooReviewFlag);
 
                 while (interestsResultSet.next()){
                     user.addInterest(interestsResultSet.getString("interest"));
@@ -111,7 +113,7 @@ public class UsersDAO {
         while (resultSet.next()) {
             UserObject userObject = new UserObject(resultSet.getString("username"), resultSet.getString("password"),
                     resultSet.getString("firstname"), resultSet.getString("lastname"),
-                    resultSet.getInt("membershiplevel"));
+                    resultSet.getInt("membershiplevel"), resultSet.getInt("DocumentTabooReviewFlag"));
             userList.add(userObject);
         }
         return userList;

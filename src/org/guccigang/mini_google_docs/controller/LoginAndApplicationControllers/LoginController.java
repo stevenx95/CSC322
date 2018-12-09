@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.controller.TabooControllers.TabooDocumentReviewController;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.DbUtil;
@@ -51,21 +52,26 @@ public class LoginController {
     private void loadUserProfile(ActionEvent event, ResultSet resultSet) throws SQLException, IOException {
         this.currentUser = new UserObject(resultSet.getString("username"), resultSet.getString("password"),
                 resultSet.getString("firstname"), resultSet.getString("lastname"),
-                resultSet.getInt("membershiplevel"));
+                resultSet.getInt("membershiplevel"),resultSet.getInt("DocumentTabooReviewFlag"));
 
         if (currentUser.getMembershipLevel() == 1) {
             OriginalUserUIController controller = new OriginalUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.ORIGINAL_USER_UI, currentUser.getFirstName(), controller);
+            if(currentUser.isTabooFlag()){
+                TabooDocumentReviewController controller1 = new TabooDocumentReviewController(currentUser);
+                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents");
+            }
         }
 
         if (currentUser.getMembershipLevel() == 2) {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
+            if(currentUser.isTabooFlag()){
+                TabooDocumentReviewController controller1 = new TabooDocumentReviewController(currentUser);
+                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents");
+            }
         }
 
-        if(currentUser.getMembershipLevel() == 3){
-
-        }
     }
 
     public void signUpAction(ActionEvent event) {

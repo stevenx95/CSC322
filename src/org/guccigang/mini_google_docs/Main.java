@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyCode;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.DebugUtil;
+import org.guccigang.mini_google_docs.model.TabooUtil;
 
 public class Main extends Application {
     //List of documents for table view in view document controller.

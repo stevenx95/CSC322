@@ -68,7 +68,7 @@ public class TabooUtil {
      * @param userName
      */
     public static void flagUser(String userName){
-        String SQLStatement = "Update users SET membershipLevel = 3 WHERE userName = ?";
+        String SQLStatement = "Update users SET DocumentTabooReviewFlag = 1 WHERE userName = ?";
         DbUtil.executeUpdateDB(SQLStatement,userName);
     }
 

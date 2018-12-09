@@ -9,7 +9,7 @@ public class TabooDocumentReviewController {
         this.currentUser = null;
     }
 
-    TabooDocumentReviewController(UserObject currentUser){
+    public TabooDocumentReviewController(UserObject currentUser){
         this.currentUser = currentUser;
     }
 }

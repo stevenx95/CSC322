@@ -18,7 +18,7 @@ public class DocumentDAO {
         //Execute select statement
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
-            ObservableList<DocumentFile> documentFiles = getDocumentsList(resultSet);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
         }catch (SQLException e){
             System.out.println("SQL query has failed" + e);
@@ -37,7 +37,7 @@ public class DocumentDAO {
         //Execute select statement
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
-            ObservableList<DocumentFile> documentFiles = getDocumentsList(resultSet);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
 
         }catch (SQLException e){
@@ -124,7 +124,7 @@ public class DocumentDAO {
      * @return documentFiles ObservableList
      * @throws SQLException
      */
-    private static ObservableList<DocumentFile> getDocumentsList(ResultSet resultSet)throws SQLException{
+    private static ObservableList<DocumentFile> getAllDocumentFilesDataList(ResultSet resultSet)throws SQLException{
         ObservableList<DocumentFile> documentFiles = FXCollections.observableArrayList();
         while(resultSet.next()){
             DocumentFile document = new DocumentFile();

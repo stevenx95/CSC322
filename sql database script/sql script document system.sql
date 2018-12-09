@@ -33,7 +33,8 @@ CREATE TABLE users (
     password varchar(20) NOT NULL,
     firstName varchar(20) NOT NULL,
     lastName varchar(50) NOT NULL,
-    membershipLevel int
+    membershipLevel int NOT NULL,
+    DocumentTabooReviewFlag int NOT NULL
 );
 
 CREATE TABLE interests (
@@ -81,25 +82,25 @@ CREATE TABLE sharedDocs (
 );
 
 
-insert into users value("Jon", "password", "Jonathan", "Tran", 1);
+insert into users value("Jon", "password", "Jonathan", "Tran", 1, 0);
 insert into interests values
 ("Jon", "Sleeping"),
 ("Jon", "Eating"),
 ("Jon", "Lifting");
 
-insert into users value("Peter", "password", "Peter", "Phung", 2);
+insert into users value("Peter", "password", "Peter", "Phung", 2, 0);
 insert into interests values
 ("Peter", "Filming"),
 ("Peter", "Engineering"),
 ("Peter", "Photography");
 
-insert into users values("Ant", "password", "Ant", "Hony", 1);
+insert into users values("Ant", "password", "Ant", "Hony", 1, 0);
 insert into interests values
 ("Ant", "Youtubing"),
 ("Ant", "Gaming"),
 ("Ant", "Writing Sketches");
 
-insert into users value("Kelly", "password", "Kelly", "Tran", 1);
+insert into users value("Kelly", "password", "Kelly", "Tran", 1, 0);
 insert into interests values
 ("Kelly", "Sleeping"),
 ("Kelly", "Doing Nothing"),

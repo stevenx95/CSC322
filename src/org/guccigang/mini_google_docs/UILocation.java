@@ -18,7 +18,9 @@ public enum UILocation {
     ORIGINAL_USER_UI("views/UserUI/originalUserUI.fxml"),
     SUPER_USER_UI("views/UserUI/superUserUI.fxml"),
     VISITOR_UI("views/UserUI/visitorUI.fxml"),
-    VISITOR_COMPLAINT_FORM_VIEW("views/VisitorComplaintFormView.fxml");
+    VISITOR_COMPLAINT_FORM_VIEW("views/VisitorComplaintFormView.fxml"),
+    TABOO_DOCUMENT_REVIEW_UI("views/TabooUI/TabooDocumentReview.fxml");
+
 
     public final String directory;
     UILocation(String location) {
