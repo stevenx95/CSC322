@@ -57,8 +57,6 @@ public class OUViewOfUsersController {
             documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(otherUser.getUserName()));
         }catch (SQLException e){
             e.printStackTrace();
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
         }
     }
 

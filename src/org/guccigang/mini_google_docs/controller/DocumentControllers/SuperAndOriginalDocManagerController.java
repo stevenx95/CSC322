@@ -90,7 +90,7 @@ public class SuperAndOriginalDocManagerController {
 
     private void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
         }catch (Exception e){
             e.printStackTrace();
         }

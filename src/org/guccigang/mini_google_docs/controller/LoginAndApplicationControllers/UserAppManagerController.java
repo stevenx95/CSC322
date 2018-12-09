@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller.LoginAndApplicationControllers
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
@@ -63,7 +64,36 @@ public class UserAppManagerController implements Initializable {
         }
     }
 
+    @FXML
+    public void handleAcceptApp(ActionEvent event) {
+        int selectedIndex = applicationsTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            UserObject user = applicationsTable.getItems().get(selectedIndex);
+            UsersDAO.insertNewUser(user);
+            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "This user have been added successfully",
+                    "New User: "+user.getUserName(), "Confirmation");
+            UsersDAO.deleteApplication(user.getUserName());
+            applicationsTable.getItems().remove(selectedIndex);
+        } else {
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "please make a selection in the applications table",
+                    "No user selected", "Error");
+        }
+    }
 
+    @FXML
+    public void hanldeDeclineApp(ActionEvent event) {
+        int selectedIndex = applicationsTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0) {
+            String removedUsername = applicationsTable.getItems().get(selectedIndex).getUserName();
+            UsersDAO.deleteApplication(removedUsername);
+            applicationsTable.getItems().remove(selectedIndex);
+            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "This application have been remove from your list",
+                    "Removed: "+removedUsername, "Confirmation");
+        } else {
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "please make a selection in the applications table",
+                    "No user selected", "Error");
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

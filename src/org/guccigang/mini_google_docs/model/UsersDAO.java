@@ -7,6 +7,7 @@ import org.guccigang.mini_google_docs.model.DbUtil;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UsersDAO {
 
@@ -114,5 +115,23 @@ public class UsersDAO {
             userList.add(userObject);
         }
         return userList;
+    }
+
+    public static int insertNewUser(UserObject newUser) {
+        String sqlStatement1 = "INSERT INTO users VALUE(?,?,?,?,1)";
+        String sqlStatement2 = "INSERT INTO interests VALUE(?,?)";
+        int result = DbUtil.executeUpdateDB(sqlStatement1, newUser.getUserName(),newUser.getPassword(),
+                newUser.getFirstName(), newUser.getLastName());
+        List<String> interests = newUser.getInterests();
+        for ( String interest: interests) {
+            result += DbUtil.executeUpdateDB(sqlStatement2, interest);
+        }
+        return result;
+    }
+
+    public static int deleteApplication(String userName) {
+        String sqlStatement = "DELETE FROM application WHERE userName= ?";
+        int result = DbUtil.executeUpdateDB(sqlStatement, userName);
+        return result;
     }
 }

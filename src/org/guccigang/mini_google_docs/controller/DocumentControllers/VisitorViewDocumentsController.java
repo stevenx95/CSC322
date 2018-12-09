@@ -85,7 +85,7 @@ public class VisitorViewDocumentsController {
      */
     private void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesData());
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
         }catch (Exception e){
             e.printStackTrace();
         }
