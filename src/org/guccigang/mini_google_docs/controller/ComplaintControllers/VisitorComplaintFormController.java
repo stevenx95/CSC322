@@ -1,27 +1,23 @@
 package org.guccigang.mini_google_docs.controller.ComplaintControllers;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import org.guccigang.mini_google_docs.model.ComplaintText;
-import org.guccigang.mini_google_docs.model.DbUtil;
-import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.model.UserObject;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import org.guccigang.mini_google_docs.model.*;
 
-import javax.sql.rowset.CachedRowSet;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Calendar;
 
 public class VisitorComplaintFormController {
 
     @FXML
-    private TextField textBarUsername;
+    TextField textBarUsername;
 
     @FXML
-    private TextField complaintText;
+    TextArea complaintText;
 
-    @FXML
-    private Button complaintSubmitButton;
+
 
     private DocumentFile docFile;
 
@@ -34,17 +30,28 @@ public class VisitorComplaintFormController {
     }
 
 
-    public void submitComplaintToDB(ActionEvent event){
-        ComplaintText complainTextObject = new ComplaintText();
+    public void submitComplaintToDB(ActionEvent event) throws SQLException {
+        int tempDocId = docFile.getID();
+        int result = 0;
 
-        complainTextObject.setComplainer(textBarUsername.getText());
-        complainTextObject.setMessage(complaintText.getText());
-     // complainTextObject.setVersion(getVersionOfDocument());
+        try {
+            String sql = "INSERT INTO complaints(DocId,version,owner,complainer,message) VALUES ('" + tempDocId + "','" + getVersionOfDocument(tempDocId) + "', '" + docFile.getOwner() + "', '" + textBarUsername.getText() + "','" + complaintText.getText() + "')";
+
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322project", "root", "Starpoint29");
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            result = preparedStatement.executeUpdate(sql);
 
 
-
-
-
+            if (result == 0) {
+                GuiUtil.createAlertWindow(Alert.AlertType.ERROR, null, "Something went wrong. Please try again", "error");
+            } else {
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Complaint has been sent!",
+                        "Complaint submitted successfully!,", "Confirmation");
+                GuiUtil.closeWindow(event);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private int getVersionOfDocument(Integer docID) throws SQLException {
@@ -58,8 +65,6 @@ public class VisitorComplaintFormController {
 
         return version;
     }
-
-
 
 
     private boolean isTaken(String userName) {

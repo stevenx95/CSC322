@@ -9,7 +9,7 @@ drop table if exists tabooSuggestions;
 drop table if exists application;
 
 CREATE TABLE complaints (
-    complaintID int PRIMARY KEY,
+    complaintID int PRIMARY KEY AUTO_INCREMENT,
     DocID int,
     version int,
     owner varchar(20),
