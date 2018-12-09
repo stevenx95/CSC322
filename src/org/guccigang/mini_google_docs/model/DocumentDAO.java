@@ -17,11 +17,9 @@ public class DocumentDAO {
         String selectStatement = "SELECT * FROM documents where restricted >= 2";
         //Execute select statement
         try{
-
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
             ObservableList<DocumentFile> documentFiles = getDocumentsList(resultSet);
             return documentFiles;
-
         }catch (SQLException e){
             System.out.println("SQL query has failed" + e);
             throw e;
@@ -84,6 +82,41 @@ public class DocumentDAO {
             }
         }
         return documentFiles;
+    }
+
+    /**
+     * Queries the database for all documents owned by userName.
+     * @Params userName
+     * @return documentFiles ObservableList
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static ObservableList<DocumentFile> getAllSpecificsUsersDocuments(String userName) throws SQLException{
+        String selectStatement = "SELECT * FROM documents where owner = ?";
+        //Execute select statment
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            return documentFiles;
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
+    }
+
+    public static ObservableList<DocumentFile> getSharedUsersDocuments(String userName) throws SQLException
+    {
+        String selectStatement = "select * from documents natural join sharedDocs where userName = ?;";
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            return documentFiles;
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
     }
 
     /**

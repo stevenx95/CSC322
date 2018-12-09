@@ -75,20 +75,54 @@ public class SuperAndOriginalDocManagerController {
         }
     }
 
+    public void handleMyDocument(ActionEvent event)
+    {
+        fillTableMyDocs();
+    }
+
+    public void handlePublicDocument(ActionEvent event)
+    {
+        fillTable();
+    }
+
+    public void handleSharedDocument(ActionEvent event)
+    {
+        System.out.println("Yes");
+        fillTableShared();
+    }
+
 
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
     @FXML
-    private void initialize(){
+    private void initialize()
+    {
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
         documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictedProperty());
-        fillTable();
+        fillTableMyDocs();
     }
 
-    private void fillTable(){
+    private void fillTableMyDocs()
+    {
+        try{
+            documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(currentUser.getUserName()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void fillTableShared()
+    {
+        try{
+            documentFileTable.setItems(DocumentDAO.getSharedUsersDocuments(currentUser.getUserName()));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void fillTable()
+    {
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
         }catch (Exception e){

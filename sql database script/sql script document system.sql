@@ -79,7 +79,6 @@ CREATE TABLE sharedDocs (
     FOREIGN KEY(userName) REFERENCES users(userName),
     FOREIGN KEY(docID) REFERENCES documents(docID)
 );
-/*Does sharedDoc table need the version number also? */
 
 
 insert into users value("Jon", "password", "Jonathan", "Tran", 1);
@@ -112,7 +111,8 @@ insert into documents (owner,docName,content,isLocked,restricted,createdDate,tab
 ("Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
 ("Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
 ("Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
-("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0);
+("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0),
+("Ant","Food Bank","Pizza\nSoda\nChips",0,3,"2011-08-12",0);
 
 insert into tabooList values
  ('fuck'),
@@ -120,4 +120,6 @@ insert into tabooList values
  ('moffo'),
  ('faggot'),
  ('shit');
+ insert into sharedDocs (userName, docID)values
+ ("Jon", 7);
 
