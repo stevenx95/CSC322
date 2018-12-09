@@ -51,7 +51,7 @@ CREATE TABLE documents (
     content text,
     isLocked int NOT NULL,
     restricted int NOT NULL,
-    createdDate date,
+    createdDate date NOT NULL,
     tabooFlag int
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE sharedDocs (
 );
 
 
-insert into users value("Jon", "password", "Jonathan", "Tran", 1, 0);
+insert into users value("Jon", "password", "Jonathan", "Tran", 1, 1);
 insert into interests values
 ("Jon", "Sleeping"),
 ("Jon", "Eating"),
@@ -113,7 +113,8 @@ insert into documents (owner,docName,content,isLocked,restricted,createdDate,tab
 ("Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
 ("Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
 ("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0),
-("Ant","Food Bank","Pizza\nSoda\nChips",0,3,"2011-08-12",0);
+("Ant","Food Bank","Pizza\nSoda\nChips",0,3,"2011-08-12",0),
+("Jon","No no Words","Pizza\nfuck\nUNK",0,3,"2011-08-12",1);
 
 insert into tabooList values
  ('fuck'),

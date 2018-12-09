@@ -5,6 +5,18 @@ import java.sql.SQLException;
 import java.util.HashSet;
 
 public class TabooUtil {
+    public static boolean isUserFlaged(String userName){
+        String SQLStatement = "select DocumentTabooReviewFlag from users where userName = ? AND DocumentTabooReviewFlag = 1";
+        try{
+            ResultSet resultSet = DbUtil.processQuery(SQLStatement, userName);
+            if(resultSet.next()){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
     /**
      * Checks if string contains taboo words by querying the database.
      * @param string
@@ -22,6 +34,18 @@ public class TabooUtil {
                 }
             }catch (SQLException e){
                 e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean containTabooAndUNK (String string){
+        String[] documentContents = string.split("\n");
+        String SQLStatement = "select * from tabooList where tabooWord = ?";
+
+        for (String word : documentContents){
+            if (word.equals("UNK") || containsTaboo(string)){
+                return true;
             }
         }
         return false;

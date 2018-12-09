@@ -14,6 +14,7 @@ import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.DbUtil;
 import org.guccigang.mini_google_docs.model.GuiUtil;
+import org.guccigang.mini_google_docs.model.TabooUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 
 public class LoginController {
@@ -57,18 +58,18 @@ public class LoginController {
         if (currentUser.getMembershipLevel() == 1) {
             OriginalUserUIController controller = new OriginalUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.ORIGINAL_USER_UI, currentUser.getFirstName(), controller);
-            if(currentUser.isTabooFlag()){
-                TabooDocumentReviewController controller1 = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents");
+            while(TabooUtil.isUserFlaged(currentUser.getUserName())){
+                TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
+                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 
         if (currentUser.getMembershipLevel() == 2) {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
-            if(currentUser.isTabooFlag()){
-                TabooDocumentReviewController controller1 = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents");
+            while(TabooUtil.isUserFlaged(currentUser.getUserName())){
+                TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
+                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 

@@ -160,6 +160,19 @@ public class GuiUtil {
     }
 
     /**
+     * Destorys window
+     * @param event
+     * @param <T>
+     * @throws IOException
+     */
+    public static <T> void DestoryWindow(ActionEvent event) throws IOException {
+        //destroy current window
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
      *
      * @param event
      * @param sourceUI

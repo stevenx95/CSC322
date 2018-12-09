@@ -26,6 +26,19 @@ public class DocumentDAO {
         }
     }
 
+    public static ObservableList<DocumentFile> getTabooFlagedDocuments(String owner) throws SQLException{
+        String selectStatement = "SELECT * FROM documents where owner = ? AND tabooFlag = 1";
+        //Execute select statement
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,owner);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            return documentFiles;
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
+    }
+
     /**
      * Queries the database for all documents owned by userName.
      * @Params userName

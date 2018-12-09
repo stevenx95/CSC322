@@ -19,7 +19,8 @@ public enum UILocation {
     SUPER_USER_UI("views/UserUI/superUserUI.fxml"),
     VISITOR_UI("views/UserUI/visitorUI.fxml"),
     VISITOR_COMPLAINT_FORM_VIEW("views/VisitorComplaintFormView.fxml"),
-    TABOO_DOCUMENT_REVIEW_UI("views/TabooUI/TabooDocumentReview.fxml");
+    TABOO_DOCUMENT_REVIEW_UI("views/TabooUI/TabooDocumentReview.fxml"),
+    TABOO_DOCUMENT_REVIEW_EDITOR("views/TabooUI/TabooDocumentReviewEditor.fxml");
 
 
     public final String directory;
