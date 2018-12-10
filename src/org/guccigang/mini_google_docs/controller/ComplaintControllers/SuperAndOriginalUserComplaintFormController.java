@@ -1,15 +1,17 @@
 package org.guccigang.mini_google_docs.controller.ComplaintControllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.guccigang.mini_google_docs.model.*;
+import org.guccigang.mini_google_docs.model.DbUtil;
+import org.guccigang.mini_google_docs.model.DocumentFile;
+import org.guccigang.mini_google_docs.model.GuiUtil;
 
 import java.sql.*;
-import java.util.Calendar;
 
-public class VisitorComplaintFormController {
+public class SuperAndOriginalUserComplaintFormController {
 
     @FXML
     TextField textBarUsername;
@@ -18,12 +20,12 @@ public class VisitorComplaintFormController {
     TextArea complaintText;
 
     private DocumentFile docFile;
-
-    public VisitorComplaintFormController(){
+    
+    SuperAndOriginalUserComplaintFormController() {
         this(null);
     }
 
-    public VisitorComplaintFormController(DocumentFile docFile) {
+    public SuperAndOriginalUserComplaintFormController(DocumentFile docFile) {
         this.docFile = docFile;
     }
 
@@ -52,26 +54,16 @@ public class VisitorComplaintFormController {
     }
 
     private int getVersionOfDocument(Integer docID) throws SQLException {
-       int version = 0;
+        int version = 0;
 
         String sqlStatement = "Select docID FROM revisions WHERE docID = ? ";
-        ResultSet rs =DbUtil.processQuery(sqlStatement,docID.toString());
+        ResultSet rs = DbUtil.processQuery(sqlStatement,docID.toString());
         if(rs.next()){
-             version = rs.getInt("version");
+            version = rs.getInt("version");
         }
 
         return version;
     }
-
-    private boolean isTaken(String userName) {
-        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", userName);
-        try {
-            if(!resultSet.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    
+    
 }

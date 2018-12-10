@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="600.0" prefWidth="800.0">
          <top>
@@ -18,7 +18,7 @@
                      <items>
                         <MenuItem mnemonicParsing="false" text="Change Document Type" />
                         <MenuItem onAction="#onSave" text="Retrieve Old Documents" />
-                        <MenuItem onAction="#onLoad" text="File Compaint" />
+                        <MenuItem onAction="#handleComplaint" text="File Compaint" />
                         <MenuItem mnemonicParsing="false" text="Submit Changes" />
                         <MenuItem onAction="#onClose" text="Close" />
                      </items>
