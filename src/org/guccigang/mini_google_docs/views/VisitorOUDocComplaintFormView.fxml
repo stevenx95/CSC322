@@ -19,7 +19,7 @@
       <TextField fx:id="textBarUsername" layoutX="171.0" layoutY="72.0" />
       <AnchorPane layoutX="81.1015625" layoutY="121.98828125">
          <children>
-            <Text boundsType="VISUAL" layoutX="27.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you are a visitor please enter visitor for Username!" wrappingWidth="278.091796875" />
+            <Text boundsType="VISUAL" layoutX="27.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you are a visitor please enter visitor for Username!" wrappingWidth="278.091796875" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <TextArea fx:id="complaintText" layoutX="119.0" layoutY="186.0" prefHeight="200.0" prefWidth="272.0" />

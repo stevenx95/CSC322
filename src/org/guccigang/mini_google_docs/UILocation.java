@@ -8,7 +8,7 @@ public enum UILocation {
     VISITOR_VIEW_DOCUMENTS("views/DocumentUI/VisitorViewDocuments.fxml"),
     LOGIN("views/LoginAndApplicationUI/login.fxml"),
     SIGNUP("views/LoginAndApplicationUI/signup.fxml"),
-    TABOO_SU_LIST_MANAGER("views/LoginAndApplicationUI/login.fxml"),
+    TABOO_SU_LIST_MANAGER("views/LoginAndApplicationUI/tabooSUListView.fxml"),
     TABOO_SU_LIST_VIEW("views/TabooUI/tabooSUListView.fxml"),
     USER_APP_MANAGER("views/LoginAndApplicationUI/UserAppManager.fxml"),
     ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD("views/TabooUI/OriginalAndVisitorReportTabooWord.fxml"),
@@ -20,8 +20,9 @@ public enum UILocation {
     VISITOR_UI("views/UserUI/visitorUI.fxml"),
     VISITOR_COMPLAINT_FORM_VIEW("views/VisitorComplaintFormView.fxml"),
     TABOO_DOCUMENT_REVIEW_UI("views/TabooUI/TabooDocumentReview.fxml"),
+    SUPER_USER_COMPLAINT_MANAGER("views/ComplaintViews/SUComplaintTypeSelectionMenuView.fxml"),
+    SUPER_USER_DOCUMENT_COMPLAINT_VIEW("views/ComplaintViews/SUDocumentComplaintView.fxml"),
     TABOO_DOCUMENT_REVIEW_EDITOR("views/TabooUI/TabooDocumentReviewEditor.fxml");
-
 
     public final String directory;
     UILocation(String location) {

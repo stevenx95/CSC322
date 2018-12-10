@@ -133,12 +133,16 @@ public class DocumentFile {
         this.iD.set(iD);
     }
 
+
+
     public boolean isLock() {
         return this.isLock;
     }
+
     public StringProperty restrictedProperty() {
         return new SimpleStringProperty(restricted.toString());
     }
+
     public StringProperty restrictionLevelProperty(){
         //Returns a string representation of the restriction.
         if(getRestricted() == 0){
