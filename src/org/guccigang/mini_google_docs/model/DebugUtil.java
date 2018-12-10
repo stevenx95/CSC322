@@ -23,12 +23,12 @@ public class DebugUtil
         }
         else if(args[0].equals("save"))
         {
-            VersionUtil.save(args[1], args[2], args[3]);//
+            VersionUtil.save(Integer.parseInt(args[1]), args[2], args[3]);//
         }
         else if(args[0].equals("create"))
         {
             try {
-                String id = VersionUtil.create(args[1], args[2]);//owner,string
+                int id = VersionUtil.create(args[1], args[2]);//owner,string
                 System.out.println("Created docID "+id);
             }catch (java.sql.SQLException e)
             {
