@@ -31,7 +31,7 @@ public class TabooDocumentReviewEditorController {
         }else {
             String SQLStatement = "UPDATE documents set tabooFlag = 0 where owner = ? AND docID = ?";
             DbUtil.executeUpdateDB(SQLStatement, currentUser.getUserName(), Integer.toString(currentFile.getID()));
-            VersionUtil.save(Integer.toString(currentFile.getID()),textArea.getText(),currentFile.getOwner());
+            VersionUtil.save(currentFile.getID(),textArea.getText(),currentFile.getOwner());
         }
     }
     @FXML
