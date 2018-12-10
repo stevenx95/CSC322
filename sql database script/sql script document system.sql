@@ -17,6 +17,18 @@ CREATE TABLE complaints (
     message text
 );
 
+CREATE TABLE complaintsuser (
+    complaintuserID int PRIMARY KEY AUTO_INCREMENT,
+    owner varchar(20),
+    version int,
+    complainer varchar(20),
+    violator varchar(20),
+    message text,
+    docID int,
+);
+
+
+
 CREATE TABLE application (
     userName varchar(20) PRIMARY KEY,
     password varchar(20) NOT NULL,
