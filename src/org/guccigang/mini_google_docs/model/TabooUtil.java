@@ -32,7 +32,7 @@ public class TabooUtil {
      * @return
      */
     public static boolean containsTaboo (String string){
-        String[] documentContents = string.split("\n");
+        String[] documentContents = string.split(" ");
         String SQLStatement = "select * from tabooList where tabooWord = ?";
 
         for (String word : documentContents){
@@ -49,7 +49,7 @@ public class TabooUtil {
     }
 
     public static boolean containTabooAndUNK (String string){
-        String[] documentContents = string.split("\n");
+        String[] documentContents = string.split(" ");
         String SQLStatement = "select * from tabooList where tabooWord = ?";
 
         for (String word : documentContents){
@@ -85,7 +85,7 @@ public class TabooUtil {
      */
     public static String censorTabooWords(String string){
         HashSet<String> tabooSet = getTabooList();
-        String[] documentContents = string.split("\n");
+        String[] documentContents = string.split(" ");
         for(String word : documentContents){
             if (tabooSet.contains(word)){
                 string = string.replace(word,"UNK");
@@ -118,12 +118,12 @@ public class TabooUtil {
     }
 
     public static void foundUpdateAndFlagDocument(String userName, int docID, String newContent){
-        String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";
+        String SQLStatement = "UPDATE documents set content = ? where owner = ? AND docID = ?";
         DbUtil.executeUpdateDB(SQLStatement,newContent, userName, Integer.toString(docID));
         flagDocument(userName,docID);
     }
     public static void foundUpdateAndUnflagDocument(String userName, int docID, String newContent){
-        String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";
+        String SQLStatement = "UPDATE documents set content = ? where owner = ? AND docID = ?";
         DbUtil.executeUpdateDB(SQLStatement,newContent, userName, Integer.toString(docID));
         unFlagDocument(userName,docID);
     }
