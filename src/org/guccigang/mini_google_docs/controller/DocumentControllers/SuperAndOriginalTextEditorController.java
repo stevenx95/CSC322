@@ -61,7 +61,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                     "Document contains taboo words", "Taboo Warning");
         }
         //if document was previously flagged and the user changes it. it will not be unflagged.
-        else if(!TabooUtil.containTabooAndUNK(areaText.getText()) && TabooUtil.isUserFlaged(selectedDocument.getOwner())){
+        else if(!TabooUtil.containTabooAndUNK(areaText.getText()) && TabooUtil.isDocumentFlagged(selectedDocument.getOwner(),selectedDocument.getID())){
             TabooUtil.unFlagDocument(selectedDocument.getOwner(), selectedDocument.getID());
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,

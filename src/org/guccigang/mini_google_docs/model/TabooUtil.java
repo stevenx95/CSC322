@@ -100,6 +100,19 @@ public class TabooUtil {
         String SQLStatement = "UPDATE documents set tabooFlag = 0 where owner = ? AND docID = ?";
         DbUtil.executeUpdateDB(SQLStatement, userName, Integer.toString(docID));
     }
+    public static boolean isDocumentFlagged(String userName, int docID){
+        String SQLStatment = "Select * from documents where owner = ? AND docID = ? AND tabooFlag = 1";
+        ResultSet resultSet = DbUtil.processQuery(SQLStatment, userName, Integer.toString(docID));
+        try {
+            if(resultSet.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
 
     public static void foundUpdateAndFlagDocument(String userName, int docID, String newContent){
         String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";

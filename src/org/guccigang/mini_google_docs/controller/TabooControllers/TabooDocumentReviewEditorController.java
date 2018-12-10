@@ -35,6 +35,10 @@ public class TabooDocumentReviewEditorController {
     }
     @FXML
     private void initialize(){
-        textArea.setText(currentFile.getContent());
+        try {
+            textArea.setText(VersionUtil.open(Integer.toString(currentFile.getID())));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
