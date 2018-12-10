@@ -85,11 +85,34 @@ public class DocumentFile {
         return this.isLock;
     }
 
-    public void setRestricted(int restricted){
+    public void setRestricted(Restriction restricted){
+        this.restricted.set(restricted.id);
+    }
+
+    public void setRestricted(int restricted) {
         this.restricted.set(restricted);
     }
-    public int getRestricted(){
-        return this.restricted.get();
+    public Restriction getRestricted(){
+        Restriction value;
+        switch (this.restricted.get()) {
+            case 0:
+                value = Restriction.PRIVATE;
+                break;
+            case 1:
+                value = Restriction.SHARED;
+                break;
+            case 2:
+                value= Restriction.PUBLIC;
+                break;
+            case 3:
+                value = Restriction.RESTRICTED;
+                break;
+                default:
+                    value = null;
+                    break;
+        }
+
+        return value;
     }
 
 //    public void setDate(Date date){
@@ -145,11 +168,11 @@ public class DocumentFile {
 
     public StringProperty restrictionLevelProperty(){
         //Returns a string representation of the restriction.
-        if(getRestricted() == 0){
+        if(getRestricted() == Restriction.PRIVATE){
             return new SimpleStringProperty("Private");
-        }else if(getRestricted() == 1){
+        }else if(getRestricted() == Restriction.SHARED){
             return new SimpleStringProperty("Shared");
-        }else if(getRestricted() == 2){
+        }else if(getRestricted() == Restriction.PUBLIC){
             return new SimpleStringProperty("Public");
         }else return new SimpleStringProperty("Restricted");
     }

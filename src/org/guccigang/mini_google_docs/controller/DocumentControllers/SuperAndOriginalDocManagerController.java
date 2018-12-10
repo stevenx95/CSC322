@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
@@ -78,6 +78,19 @@ public class SuperAndOriginalDocManagerController {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
                     "No Document Selected", "No Selection");
         }
+    }
+
+    @FXML
+    public void handleCreateNewDocument() {
+        DocumentFile newDoc = new DocumentFile();
+        try {
+            SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, newDoc);
+            GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
+        } catch (IOException e) {
+            e.printStackTrace();
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
+        }
+
     }
 
     public void handleMyDocument(ActionEvent event)

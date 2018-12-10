@@ -6,9 +6,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
+import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class SuperAndOriginalTextEditorController implements Initializable {
@@ -18,6 +20,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     private UserObject currentUser;
     private DocumentFile selectedDocument;
+    private List<String> usersToShare;
 
     public SuperAndOriginalTextEditorController() {
         this(null,null);
@@ -26,6 +29,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public SuperAndOriginalTextEditorController(UserObject currentUser, DocumentFile selectedDocument) {
         this.currentUser = currentUser;
         this.selectedDocument = selectedDocument;
+        this.usersToShare = null;
     }
 
     @Override
@@ -39,7 +43,23 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     }
     public void onSave(ActionEvent event)
     {
-        VersionUtil.save(Integer.toString(selectedDocument.getID()),areaText.getText(),currentUser.getUserName());
+        if(selectedDocument.getID() == 0) {
+            handleFirstTimeSave();
+        }else{
+                VersionUtil.save(Integer.toString(selectedDocument.getID()), areaText.getText(), currentUser.getUserName());
+            }
+    }
+
+    private void handleFirstTimeSave()  {
+        FirstTimeSaveController controller = new FirstTimeSaveController(selectedDocument, usersToShare);
+        try {
+            GuiUtil.createWindow(UILocation.FIRST_TIME_SAVING, "Document Type", controller);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "An error occured creating the document. Try Again Later",
+                    "Cannot Save Document", "Error");
+        }
     }
 
     public void onLoad(ActionEvent event)

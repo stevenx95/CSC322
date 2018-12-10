@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.TabooControllers.TabooDocumentReviewController;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;

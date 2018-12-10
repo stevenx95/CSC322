@@ -1,7 +1,7 @@
 package org.guccigang.mini_google_docs.controller.UserUI;
 
 import javafx.event.ActionEvent;
-import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUComplaintTypeSelectionMenuController;
 import org.guccigang.mini_google_docs.controller.UsersManager.SUOUUsersManagerController;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController;
