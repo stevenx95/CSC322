@@ -80,7 +80,7 @@ public class TabooUtil {
      * @param string
      * @return
      */
-    public static String replaceTaboo(String string){
+    public static String censorTabooWords(String string){
         HashSet<String> tabooSet = getTabooList();
         String[] documentContents = string.split("\n");
         for(String word : documentContents){
@@ -90,5 +90,25 @@ public class TabooUtil {
         }
         return string;
 
+    }
+    public static void flagDocument(String userName, int docID){
+        String SQLStatement = "UPDATE documents set tabooFlag = 1 where owner = ? AND docID = ?";
+        DbUtil.executeUpdateDB(SQLStatement, userName, Integer.toString(docID));
+    }
+
+    public static void unFlagDocument(String userName, int docID){
+        String SQLStatement = "UPDATE documents set tabooFlag = 0 where owner = ? AND docID = ?";
+        DbUtil.executeUpdateDB(SQLStatement, userName, Integer.toString(docID));
+    }
+
+    public static void foundUpdateAndFlagDocument(String userName, int docID, String newContent){
+        String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";
+        DbUtil.executeUpdateDB(SQLStatement,newContent, userName, Integer.toString(docID));
+        flagDocument(userName,docID);
+    }
+    public static void foundUpdateAndUnflagDocument(String userName, int docID, String newContent){
+        String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";
+        DbUtil.executeUpdateDB(SQLStatement,newContent, userName, Integer.toString(docID));
+        unFlagDocument(userName,docID);
     }
 }
