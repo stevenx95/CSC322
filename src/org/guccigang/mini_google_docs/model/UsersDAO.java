@@ -117,6 +117,11 @@ public class UsersDAO {
         return userList;
     }
 
+    public static void upgradeUserMembership(String userName){
+        String SQLStatement = "UPDATE users set membershipLevel = 2 where userName = ?";
+        DbUtil.executeUpdateDB(SQLStatement, userName);
+    }
+
     public static int insertNewUser(UserObject newUser) {
         String sqlStatement1 = "INSERT INTO users VALUE(?,?,?,?,1)";
         String sqlStatement2 = "INSERT INTO interests VALUE(?,?)";
