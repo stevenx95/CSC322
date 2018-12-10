@@ -130,4 +130,5 @@ insert into tabooList values
  ('shit');
  insert into sharedDocs (userName, docID)values
  ("Jon", 7),
- ("Ant", 1);
+ ("Ant", 1),
+ ("kduggan15",7);

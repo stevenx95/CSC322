@@ -91,6 +91,18 @@ public class SuperAndOriginalDocManagerController {
         fillTable();
     }
 
+    public void handleAllDocument(ActionEvent event)
+    {
+        if(currentUser.getMembershipLevel() == 2)
+        {
+            fillTableAll();
+        }
+        else
+        {
+            fillTable();
+        }
+    }
+
     public void handleSharedDocument(ActionEvent event)
     {
         System.out.println("Yes");
@@ -131,6 +143,15 @@ public class SuperAndOriginalDocManagerController {
     {
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTableAll()
+    {
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForSuperUser());
         }catch (Exception e){
             e.printStackTrace();
         }
