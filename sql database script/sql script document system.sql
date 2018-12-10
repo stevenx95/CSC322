@@ -105,6 +105,12 @@ insert into interests values
 ("Kelly", "Doing Nothing"),
 ("Kelly", "Lifting");
 
+insert into users value("kduggan15", "pass", "Kieran", "Duggan");
+insert into interests values
+("kduggan15","Programming"),
+("kduggan15","Bowery"),
+("kduggan15","Coffee");
+
 insert into documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag)values
 ("Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
 ("Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
@@ -116,7 +122,6 @@ insert into documents (owner,docName,content,isLocked,restricted,createdDate,tab
 ("Jon","No no Words","Pizza\nfuck\nUNK",0,3,"2011-08-12",1),
 ("Jon","No no Words2","fuck\nfuck\nUNK",0,3,"2011-08-12",1);
 
-
 insert into tabooList values
  ('fuck'),
  ('cunt'),
@@ -126,4 +131,3 @@ insert into tabooList values
  insert into sharedDocs (userName, docID)values
  ("Jon", 7),
  ("Ant", 1);
-
