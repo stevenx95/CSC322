@@ -38,14 +38,20 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                     "Document contains taboo words", "Taboo Warning");
         }
         this.areaText.setText(selectedDocument.getContent());
-        if (currentUser.getMembershipLevel() != 2 && DocumentDAO.documentIsLocked(selectedDocument.getID())) {
+        if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
             this.areaText.setEditable(false);
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
                     "Document is locked", "Warning");
         }
+        //DocumentDAO.lockDocument(selectedDocument.getID());//locks document once it's opened
     }
     public void onSave(ActionEvent event)
     {
+        if(!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName()))
+        {
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You do not have write permission for this document!",
+                    "No Permission", "No Permission");
+        }
         if(TabooUtil.containTabooAndUNK(areaText.getText())){
             areaText.setText(TabooUtil.censorTabooWords(areaText.getText()));
             TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
@@ -69,7 +75,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     public void onClose(ActionEvent event)
     {
-        DocumentDAO.unlockDocument(selectedDocument.getID());
+        //DocumentDAO.unlockDocument(selectedDocument.getID());
         System.out.println("Stub! OnClose");
     }
 
