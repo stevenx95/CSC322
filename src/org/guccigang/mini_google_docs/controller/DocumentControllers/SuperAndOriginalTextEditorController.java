@@ -37,7 +37,11 @@ public class SuperAndOriginalTextEditorController implements Initializable {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
                     "Document contains taboo words", "Taboo Warning");
         }
-        this.areaText.setText(selectedDocument.getContent());
+        try {
+            areaText.setText(VersionUtil.open(Integer.toString(selectedDocument.getID())));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
             this.areaText.setEditable(false);
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
@@ -100,15 +104,6 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                 "Version Selection");
         try {
             areaText.setText(VersionUtil.openVersion(selectedDocument.getID(),Integer.parseInt(version)));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void initialize()
-    {
-        try {
-            areaText.setText(VersionUtil.open(Integer.toString(selectedDocument.getID())));
         } catch (SQLException e) {
             e.printStackTrace();
         }
