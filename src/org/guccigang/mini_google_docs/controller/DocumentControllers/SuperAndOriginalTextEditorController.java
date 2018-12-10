@@ -32,9 +32,9 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(TabooUtil.containTabooAndUNK(selectedDocument.getContent())){
             selectedDocument.setContent(TabooUtil.censorTabooWords(selectedDocument.getContent()));
-            TabooUtil.flagDocument(currentUser.getUserName(), selectedDocument.getID());
+            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
             VersionUtil.save(selectedDocument.getID(),selectedDocument.getContent(),currentUser.getUserName());
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time you login you must review all flaged documents." ,
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
                     "Document contains taboo words", "Taboo Warning");
         }
         this.areaText.setText(selectedDocument.getContent());
@@ -48,16 +48,15 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     {
         if(TabooUtil.containTabooAndUNK(areaText.getText())){
             areaText.setText(TabooUtil.censorTabooWords(areaText.getText()));
-            TabooUtil.flagDocument(currentUser.getUserName(), selectedDocument.getID());
+            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flagged. Next time you login you must review all flaged documents." ,
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
                     "Document contains taboo words", "Taboo Warning");
         }else if(!TabooUtil.containTabooAndUNK(areaText.getText())){
-            TabooUtil.unFlagDocument(currentUser.getUserName(), selectedDocument.getID());
+            TabooUtil.unFlagDocument(selectedDocument.getOwner(), selectedDocument.getID());
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
-            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION, "Thank you for removing taboo words. Document has been unflagged." ,
-                    "Document no longer contains taboo words", "Thank You!");
-
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
         }else {
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
         }

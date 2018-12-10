@@ -29,7 +29,7 @@ public class TabooDocumentReviewEditorController {
         if (TabooUtil.containTabooAndUNK(textArea.getText())){
             GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'","Please Change","Warning");
         }else {
-            TabooUtil.unFlagDocument(currentUser.getUserName(),currentFile.getID());
+            TabooUtil.unFlagDocument(currentFile.getOwner(),currentFile.getID());
             VersionUtil.save(currentFile.getID(),textArea.getText(),currentFile.getOwner());
         }
     }
