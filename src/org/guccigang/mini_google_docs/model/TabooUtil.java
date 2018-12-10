@@ -5,6 +5,7 @@ import javafx.scene.control.TextArea;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class TabooUtil {
@@ -86,6 +87,7 @@ public class TabooUtil {
     public static String censorTabooWords(String string){
         HashSet<String> tabooSet = getTabooList();
         String[] documentContents = string.split(" ");
+        System.out.println(Arrays.toString(documentContents));
         for(String word : documentContents){
             if (tabooSet.contains(word)){
                 string = string.replace(word,"UNK");
