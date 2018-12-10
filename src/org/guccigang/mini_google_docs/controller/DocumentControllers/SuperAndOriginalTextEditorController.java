@@ -30,23 +30,28 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(TabooUtil.containTabooAndUNK(selectedDocument.getContent())){
-            selectedDocument.setContent(TabooUtil.censorTabooWords(selectedDocument.getContent()));
-            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
-            VersionUtil.save(selectedDocument.getID(),selectedDocument.getContent(),currentUser.getUserName());
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
-                    "Document contains taboo words", "Taboo Warning");
-        }
         try {
-            areaText.setText(VersionUtil.open(Integer.toString(selectedDocument.getID())));
+            String documentContent = VersionUtil.open(Integer.toString(selectedDocument.getID()));
+
+            if(TabooUtil.containTabooAndUNK(documentContent)){
+                selectedDocument.setContent(TabooUtil.censorTabooWords(documentContent));
+                TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+                VersionUtil.save(selectedDocument.getID(),selectedDocument.getContent(),currentUser.getUserName());
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                        "Document contains taboo words", "Taboo Warning");
+            }
+
+            if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
+                this.areaText.setEditable(false);
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
+                        "Document is locked", "Warning");
+            }
+            areaText.setText(documentContent);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
-            this.areaText.setEditable(false);
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
-                    "Document is locked", "Warning");
-        }
+
         //DocumentDAO.lockDocument(selectedDocument.getID());//locks document once it's opened
     }
     public void onSave(ActionEvent event)
