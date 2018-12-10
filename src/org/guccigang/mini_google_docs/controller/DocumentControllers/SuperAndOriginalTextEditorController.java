@@ -30,6 +30,12 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(TabooUtil.containsTaboo(selectedDocument.getContent())){
+            selectedDocument.setContent(TabooUtil.censorTabooWords(selectedDocument.getContent()));
+            TabooUtil.foundUpdateAndFlagDocument(currentUser.getUserName(), selectedDocument.getID(),selectedDocument.getContent());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time you login you must review all flaged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+        }
         this.areaText.setText(selectedDocument.getContent());
         if (currentUser.getMembershipLevel() != 2 && DocumentDAO.documentIsLocked(selectedDocument.getID())) {
             this.areaText.setEditable(false);
@@ -39,7 +45,18 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     }
     public void onSave(ActionEvent event)
     {
-        VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+        if(TabooUtil.containTabooAndUNK(areaText.getText())){
+            areaText.setText(TabooUtil.censorTabooWords(areaText.getText()));
+            TabooUtil.foundUpdateAndFlagDocument(currentUser.getUserName(), selectedDocument.getID(),areaText.getText());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flagged. Next time you login you must review all flaged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+        }else if(!TabooUtil.containTabooAndUNK(areaText.getText())){
+            TabooUtil.foundUpdateAndUnflagDocument(currentUser.getUserName(), selectedDocument.getID(),areaText.getText());
+            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION, "Thank you for removing taboo words. Document has been unflagged." ,
+                    "Document no longer contains taboo words", "Thank You!");
+        }else {
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+        }
     }
 
     public void onLoad(ActionEvent event)
