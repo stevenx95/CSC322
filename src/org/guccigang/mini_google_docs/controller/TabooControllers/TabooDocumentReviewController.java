@@ -1,9 +1,12 @@
 package org.guccigang.mini_google_docs.controller.TabooControllers;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.model.*;
 
@@ -27,12 +30,12 @@ public class TabooDocumentReviewController {
         this.currentUser = currentUser;
     }
 
-    public void handleOpenDocument()throws IOException{
+    public void handleOpenDocument(ActionEvent event)throws IOException{
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
             TabooDocumentReviewEditorController controller = new TabooDocumentReviewEditorController(currentUser, selectedDocument);
-            GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_EDITOR,"Document Editor", controller);
+            GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_EDITOR,"Document Editor");
         }else {
             //Nothing selected.
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
@@ -45,24 +48,16 @@ public class TabooDocumentReviewController {
         //Files the TableView with documents.
         fillTable();
 
-        if(documentFileTable.getItems().isEmpty()){
-            String SQLStatement = "UPDATE users set DocumentTabooReviewFlag = 0 where userName = ?";
-            DbUtil.executeUpdateDB(SQLStatement, currentUser.getUserName());
-
-        }
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-
-        /**Listens for selection changes and when the user clicks open document on while
-         *while document is highlighted then that exact document should open.
-         */
-        // documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
     }
 
-    private void fillTable(){
+    public void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getTabooFlagedDocuments(currentUser.getUserName()));
+            ObservableList<DocumentFile> documentFileObservableList = DocumentDAO.getTabooFlagedDocuments(currentUser.getUserName());
+            documentFileTable.setItems(documentFileObservableList);
+
         }catch (Exception e){
             e.printStackTrace();
         }

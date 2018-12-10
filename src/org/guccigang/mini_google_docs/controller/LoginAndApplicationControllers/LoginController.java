@@ -53,12 +53,13 @@ public class LoginController {
     private void loadUserProfile(ActionEvent event, ResultSet resultSet) throws SQLException, IOException {
         this.currentUser = new UserObject(resultSet.getString("username"), resultSet.getString("password"),
                 resultSet.getString("firstname"), resultSet.getString("lastname"),
-                resultSet.getInt("membershiplevel"),resultSet.getInt("DocumentTabooReviewFlag"));
+                resultSet.getInt("membershiplevel"));
 
         if (currentUser.getMembershipLevel() == 1) {
             OriginalUserUIController controller = new OriginalUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.ORIGINAL_USER_UI, currentUser.getFirstName(), controller);
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'. Until this is done, This window will not go away until you review and alter all flagged documents","Document Review","Warning");
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
                 GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
@@ -68,6 +69,7 @@ public class LoginController {
             SuperUserUIController controller = new SuperUserUIController(currentUser);
             GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'. Until this is done, This window will not go away until you review and alter all flagged documents","Document Review","Warning");
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
                 GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
