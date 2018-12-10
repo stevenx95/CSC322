@@ -1,20 +1,16 @@
 package org.guccigang.mini_google_docs.controller.DocumentControllers;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
-import org.guccigang.mini_google_docs.model.GuiUtil;
-import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.model.DocumentDAO;
+import org.guccigang.mini_google_docs.model.*;
 
 import javafx.fxml.FXML;
-import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
 
 
 public class SuperAndOriginalDocManagerController {
@@ -81,6 +77,32 @@ public class SuperAndOriginalDocManagerController {
         }
     }
 
+    public void handleCreateDocument(ActionEvent event)
+    {
+        String title = "untitled";
+        int restriction;
+
+        TextInputDialog dialog = new TextInputDialog("untitles");
+        dialog.setTitle("Creating a Document");
+        dialog.setHeaderText("Creating a Document");
+        dialog.setContentText("Please name your document:");
+        Optional<String> result = dialog.showAndWait();
+        if(result.isPresent()) title = result.get();
+        else
+        {
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document creation failed",
+                    "Document Failed", "You did this. This is your fault");
+            return;
+        }
+        try {
+            VersionUtil.create(currentUser.getUserName(),title);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You've just created a document. Check your documents",
+                "Document Created", "New Document");
+    }
+
     public void handleMyDocument(ActionEvent event)
     {
         fillTableMyDocs();
@@ -105,7 +127,6 @@ public class SuperAndOriginalDocManagerController {
 
     public void handleSharedDocument(ActionEvent event)
     {
-        System.out.println("Yes");
         fillTableShared();
     }
 

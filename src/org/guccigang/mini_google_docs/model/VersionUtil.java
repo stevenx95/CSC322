@@ -38,7 +38,7 @@ public class VersionUtil
      */
     public static int create(String owner,String title) throws SQLException {
 
-        DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,\"1941-12-07\",0)",owner,title,"");
+        DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,CURRENT_DATE,0)",owner,title,"");
         java.sql.ResultSet query = DbUtil.processQuery("select max(docID) from documents where docName=? and owner=?;",title,owner);
         query.next();
         return Integer.parseInt(query.getString(1));
