@@ -1,5 +1,8 @@
 package org.guccigang.mini_google_docs.model;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -123,5 +126,36 @@ public class TabooUtil {
         String SQLStatement = "UPDATE documents set conent = ? where owner = ? AND docID = ?";
         DbUtil.executeUpdateDB(SQLStatement,newContent, userName, Integer.toString(docID));
         unFlagDocument(userName,docID);
+    }
+
+    public static boolean tabooOnSave(TextArea areaText, DocumentFile selectedDocument, UserObject currentUser){
+        if(TabooUtil.containTabooAndUNK(areaText.getText())){
+            areaText.setText(TabooUtil.censorTabooWords(areaText.getText()));
+            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+            return true;
+        }
+        //if document was previously flagged and the user changes it. it will not be unflagged.
+        else if(!TabooUtil.containTabooAndUNK(areaText.getText()) && TabooUtil.isDocumentFlagged(selectedDocument.getOwner(),selectedDocument.getID())){
+            TabooUtil.unFlagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+            return true;
+        }
+        return false;
+    }
+    public static boolean tabooOnOpen(DocumentFile selectedDocument, UserObject currentUser){
+        if(TabooUtil.containTabooAndUNK(selectedDocument.getContent())){
+            selectedDocument.setContent(TabooUtil.censorTabooWords(selectedDocument.getContent()));
+            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+            VersionUtil.save(selectedDocument.getID(),selectedDocument.getContent(),currentUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+            return true;
+        }
+        return false;
     }
 }
