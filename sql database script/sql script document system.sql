@@ -105,7 +105,7 @@ insert into interests values
 ("Kelly", "Doing Nothing"),
 ("Kelly", "Lifting");
 
-insert into users value("kduggan15", "pass", "Kieran", "Duggan");
+insert into users value("kduggan15", "pass", "Kieran", "Duggan",1);
 insert into interests values
 ("kduggan15","Programming"),
 ("kduggan15","Bowery"),
