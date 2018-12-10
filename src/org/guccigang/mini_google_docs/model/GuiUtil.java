@@ -157,19 +157,6 @@ public class GuiUtil {
     }
 
     /**
-     * Destorys window
-     * @param event
-     * @param <T>
-     * @throws IOException
-     */
-    public static <T> void DestoryWindow(ActionEvent event) throws IOException {
-        //destroy current window
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-    }
-
-    /**
      *
      * @param event
      * @param sourceUI
@@ -199,38 +186,6 @@ public class GuiUtil {
         scene.setRoot(loader.load());
         window.setTitle(title);
     }
-
-//    /**
-//    Opens Visitor Text Editor
-//    @param selectedDocumentFile
-//    Takes in a DocumentFile object and sets the text editor to it.
-//     */
-//    public static void openVisitorTextReader(DocumentFile selectedDocumentFile){
-//        try{
-//            //Load the fxml file and create a new stage for the popup dialog.
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(Main.class.getResource(UILocation.VISITOR_TEXT_EDITOR.directory));
-//            AnchorPane textEditor = (AnchorPane) loader.load();
-//
-//            //Create the view document stage.
-//            Stage textEditorStage = new Stage();
-//            textEditorStage.setTitle("Text Editor");
-//            Scene scene = new Scene(textEditor);
-//            textEditorStage.setScene(scene);
-//            textEditorStage.initModality(Modality.APPLICATION_MODAL);
-//
-//
-//            //Set the controller
-//            VisitorTextEditorController controller = loader.getController();
-//            //Takes the string and loads it in text editor.
-//            controller.setSelectedDocument(selectedDocumentFile);
-//            controller.setAreaText();
-//            textEditorStage.show();
-//
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
 
 
     /**

@@ -153,4 +153,18 @@ public class DocumentDAO {
         }
         return documentFiles;
     }
+
+    public static boolean documentIsLocked(int docID) {
+        String sqlStatement = "SELECT * FROM documents WHERE docID = " + docID;
+        ResultSet resultSet = DbUtil.processQuery(sqlStatement);
+        try {
+            int lockStatus = resultSet.getInt("isLocked");
+            if (lockStatus == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
