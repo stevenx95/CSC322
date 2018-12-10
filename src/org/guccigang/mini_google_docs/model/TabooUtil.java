@@ -33,7 +33,8 @@ public class TabooUtil {
      * @return
      */
     public static boolean containsTaboo (String string){
-        String[] documentContents = string.split(" ");
+        String tempStr = string.replace("\n", " ");
+        String[] documentContents = tempStr.split(" ");
         String SQLStatement = "select * from tabooList where tabooWord = ?";
 
         for (String word : documentContents){
@@ -50,7 +51,8 @@ public class TabooUtil {
     }
 
     public static boolean containTabooAndUNK (String string){
-        String[] documentContents = string.split(" ");
+        String tempStr = string.replace("\n", " ");
+        String[] documentContents = tempStr.split(" ");
         String SQLStatement = "select * from tabooList where tabooWord = ?";
 
         for (String word : documentContents){
@@ -86,8 +88,8 @@ public class TabooUtil {
      */
     public static String censorTabooWords(String string){
         HashSet<String> tabooSet = getTabooList();
-        String[] documentContents = string.split(" ");
-        System.out.println(Arrays.toString(documentContents));
+        String tempStr = string.replace("\n", " ");
+        String[] documentContents = tempStr.split(" ");
         for(String word : documentContents){
             if (tabooSet.contains(word)){
                 string = string.replace(word,"UNK");
