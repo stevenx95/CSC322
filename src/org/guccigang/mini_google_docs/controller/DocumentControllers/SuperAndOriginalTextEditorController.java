@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.model.*;
 
@@ -39,13 +39,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     }
     public void onSave(ActionEvent event)
     {
-        try{
-            VersionUtil.save(Integer.toString(selectedDocument.getID()),areaText.getText(),currentUser.getUserName());
-        }
-        catch (java.sql.SQLException e)
-        {
-            e.printStackTrace();
-        }
+        VersionUtil.save(Integer.toString(selectedDocument.getID()),areaText.getText(),currentUser.getUserName());
     }
 
     public void onLoad(ActionEvent event)
@@ -61,5 +55,20 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void onAbout(ActionEvent event)
     {
         System.out.println("Stub! OnAbout");
+    }
+
+    public void handleComplaint(ActionEvent event)
+    {
+        System.out.println("Stub! OnAbout");
+    }
+
+    @FXML
+    private void initialize()
+    {
+        try {
+            areaText.setText(VersionUtil.open(Integer.toString(selectedDocument.getID())));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
