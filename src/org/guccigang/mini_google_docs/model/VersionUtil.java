@@ -3,6 +3,9 @@
 This is a utility class for version control
  */
 package org.guccigang.mini_google_docs.model;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -25,7 +28,7 @@ public class VersionUtil
             currText = query.getString(1);
             diff = getChanges(newText,currText);
 
-            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",\"1941-12-07\",?,?)",author,diff);
+            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
             DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",Integer.toString(docID));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,10 +63,10 @@ public class VersionUtil
      *
      * @return a string representing the contents of the given version of the doc
      */
-    public static String openVersion(String docID, int version) throws java.sql.SQLException
+    public static String openVersion(int docID, int version) throws java.sql.SQLException
     {
-        version++;//account for version off-by-one
-        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",docID);
+        //version++;//account for version off-by-one
+        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",""+docID);
         query.next();
         String currVersion = query.getString(1);
         ArrayList<String> versions = new ArrayList<>();
@@ -77,10 +80,16 @@ public class VersionUtil
         }
 
 
-        for(int i=versions.size()-1; i>version;i--)
+        for(int i=versions.size()-1; i>=version;i--)
         {
+            System.out.println("Version loading: "+ version);
+            System.out.println(currVersion);
+            System.out.println("Applied to...");
+            System.out.println(versions.get(i));
+            System.out.println("Next apply..");
             currVersion = applyChanges(currVersion,versions.get(i));
         }
+        System.out.println(currVersion);
         return currVersion;
     }
 
@@ -115,5 +124,21 @@ public class VersionUtil
         LinkedList<diff_match_patch.Patch> p = new LinkedList<>();
         p.addAll(pList);
         return (String) dmp.patch_apply(p,originalString)[0];
+    }
+    public static ArrayList<String> getVersionList(int docID)
+    {
+        ArrayList<String> ans = new ArrayList<>();
+        //ans.add("0");
+        ResultSet query = DbUtil.processQuery("SELECT version FROM revisions where docID="+docID+";");
+        try{
+            while (query.next())
+            {
+                ans.add(query.getString(1));
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ans;
     }
 }

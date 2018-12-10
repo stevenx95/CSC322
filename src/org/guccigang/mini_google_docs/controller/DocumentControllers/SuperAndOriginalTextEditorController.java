@@ -92,6 +92,18 @@ public class SuperAndOriginalTextEditorController implements Initializable {
         System.out.println("Stub! OnAbout");
     }
 
+    public void handleVersion(ActionEvent event)
+    {
+        String version = GuiUtil.createOptionAlert(VersionUtil.getVersionList(selectedDocument.getID()),
+                "Please select a version to load",
+                "Version",
+                "Version Selection");
+        try {
+            areaText.setText(VersionUtil.openVersion(selectedDocument.getID(),Integer.parseInt(version)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void initialize()
     {

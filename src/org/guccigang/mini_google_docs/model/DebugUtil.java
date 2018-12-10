@@ -38,7 +38,7 @@ public class DebugUtil
         else if(args[0].equals("open"))
         {
             try {
-                String text = VersionUtil.openVersion(args[1], Integer.parseInt(args[2]));//owner,string
+                String text = VersionUtil.openVersion(Integer.parseInt(args[1]), Integer.parseInt(args[2]));//owner,string
                 System.out.println("Text: "+text);
             }catch (java.sql.SQLException e)
             {
