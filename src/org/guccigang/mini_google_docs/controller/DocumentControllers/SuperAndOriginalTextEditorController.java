@@ -39,7 +39,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     }
     public void onSave(ActionEvent event)
     {
-        VersionUtil.save(Integer.toString(selectedDocument.getID()),areaText.getText(),currentUser.getUserName());
+        VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
     }
 
     public void onLoad(ActionEvent event)
