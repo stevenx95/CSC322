@@ -82,11 +82,6 @@ public class VersionUtil
 
         for(int i=versions.size()-1; i>=version;i--)
         {
-            System.out.println("Version loading: "+ version);
-            System.out.println(currVersion);
-            System.out.println("Applied to...");
-            System.out.println(versions.get(i));
-            System.out.println("Next apply..");
             currVersion = applyChanges(currVersion,versions.get(i));
         }
         System.out.println(currVersion);
