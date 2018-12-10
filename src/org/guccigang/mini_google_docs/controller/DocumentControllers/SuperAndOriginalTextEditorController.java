@@ -47,6 +47,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     }
     public void onSave(ActionEvent event)
     {
+        //If text field contains taboo words
         if(!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName()))
         {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You do not have write permission for this document!",
@@ -58,7 +59,9 @@ public class SuperAndOriginalTextEditorController implements Initializable {
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
                     "Document contains taboo words", "Taboo Warning");
-        }else if(!TabooUtil.containTabooAndUNK(areaText.getText())){
+        }
+        //if document was previously flagged and the user changes it. it will not be unflagged.
+        else if(!TabooUtil.containTabooAndUNK(areaText.getText()) && TabooUtil.isUserFlaged(selectedDocument.getOwner())){
             TabooUtil.unFlagDocument(selectedDocument.getOwner(), selectedDocument.getID());
             VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
