@@ -59,11 +59,16 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     public void handleOpenDocument()
     {
+
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
+            if(DocumentDAO.documentIsLocked(selectedDocument.getID()))
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document is locked! Wait for it to unlock",
+                        "Locked Document", "Locked Document");
             try
             {
+                DocumentDAO.lockDocument(selectedDocument.getID());
                 SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
                 GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
             }catch (java.io.IOException e)

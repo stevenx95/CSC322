@@ -69,6 +69,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     public void onClose(ActionEvent event)
     {
+        DocumentDAO.unlockDocument(selectedDocument.getID());
         System.out.println("Stub! OnClose");
     }
 

@@ -143,4 +143,14 @@ public class DocumentDAO {
         }
         return false;
     }
+    public static void lockDocument(int docID)
+    {
+        String sqlStatement = "UPDATE documents SET isLocked = 1 where docID = "+docID;
+        DbUtil.executeUpdateDB(sqlStatement);
+    }
+    public static void unlockDocument(int docID)
+    {
+        String sqlStatement = "UPDATE documents SET isLocked = 0 where docID = "+docID;
+        DbUtil.executeUpdateDB(sqlStatement);
+    }
 }
