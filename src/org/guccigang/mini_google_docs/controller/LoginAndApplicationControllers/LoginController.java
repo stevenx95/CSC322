@@ -61,7 +61,7 @@ public class LoginController {
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'. Until this is done, This window will not go away until you review and alter all flagged documents","Document Review","Warning");
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
+                GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 
@@ -71,7 +71,7 @@ public class LoginController {
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'. Until this is done, This window will not go away until you review and alter all flagged documents","Document Review","Warning");
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
+                GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 

@@ -39,10 +39,14 @@ public class SuperAndOriginalDocManagerController {
     }
     @FXML
     public void handleHome(ActionEvent event){
+        ReturnToProfile(event, currentUser);
+    }
+
+    public static void ReturnToProfile(ActionEvent event, UserObject currentUser) {
         try{
             if(currentUser.getMembershipLevel()==1){
                 OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
+                GuiUtil.changeScene(event, UILocation.ORIGINAL_USER_UI,"Home", controller);
             }else {
                 SuperUserUIController controller = new SuperUserUIController(currentUser);
                 GuiUtil.changeScene(event,UILocation.SUPER_USER_UI,"Home", controller);
@@ -52,20 +56,21 @@ public class SuperAndOriginalDocManagerController {
         }
     }
 
-
     @FXML
-    public void handleOpenDocument(ActionEvent event)
+    public void handleOpenDocument()
     {
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
-            SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
             try
             {
-                GuiUtil.createWindow(event, UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
+                SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
+                GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
             }catch (java.io.IOException e)
             {
                 e.printStackTrace();
+                GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
+
             }
 
         }else {

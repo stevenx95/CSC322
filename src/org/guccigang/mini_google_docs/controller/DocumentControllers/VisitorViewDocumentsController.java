@@ -47,7 +47,13 @@ public class VisitorViewDocumentsController {
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
-            GuiUtil.openVisitorTextReader(selectedDocument);
+            try {
+                VisitorTextEditorController controller = new VisitorTextEditorController(selectedDocument);
+                GuiUtil.createWindow(UILocation.VISITOR_TEXT_EDITOR, "Text Editor", controller);
+            } catch (Exception e) {
+                e.printStackTrace();
+                GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
+            }
         }else {
             //Nothing selected.
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
