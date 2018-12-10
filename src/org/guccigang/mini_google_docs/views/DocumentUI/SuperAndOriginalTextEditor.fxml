@@ -17,15 +17,15 @@
                   <Menu text="Options">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Change Document Type" />
-                        <MenuItem onAction="#onSave" text="Retrieve Old Documents" />
-                        <MenuItem onAction="#onLoad" text="File Compaint" />
+                        <MenuItem text="Retrieve Old Documents" />
+                        <MenuItem text="File Compaint" />
                         <MenuItem mnemonicParsing="false" text="Submit Changes" />
-                        <MenuItem onAction="#onClose" text="Close" />
+                        <MenuItem text="Close" />
                      </items>
                   </Menu>
                   <Menu text="Help">
                      <items>
-                        <MenuItem onAction="#onAbout" text="About" />
+                        <MenuItem text="About" />
                      </items>
                   </Menu>
                </menus>
@@ -35,7 +35,7 @@
             <HBox prefHeight="43.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <TextArea fx:id="areaText" prefHeight="264.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="editingArea" prefHeight="264.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

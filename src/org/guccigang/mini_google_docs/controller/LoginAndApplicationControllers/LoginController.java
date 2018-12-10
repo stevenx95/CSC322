@@ -60,7 +60,7 @@ public class LoginController {
             GuiUtil.createWindowAndDestroy(event, UILocation.ORIGINAL_USER_UI, currentUser.getFirstName(), controller);
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
+                GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 
@@ -69,7 +69,7 @@ public class LoginController {
             GuiUtil.createWindowAndDestroy(event, UILocation.SUPER_USER_UI, currentUser.getFirstName(), controller);
             while(TabooUtil.isUserFlaged(currentUser.getUserName())){
                 TabooDocumentReviewController TabooController = new TabooDocumentReviewController(currentUser);
-                GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
+                GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_UI, "Review Documents",TabooController);
             }
         }
 

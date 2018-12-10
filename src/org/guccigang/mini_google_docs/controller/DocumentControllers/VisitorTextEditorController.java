@@ -1,35 +1,43 @@
 package org.guccigang.mini_google_docs.controller.DocumentControllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.event.ActionEvent;
 
 import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorComplaintFormController;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class VisitorTextEditorController {
+public class VisitorTextEditorController  implements Initializable {
     private DocumentFile selectedDocument;
 
     @FXML
     private TextArea areaText;
 
 
+
+    public VisitorTextEditorController(DocumentFile selectedDocument) {
+        this.selectedDocument = selectedDocument;
+    }
+
+    public VisitorTextEditorController() {
+        this(null);
+    }
     @FXML
     private void onSave(){
 
     }
     @FXML
-    private void handleComplaint(ActionEvent event){
+    private void handleComplaint(){
         try {
             VisitorComplaintFormController controller = new VisitorComplaintFormController(selectedDocument);
-            GuiUtil.createWindow(event, UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
+            GuiUtil.createWindow(UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,15 +57,14 @@ public class VisitorTextEditorController {
         alert.setContentText("This is a simple text editor");
         alert.show();
     }
-    @FXML
-    private void initialize(){
-        this.areaText.setEditable(false);
-    }
+
     public void setSelectedDocument(DocumentFile selectedDocument){
         this.selectedDocument = selectedDocument;
     }
-    public void setAreaText() {
-        this.areaText.setText(selectedDocument.getContent());
-    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.areaText.setText(selectedDocument.getContent());
+        this.areaText.setEditable(false);
+    }
 }

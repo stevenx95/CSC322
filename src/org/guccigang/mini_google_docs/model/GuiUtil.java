@@ -10,12 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.Main;
 import org.guccigang.mini_google_docs.UILocation;
-import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController;
 
 import java.io.IOException;
 
@@ -73,7 +71,6 @@ public class GuiUtil {
     }
 
     /**
-     * @param event
      * @param sourceUI
      * @param title
      * @param controller
@@ -82,7 +79,7 @@ public class GuiUtil {
      *
      * Creates new window and prevents interaction with previous window till the current window is taken care off.
      */
-    public static <T> void createWindow(ActionEvent event, UILocation sourceUI, String title, T controller) throws IOException {
+    public static <T> void createWindow(UILocation sourceUI, String title, T controller) throws IOException {
         //define FXMLLoader and new Stage
         FXMLLoader loader = new FXMLLoader();
         Stage stage = new Stage();
@@ -203,37 +200,38 @@ public class GuiUtil {
         window.setTitle(title);
     }
 
-    /**
-    Opens Visitor Text Editor
-    @param selectedDocumentFile
-    Takes in a DocumentFile object and sets the text editor to it.
-     */
-    public static void openVisitorTextReader(DocumentFile selectedDocumentFile){
-        try{
-            //Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource(UILocation.VISITOR_TEXT_EDITOR.directory));
-            AnchorPane textEditor = (AnchorPane) loader.load();
+//    /**
+//    Opens Visitor Text Editor
+//    @param selectedDocumentFile
+//    Takes in a DocumentFile object and sets the text editor to it.
+//     */
+//    public static void openVisitorTextReader(DocumentFile selectedDocumentFile){
+//        try{
+//            //Load the fxml file and create a new stage for the popup dialog.
+//            FXMLLoader loader = new FXMLLoader();
+//            loader.setLocation(Main.class.getResource(UILocation.VISITOR_TEXT_EDITOR.directory));
+//            AnchorPane textEditor = (AnchorPane) loader.load();
+//
+//            //Create the view document stage.
+//            Stage textEditorStage = new Stage();
+//            textEditorStage.setTitle("Text Editor");
+//            Scene scene = new Scene(textEditor);
+//            textEditorStage.setScene(scene);
+//            textEditorStage.initModality(Modality.APPLICATION_MODAL);
+//
+//
+//            //Set the controller
+//            VisitorTextEditorController controller = loader.getController();
+//            //Takes the string and loads it in text editor.
+//            controller.setSelectedDocument(selectedDocumentFile);
+//            controller.setAreaText();
+//            textEditorStage.show();
+//
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
 
-            //Create the view document stage.
-            Stage textEditorStage = new Stage();
-            textEditorStage.setTitle("Text Editor");
-            Scene scene = new Scene(textEditor);
-            textEditorStage.setScene(scene);
-            textEditorStage.initModality(Modality.APPLICATION_MODAL);
-
-
-            //Set the controller
-            VisitorTextEditorController controller = loader.getController();
-            //Takes the string and loads it in text editor.
-            controller.setSelectedDocument(selectedDocumentFile);
-            controller.setAreaText();
-            textEditorStage.show();
-
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 
     /**
      *

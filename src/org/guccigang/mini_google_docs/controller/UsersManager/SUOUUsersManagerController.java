@@ -4,8 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.UILocation;
-import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
-import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
+import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 import org.guccigang.mini_google_docs.model.UsersDAO;
@@ -54,21 +53,21 @@ public class SUOUUsersManagerController {
         usersTable.setItems(UsersDAO.getSearchedResult(searchBar.getText(), currentUser.getUserName()));
     }
     @FXML
-    public void handleOpenUserProfile(ActionEvent event){
+    public void handleOpenUserProfile(){
         int selectedIndex = usersTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             UserObject otherUser = usersTable.getItems().get(selectedIndex);
             if(currentUser.getMembershipLevel() == 1){
                 try{
                     OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
-                    GuiUtil.createWindow(event, UILocation.OU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
+                    GuiUtil.createWindow(UILocation.OU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
             }else {
                 try{
                     OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
-                    GuiUtil.createWindow(event,UILocation.SU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
+                    GuiUtil.createWindow(UILocation.SU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -81,17 +80,7 @@ public class SUOUUsersManagerController {
     }
     @FXML
     public void handleHome(ActionEvent event){
-        try{
-            if(currentUser.getMembershipLevel()==1){
-                OriginalUserUIController controller = new OriginalUserUIController(currentUser);
-                GuiUtil.changeScene(event,UILocation.ORIGINAL_USER_UI,"Home", controller);
-            }else {
-                SuperUserUIController controller = new SuperUserUIController(currentUser);
-                GuiUtil.changeScene(event,UILocation.SUPER_USER_UI,"Home", controller);
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        SuperAndOriginalDocManagerController.ReturnToProfile(event, currentUser);
     }
 
 

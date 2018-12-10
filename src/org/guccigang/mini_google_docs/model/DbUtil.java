@@ -23,7 +23,7 @@ public class DbUtil {
     private static Connection connection = null;
 
     //Connection String  YOU GUYS WILL HAVE TO KEEP CHANGING THIS CRAP DEPENDING ON THE NAME OF YOUR DATABASE
-    private static final String connString = "jdbc:mysql://localhost:3306/GucciGangDB";
+    private static final String connString = "jdbc:mysql://localhost:3306/guccigangdb";
 
     public static void connectDB() {
         try {
