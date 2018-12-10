@@ -133,6 +133,7 @@ public class DocumentDAO {
         String sqlStatement = "SELECT * FROM documents WHERE docID = " + docID;
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
+            resultSet.next();
             int lockStatus = resultSet.getInt("isLocked");
             if (lockStatus == 1) {
                 return true;
