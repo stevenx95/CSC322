@@ -23,12 +23,7 @@ public class DebugUtil
         }
         else if(args[0].equals("save"))
         {
-            try {
-                VersionUtil.save(args[1], args[2], args[3]);//
-            }catch (java.sql.SQLException e)
-            {
-                System.out.println(e);
-            }
+            VersionUtil.save(args[1], args[2], args[3]);//
         }
         else if(args[0].equals("create"))
         {
