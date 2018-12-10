@@ -15,16 +15,14 @@ public class UserObject {
     final private String firstName;
     final private String lastName;
     final private int membershipLevel;
-    final private int DocumentTabooReviewFlag;
     private List<String> interests;
 
-    public UserObject(String userName, String password, String firstName, String lastName, int membershipLevel, int DocumentTabooReviewFlag) {
+    public UserObject(String userName, String password, String firstName, String lastName, int membershipLevel) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.membershipLevel = membershipLevel;
-        this.DocumentTabooReviewFlag = DocumentTabooReviewFlag;
         this.interests = new ArrayList<>();
     }
 
@@ -62,14 +60,6 @@ public class UserObject {
         if(getMembershipLevel() == 1){
             return "Ordinary User";
         }else return "Super User";
-    }
-    public int getDocumentTabooReviewFlag () {
-        return DocumentTabooReviewFlag;
-    }
-    public boolean isTabooFlag(){
-        if (getDocumentTabooReviewFlag() == 1){
-            return true;
-        }else return false;
     }
     public StringProperty membershipProperty(){return new SimpleStringProperty(getMembership());}
 

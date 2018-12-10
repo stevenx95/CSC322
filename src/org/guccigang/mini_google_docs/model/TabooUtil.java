@@ -5,8 +5,14 @@ import java.sql.SQLException;
 import java.util.HashSet;
 
 public class TabooUtil {
+    /**
+     * Queries the database and checks for flagged documents. If an empty relation is returned.
+     * Then the user is cleared.
+     * @param userName
+     * @return
+     */
     public static boolean isUserFlaged(String userName){
-        String SQLStatement = "select DocumentTabooReviewFlag from users where userName = ? AND DocumentTabooReviewFlag = 1";
+        String SQLStatement = "select * from documents where owner = ? AND tabooFlag = 1";
         try{
             ResultSet resultSet = DbUtil.processQuery(SQLStatement, userName);
             if(resultSet.next()){
@@ -85,16 +91,4 @@ public class TabooUtil {
         return string;
 
     }
-
-    /**
-     * Flags user due to document containing taboo words.
-     * 1 is OU, 2 is SU, 3 is Flag for taboo review
-     * @param userName
-     */
-    public static void flagUser(String userName){
-        String SQLStatement = "Update users SET DocumentTabooReviewFlag = 1 WHERE userName = ?";
-        DbUtil.executeUpdateDB(SQLStatement,userName);
-    }
-
-
 }

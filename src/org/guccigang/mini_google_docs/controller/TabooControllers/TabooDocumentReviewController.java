@@ -1,5 +1,6 @@
 package org.guccigang.mini_google_docs.controller.TabooControllers;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -47,24 +48,16 @@ public class TabooDocumentReviewController {
         //Files the TableView with documents.
         fillTable();
 
-        if(documentFileTable.getItems().isEmpty()){
-            String SQLStatement = "UPDATE users set DocumentTabooReviewFlag = 0 where userName = ?";
-            DbUtil.executeUpdateDB(SQLStatement, currentUser.getUserName());
-
-        }
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-
-        /**Listens for selection changes and when the user clicks open document on while
-         *while document is highlighted then that exact document should open.
-         */
-        // documentFileTable.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->{} ));
     }
 
-    private void fillTable(){
+    public void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getTabooFlagedDocuments(currentUser.getUserName()));
+            ObservableList<DocumentFile> documentFileObservableList = DocumentDAO.getTabooFlagedDocuments(currentUser.getUserName());
+            documentFileTable.setItems(documentFileObservableList);
+
         }catch (Exception e){
             e.printStackTrace();
         }
