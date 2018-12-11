@@ -19,7 +19,6 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleChangeDocType" text="Change Document Type" />
                         <MenuItem onAction="#handleVersion" text="Retrieve Old Documents" />
                         <MenuItem onAction="#handleShareOfDoc" text="Share with..." />
-                        <MenuItem onAction="#handleComplaint" text="File Compaint" />
                         <MenuItem onAction="#handleComplaint" text="File Document Complaint" />
                         <MenuItem onAction="#handleUserComplaint" text="File User Complaint" />
                         <MenuItem mnemonicParsing="false" onAction="#onSave" text="Submit Changes" />
