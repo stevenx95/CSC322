@@ -134,4 +134,20 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                 String.format("Document type has been changed to %s: ", restriction.string),
                 "Confirmation");
     }
+
+    public void handleShareOfDoc() {
+        ArrayList<String> userList = SharingUtil.getAllUsers(currentUser.getUserName());
+        String selectedUser = GuiUtil.createOptionAlert(
+                userList,
+                "Share this document with: ",
+                "Share Document",
+                "Share document"
+        );
+        SharingUtil.shareDoc(selectedDocument.getID(), selectedUser);
+        UserObject selectedUserObject = UsersDAO.getSearchedResult(selectedUser,currentUser.getUserName()).get(0);
+        GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
+                "This user can now make updates to this document",
+                String.format("Shared with %s %s", selectedUserObject.getFirstName(), selectedUserObject.getLastName()),
+                "Confirmation");
+    }
 }

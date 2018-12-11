@@ -28,12 +28,12 @@ public class VersionUtil
             currText = query.getString(1);
             diff = getChanges(newText,currText);
 
-            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
-            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE(?,?,?,?,?)", statement -> {
+//            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
+            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE(?,?,CURRENT_DATE,?,?)", statement -> {
                 statement.setInt(1, docID);
                 statement.setInt(2,version);
-                statement.setString(4, author);
-                statement.setString(5, diff);
+                statement.setString(3, author);
+                statement.setString(4, diff);
             });
 //            DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",Integer.toString(docID));
             DbUtil.executeUpdateDB("UPDATE documents SET content = ? WHERE docID= ?", statement -> {
