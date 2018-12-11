@@ -1,12 +1,13 @@
 drop table if exists revisions;
 drop table if exists sharedDocs;
 drop table if exists interests;
-drop table if exists documents;
-drop table if exists users;
 drop table if exists complaints;
 drop table if exists tabooList;
 drop table if exists tabooSuggestions;
 drop table if exists application;
+drop table if exists locks;
+drop table if exists documents;
+drop table if exists users;
 
 CREATE TABLE complaints (
     complaintID int PRIMARY KEY AUTO_INCREMENT,
@@ -24,7 +25,7 @@ CREATE TABLE complaintsuser (
     complainer varchar(20),
     violator varchar(20),
     message text,
-    docID int,
+    docID int
 );
 
 
