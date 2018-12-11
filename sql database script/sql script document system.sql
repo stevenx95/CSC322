@@ -64,7 +64,8 @@ CREATE TABLE documents (
     isLocked int NOT NULL,
     restricted int NOT NULL,
     createdDate date NOT NULL,
-    tabooFlag int
+    tabooFlag int,
+    views int
 );
 
 CREATE TABLE revisions (
