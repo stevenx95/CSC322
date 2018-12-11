@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SuperAndOriginalTextEditorController implements Initializable {
@@ -111,5 +112,26 @@ public class SuperAndOriginalTextEditorController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void handleChangeDocType() {
+        ArrayList<String> options = DocRestriction.stringValues();
+        options.removeIf(item -> item.equals("shared"));
+        String selectedOption = GuiUtil.createOptionAlert(
+                options,
+                "Select the document type: ",
+                "Change document type",
+                "Change document type"
+        );
+        DocRestriction restriction = DocRestriction.getDocRestriction(selectedOption);
+        String query = "UPDATE documents SET restricted=? WHERE docID=?";
+        DbUtil.executeUpdateDB(query, statement -> {
+            statement.setInt(1, restriction.id);
+            statement.setInt(2, selectedDocument.getID());
+        });
+        GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
+                "",
+                String.format("Document type has been changed to %s: ", restriction.string),
+                "Confirmation");
     }
 }
