@@ -58,12 +58,13 @@
                         <TextArea layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="558.0" text="Document Manager&#10;      &gt;All actions related to with Documents within the UI.&#10;&#10;Report Commands&#10;      &gt;Report taboo words&#10;&#10;Upgrade Membership&#10;      &gt;Upgrade from a peasant Visitor account to a regular Original User Account&#10;&#10;" />
                         <TableView layoutX="12.0" layoutY="354.0" prefHeight="307.0" prefWidth="558.0" AnchorPane.rightAnchor="12.800000000000068">
                           <columns>
-                            <TableColumn prefWidth="85.59994506835938" text="Title" />
-                            <TableColumn prefWidth="85.59994506835938" text="Owner" />
-                              <TableColumn prefWidth="85.59994506835938" text="View Amount" />
+                            <TableColumn prefWidth="294.99998784065247" text="Title" />
+                            <TableColumn prefWidth="148.99993896484375" text="Owner" />
+                              <TableColumn prefWidth="113.0" text="View Count" />
                           </columns>
                         </TableView>
                         <Label layoutX="13.0" layoutY="336.0" text="Top 3 Documents" />
+                        <Button layoutX="14.0" layoutY="661.0" mnemonicParsing="false" text="Open Document" />
                      </children>
                   </AnchorPane>
               </items>
