@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="175.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Complaint Form">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="218.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+      <TextField fx:id="textBarUsername" layoutX="171.0" layoutY="72.0" />
+      <AnchorPane layoutX="81.1015625" layoutY="121.98828125">
+         <children>
+            <Text boundsType="VISUAL" layoutX="-1.1015625" layoutY="4.01171875" strokeType="OUTSIDE" strokeWidth="0.0" text="If you are a visitor please enter visitor for Username!" wrappingWidth="278.091796875" AnchorPane.bottomAnchor="5.8203125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7148437500001137" AnchorPane.topAnchor="-5.0" />
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="complaintText" layoutX="119.0" layoutY="186.0" prefHeight="200.0" prefWidth="272.0" />
+      <Text layoutX="218.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Complaint" />
+      <Button layoutX="213.0" layoutY="392.0" mnemonicParsing="false" onAction="#submitUserComplaintToDB" text="Submit">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

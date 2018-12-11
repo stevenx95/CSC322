@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -40,7 +40,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="386.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Report" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="477.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Report" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
@@ -51,11 +51,16 @@
                            </font>
                         </Button>
                         <Button layoutX="3.0" layoutY="642.0" mnemonicParsing="false" onAction="#signOutButton" text="Sign Out" textFill="#1389a7" />
+                        <Button layoutX="20.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleOUComplaints" prefHeight="65.0" prefWidth="265.0" text="Complaint Manager" textAlignment="CENTER" textFill="#1389a7">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="516.0" prefWidth="557.0" text="Document Manager&#10;      &gt;All actions related to with Documents within the UI.&#10;&#10;Find User&#10;      &gt;Search for users based on their interests &#10;      &gt;Search by known username.&#10;&#10;Messages&#10;     &gt;Find other users who have invited you to their documents &#10;     &gt;View complaints about your documets from other users&#10;&#10;Report Commands&#10;      &gt;Report taboo words&#10;&#10;&#10;&#10;" />
+                        <TextArea editable="false" layoutX="14.0" layoutY="14.0" prefHeight="516.0" prefWidth="557.0" text="Document Manager&#10;      &gt;All actions related to with Documents within the UI.&#10;&#10;Find User&#10;      &gt;Search for users based on their interests &#10;      &gt;Search by known username.&#10;&#10;Messages&#10;     &gt;Find other users who have invited you to their documents &#10;     &#10;Complaint Manager&#10;     &gt;Manage list of complaints towards your documents&#10;&#10;Report Commands&#10;      &gt;Report taboo words&#10;&#10;&#10;&#10;" />
                      </children>
                   </AnchorPane>
               </items>

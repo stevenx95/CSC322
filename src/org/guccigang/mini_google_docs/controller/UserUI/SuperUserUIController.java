@@ -3,6 +3,7 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUComplaintTypeSelectionMenuController;
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUDocumentComplaintController;
 import org.guccigang.mini_google_docs.controller.UsersManager.SUOUUsersManagerController;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController;
 import org.guccigang.mini_google_docs.controller.LoginAndApplicationControllers.UserAppManagerController;
@@ -67,8 +68,8 @@ public class SuperUserUIController {
 
     public void openComplaintManager(ActionEvent event) {
         try {
-            SUComplaintTypeSelectionMenuController controller = new SUComplaintTypeSelectionMenuController(currentUser);
-            GuiUtil.changeScene(event, UILocation.SUPER_USER_COMPLAINT_MANAGER, "Complaints", controller);
+            SUDocumentComplaintController controller = new SUDocumentComplaintController(currentUser);
+            GuiUtil.changeScene(event, UILocation.SUPER_USER_DOCUMENT_COMPLAINT_VIEW, "Complaints", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }

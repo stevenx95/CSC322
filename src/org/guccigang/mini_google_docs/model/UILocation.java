@@ -1,4 +1,4 @@
-package org.guccigang.mini_google_docs.model;
+package org.guccigang.mini_google_docs;
 
 public enum UILocation {
 
@@ -21,9 +21,10 @@ public enum UILocation {
     VISITOR_COMPLAINT_FORM_VIEW("views/VisitorOUDocComplaintFormView.fxml"),
     TABOO_DOCUMENT_REVIEW_UI("views/TabooUI/TabooDocumentReview.fxml"),
     SUPER_USER_COMPLAINT_MANAGER("views/ComplaintViews/SUComplaintTypeSelectionMenuView.fxml"),
+    ORIGINAL_USER_DOCUMENT_COMPLAINT_VIEW("views/ComplaintViews/OUUserComplaintFormView.fxml"),
     SUPER_USER_DOCUMENT_COMPLAINT_VIEW("views/ComplaintViews/SUDocumentComplaintView.fxml"),
-    TABOO_DOCUMENT_REVIEW_EDITOR("views/TabooUI/TabooDocumentReviewEditor.fxml"),
-    FIRST_TIME_SAVING("views/DocumentUI/FirstTimeSave.fxml");
+    ORIGINAL_USER_USER_COMPLAINT_VIEW("views/ComplaintViews/OUUserComplaintView.fxml"),
+    TABOO_DOCUMENT_REVIEW_EDITOR("views/TabooUI/TabooDocumentReviewEditor.fxml");
 
     public final String directory;
     UILocation(String location) {

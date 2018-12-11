@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
+import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintFormController;
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorComplaintFormController;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.net.URL;
@@ -98,7 +101,24 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     public void handleComplaint(ActionEvent event)
     {
-        System.out.println("Stub! OnAbout");
+        try {
+            VisitorComplaintFormController controller = new VisitorComplaintFormController(selectedDocument);
+            GuiUtil.createWindow(UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void handleUserComplaint(ActionEvent event){
+
+        try {
+            OUUserComplaintFormController controller = new OUUserComplaintFormController(selectedDocument);
+            GuiUtil.createWindow(UILocation.ORIGINAL_USER_DOCUMENT_COMPLAINT_VIEW, "Complaint Form", controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void handleVersion(ActionEvent event)

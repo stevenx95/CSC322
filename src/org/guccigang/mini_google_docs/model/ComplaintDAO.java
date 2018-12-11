@@ -42,6 +42,41 @@ public class ComplaintDAO {
         String selectStatement = "DELETE FROM complaints WHERE DocID = ?";
         DbUtil.executeUpdateDB(selectStatement,ID.toString());
     }
+
+    public static ObservableList<UserComplaint> getAllUserComplaintTexts(UserObject userObject) throws SQLException {
+        String selectStatement = "SELECT * FROM complaintsuser WHERE owner = ?";
+
+        try{
+            ResultSet rs = DbUtil.processQuery(selectStatement,userObject.getUserName());
+            ObservableList<UserComplaint> complaintTextsData = getAllUserComplaintsForDocumentsList(rs);
+            return complaintTextsData;
+        }catch (SQLException e){
+            System.out.println("SQL query has failed " + e);
+            throw e;
+        }
+    }
+
+    private static ObservableList<UserComplaint> getAllUserComplaintsForDocumentsList(ResultSet resultSet)throws SQLException{
+
+        ObservableList<UserComplaint> userComplaints= FXCollections.observableArrayList();
+
+        while(resultSet.next()){
+            UserComplaint userComplaint = new UserComplaint();
+
+            userComplaint.setOwner(resultSet.getString("owner"));
+            userComplaint.setVersion(resultSet.getInt("version"));
+            userComplaint.setComplainer(resultSet.getString("complainer"));
+            userComplaint.setViolator(resultSet.getString("violator"));
+            userComplaint.setMessage(resultSet.getString("message"));
+            userComplaint.setDocID(resultSet.getInt("DocID"));
+
+            userComplaints.add(userComplaint);
+        }
+        return userComplaints;
+    }
+
+
+
     
     
 }

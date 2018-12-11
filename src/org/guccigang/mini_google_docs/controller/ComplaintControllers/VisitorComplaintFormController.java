@@ -34,7 +34,7 @@ public class VisitorComplaintFormController {
         try {
             String sql = "INSERT INTO complaints(DocId,version,owner,complainer,message) VALUES ('" + tempDocId + "','" + getVersionOfDocument(tempDocId) + "', '" + docFile.getOwner() + "', '" + textBarUsername.getText() + "','" + complaintText.getText() + "')";
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/322project", "root", "Starpoint29");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GucciGangDB", "root", "password");
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             result = preparedStatement.executeUpdate(sql);
 
@@ -54,8 +54,8 @@ public class VisitorComplaintFormController {
     private int getVersionOfDocument(Integer docID) throws SQLException {
        int version = 0;
 
-        String sqlStatement = "Select docID FROM revisions WHERE docID = ? ";
-        ResultSet rs =DbUtil.processQuery(sqlStatement,statement -> statement.setInt(1,docID));
+        String sqlStatement = "Select version FROM revisions WHERE docID = ? ";
+        ResultSet rs =DbUtil.processQuery(sqlStatement,docID.toString());
         if(rs.next()){
              version = rs.getInt("version");
         }
@@ -64,7 +64,7 @@ public class VisitorComplaintFormController {
     }
 
     private boolean isTaken(String userName) {
-        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", statement-> statement.setString(1, userName));
+        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", userName);
         try {
             if(!resultSet.next()) {
                 return true;

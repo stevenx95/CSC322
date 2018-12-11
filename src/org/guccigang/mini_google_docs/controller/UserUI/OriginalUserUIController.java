@@ -2,7 +2,8 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 
 import javafx.event.ActionEvent;
 
-import org.guccigang.mini_google_docs.model.UILocation;
+import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintViewController;
 import org.guccigang.mini_google_docs.controller.UsersManager.SUOUUsersManagerController;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
@@ -47,6 +48,16 @@ public class OriginalUserUIController {
     public void reportTabooWordAction(ActionEvent event){
         try {
             GuiUtil.createWindow(event, UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleOUComplaints(ActionEvent event){
+        try {
+
+            OUUserComplaintViewController controller = new OUUserComplaintViewController(user);
+            GuiUtil.changeScene(event, UILocation.ORIGINAL_USER_USER_COMPLAINT_VIEW, "User Complaints",controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
