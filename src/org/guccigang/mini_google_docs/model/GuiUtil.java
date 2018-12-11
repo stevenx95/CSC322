@@ -14,6 +14,7 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.Main;
+import org.guccigang.mini_google_docs.UILocation;
 
 import java.io.IOException;
 import java.util.ArrayList;

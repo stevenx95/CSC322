@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CSC322" options="--add-exports=java.sql.rowset/com.sun.rowset=ALL-UNNAMED" />
+      <module name="CSC322"  />
     </option>
   </component>
 </project>

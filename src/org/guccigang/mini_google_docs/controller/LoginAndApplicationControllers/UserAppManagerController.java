@@ -6,7 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
-import org.guccigang.mini_google_docs.model.UILocation;
+import org.guccigang.mini_google_docs.UILocation;
+
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UsersDAO;

@@ -3,7 +3,8 @@ package org.guccigang.mini_google_docs.controller.UsersManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.guccigang.mini_google_docs.model.UILocation;
+
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;

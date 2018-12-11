@@ -2,7 +2,7 @@ package org.guccigang.mini_google_docs.controller.ComplaintControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import org.guccigang.mini_google_docs.model.UILocation;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 
