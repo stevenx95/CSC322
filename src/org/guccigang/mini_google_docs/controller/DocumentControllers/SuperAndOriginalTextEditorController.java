@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.model.*;
@@ -82,13 +81,5 @@ public class SuperAndOriginalTextEditorController implements Initializable {
         System.out.println("Stub! OnAbout");
     }
 
-    @FXML
-    private void initialize()
-    {
-        try {
-            areaText.setText(VersionUtil.open(Integer.toString(selectedDocument.getID())));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

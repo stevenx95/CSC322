@@ -4,7 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 
 import java.util.Date;
 
@@ -85,34 +84,15 @@ public class DocumentFile {
         return this.isLock;
     }
 
-    public void setRestricted(Restriction restricted){
+    public void setRestricted(DocRestriction restricted){
         this.restricted.set(restricted.id);
     }
 
     public void setRestricted(int restricted) {
         this.restricted.set(restricted);
     }
-    public Restriction getRestricted(){
-        Restriction value;
-        switch (this.restricted.get()) {
-            case 0:
-                value = Restriction.PRIVATE;
-                break;
-            case 1:
-                value = Restriction.SHARED;
-                break;
-            case 2:
-                value= Restriction.PUBLIC;
-                break;
-            case 3:
-                value = Restriction.RESTRICTED;
-                break;
-                default:
-                    value = null;
-                    break;
-        }
-
-        return value;
+    public DocRestriction getRestricted(){
+        return DocRestriction.getDocRestriction(this.restricted.get());
     }
 
 //    public void setDate(Date date){
@@ -168,11 +148,11 @@ public class DocumentFile {
 
     public StringProperty restrictionLevelProperty(){
         //Returns a string representation of the restriction.
-        if(getRestricted() == Restriction.PRIVATE){
+        if(getRestricted() == DocRestriction.PRIVATE){
             return new SimpleStringProperty("Private");
-        }else if(getRestricted() == Restriction.SHARED){
+        }else if(getRestricted() == DocRestriction.SHARED){
             return new SimpleStringProperty("Shared");
-        }else if(getRestricted() == Restriction.PUBLIC){
+        }else if(getRestricted() == DocRestriction.PUBLIC){
             return new SimpleStringProperty("Public");
         }else return new SimpleStringProperty("Restricted");
     }

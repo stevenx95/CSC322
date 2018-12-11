@@ -121,7 +121,7 @@ public class DocumentDAO {
             document.setDocumentName(resultSet.getString("docName"));
             document.setContent(resultSet.getString("content"));
             document.setLock(resultSet.getInt("isLocked"));
-            document.setRestricted(resultSet.getInt("restricted"));
+            document.setRestricted(DocRestriction.getDocRestriction(resultSet.getInt("restricted")));
             //document.setDate(new Date(resultSet.getString("createdDate")));
             document.setTabooFlag(resultSet.getInt("tabooFlag"));
             documentFiles.add(document);
