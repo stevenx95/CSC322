@@ -12,6 +12,7 @@ package org.guccigang.mini_google_docs.model;
 import com.sun.rowset.CachedRowSetImpl;
 
 import java.sql.*;
+import java.util.function.Consumer;
 //I use it here instead of JavaFX because it is quicker to code and use.
 
 public class DbUtil {
@@ -75,6 +76,23 @@ public class DbUtil {
         return result;
     }
 
+    public static int executeUpdateDB(String sqlStatement, MyConsumer<PreparedStatement> action) {
+        if (connection == null) {
+            connectDB();
+        }
+        int result = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+            action.accept(preparedStatement);
+            result = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            disconnectDB();
+        }
+        return result;
+    }
+
     public static ResultSet processQuery(String sqlStatement) {
         //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
         //post-condition: a result set object is returned containing the results from the query as a set or it is null.
@@ -111,6 +129,25 @@ public class DbUtil {
             for (int i = 0; i < sqlParams.length; i++) {
                 preparedStatement.setString(i + 1, sqlParams[i]);
             }
+            ResultSet resultSet = preparedStatement.executeQuery();
+            cachedRowSet.populate(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cachedRowSet;
+    }
+
+    public static ResultSet processQuery(String sqlStatement, MyConsumer<PreparedStatement> action) {
+        //precondition: sql is a valid SQL statement  with ? for each in sqlParams.
+        //post-condition: a result set object is returned containing the results from the query as a set or it is null.
+        if (connection == null) {
+            connectDB();
+        }
+        CachedRowSetImpl cachedRowSet = null;
+        try {
+            cachedRowSet = new CachedRowSetImpl();
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+            action.accept(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             cachedRowSet.populate(resultSet);
         } catch (SQLException e) {

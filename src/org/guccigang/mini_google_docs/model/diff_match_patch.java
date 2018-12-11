@@ -1827,7 +1827,7 @@ public class diff_match_patch {
         Patch patch = new Patch();
         int char_count1 = 0;  // Number of characters into the text1 string.
         int char_count2 = 0;  // Number of characters into the text2 string.
-        // Start with text1 (prepatch_text) and apply the diffs until we arrive at
+        // Start with text1 (prepatch_text) and accept the diffs until we arrive at
         // text2 (postpatch_text). We recreate the patches one by one to determine
         // context info.
         String prepatch_text = text1;

@@ -15,7 +15,9 @@ public class UsersDAO {
         ObservableList<UserObject> users;
         String selectStatementUsers = "select * from users where userName <> ? order by userName";
         //Execute select statement
-        ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers,currentUserName);
+        ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers,statement -> {
+                statement.setString(0,currentUserName);
+        });
         users = getAllUsersList(resultSetUsers);
         return users;
     }
@@ -30,7 +32,9 @@ public class UsersDAO {
                 String firstName = resultSetUsers.getString("firstName");
                 String lastName = resultSetUsers.getString("lastName");
                 int membershipLevel = resultSetUsers.getInt("membershipLevel");
-                ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,resultSetUsers.getString("userName"));
+                ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,statement -> {
+                        statement.setString(1,userName);
+                });
                 UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
                 while (interestsResultSet.next()){
                     user.addInterest(interestsResultSet.getString("interest"));
@@ -46,7 +50,11 @@ public class UsersDAO {
         ObservableList<UserObject> users;
         String modifiedUserInput = "%"+userInput+"%";
         String selectStatmentUserInput = "select * from users natural join interests where (userName like ? OR interest like ?) AND userName <> ?";
-        ResultSet searchedResultSet = DbUtil.processQuery(selectStatmentUserInput,modifiedUserInput,modifiedUserInput,currentUserName);
+        ResultSet searchedResultSet = DbUtil.processQuery(selectStatmentUserInput, statement -> {
+                statement.setString(1,modifiedUserInput);
+                statement.setString(2,modifiedUserInput);
+                statement.setString(3, currentUserName);
+        });
         users = getAllSearchedUsersList(searchedResultSet);
         return users;
     }
@@ -62,7 +70,9 @@ public class UsersDAO {
                 String firstName = searchedResultSet.getString("firstName");
                 String lastName = searchedResultSet.getString("lastName");
                 int membershipLevel = searchedResultSet.getInt("membershipLevel");
-                ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests,searchedResultSet.getString("userName"));
+                ResultSet interestsResultSet = DbUtil.processQuery(selectStatemnetInterests, statement -> {
+                        statement.setString(1,userName);
+                });
                 UserObject user = new UserObject(userName,password,firstName,lastName,membershipLevel);
 
                 while (interestsResultSet.next()){

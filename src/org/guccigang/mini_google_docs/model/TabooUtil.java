@@ -18,7 +18,7 @@ public class TabooUtil {
     public static boolean isUserFlaged(String userName){
         String SQLStatement = "select * from documents where owner = ? AND tabooFlag = 1";
         try{
-            ResultSet resultSet = DbUtil.processQuery(SQLStatement, userName);
+            ResultSet resultSet = DbUtil.processQuery(SQLStatement, statement-> statement.setString(1,userName));
             if(resultSet.next()){
                 return true;
             }
@@ -39,7 +39,7 @@ public class TabooUtil {
 
         for (String word : documentContents){
             try{
-                ResultSet resultSet = DbUtil.processQuery(SQLStatement,word);
+                ResultSet resultSet = DbUtil.processQuery(SQLStatement, statement -> statement.setString(1,word));
                 if(resultSet.next()){
                     return true;
                 }
@@ -109,7 +109,10 @@ public class TabooUtil {
     }
     public static boolean isDocumentFlagged(String userName, int docID){
         String SQLStatment = "Select * from documents where owner = ? AND docID = ? AND tabooFlag = 1";
-        ResultSet resultSet = DbUtil.processQuery(SQLStatment, userName, Integer.toString(docID));
+        ResultSet resultSet = DbUtil.processQuery(SQLStatment, statement ->  {
+            statement.setString(1,userName);
+            statement.setInt(2,docID);
+        });
         try {
             if(resultSet.next()){
                 return true;

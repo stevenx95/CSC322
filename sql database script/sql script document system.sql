@@ -92,6 +92,12 @@ CREATE TABLE sharedDocs (
     FOREIGN KEY(docID) REFERENCES documents(docID)
 );
 
+CREATE TABLE locks (
+    docID int NOT NULL,
+    userName varchar(20) NOT NULL,
+    FOREIGN KEY(userName) REFERENCES users(userName),
+    FOREIGN KEY(docID) REFERENCES documents(docID)
+);
 
 insert into users value("Jon", "password", "Jonathan", "Tran", 1);
 insert into interests values

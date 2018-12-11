@@ -16,6 +16,10 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getAllDocumentFilesDataForVisitor() throws SQLException{
         String selectStatement = "SELECT * FROM documents where restricted >= 2";
         //Execute select statement
+        return getDocumentFiles(selectStatement);
+    }
+
+    private static ObservableList<DocumentFile> getDocumentFiles(String selectStatement) throws SQLException {
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
@@ -29,8 +33,12 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getTabooFlagedDocuments(String owner) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ? AND tabooFlag = 1";
         //Execute select statement
+        return getDocumentFiles(owner, selectStatement);
+    }
+
+    private static ObservableList<DocumentFile> getDocumentFiles(String owner, String selectStatement) throws SQLException {
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,owner);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement, statement -> statement.setString(1,owner));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
         }catch (SQLException e){
@@ -42,14 +50,7 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getAllDocumentFilesDataForSuperUser() throws SQLException{
         String selectStatement = "SELECT * FROM documents";
 
-        try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
-            return documentFiles;
-        }catch (SQLException e){
-            System.out.println("SQL query has failed" + e);
-            throw e;
-        }
+        return getDocumentFiles(selectStatement);
     }
 
     /**
@@ -62,7 +63,7 @@ public class DocumentDAO {
         String selectStatement = "SELECT * FROM documents where owner = ?";
         //Execute select statement
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
 
@@ -74,15 +75,7 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getDocumentsForTabooReview(String userName) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ? AND tabooFlag = 1";
         //Execute select statement
-        try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
-            return documentFiles;
-
-        }catch (SQLException e){
-            System.out.println("SQL query has failed" + e);
-            throw e;
-        }
+        return getDocumentFiles(userName, selectStatement);
     }
 
     /**
@@ -97,7 +90,7 @@ public class DocumentDAO {
     {
         String selectStatement = "select * from documents natural join sharedDocs where userName = ?;";
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
 
@@ -121,7 +114,7 @@ public class DocumentDAO {
             document.setDocumentName(resultSet.getString("docName"));
             document.setContent(resultSet.getString("content"));
             document.setLock(resultSet.getInt("isLocked"));
-            document.setRestricted(resultSet.getInt("restricted"));
+            document.setRestricted(DocRestriction.getDocRestriction(resultSet.getInt("restricted")));
             //document.setDate(new Date(resultSet.getString("createdDate")));
             document.setTabooFlag(resultSet.getInt("tabooFlag"));
             documentFiles.add(document);
@@ -129,37 +122,48 @@ public class DocumentDAO {
         return documentFiles;
     }
 
-    public static boolean documentIsLocked(int docID) {
-        String sqlStatement = "SELECT * FROM documents WHERE docID = " + docID;
+    public static boolean documentIsLockedBy(int docID,String userName) {
+        String sqlStatement = "SELECT * FROM locks WHERE docID = " + docID+ " AND userName = \""+ userName+"\"";
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
-            resultSet.next();
-            int lockStatus = resultSet.getInt("isLocked");
-            if (lockStatus == 1) {
-                return true;
-            }
+            return resultSet.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    public static void lockDocument(int docID)
+    public static boolean documentIsLocked(int docID)
     {
-        String sqlStatement = "UPDATE documents SET isLocked = 1 where docID = "+docID;
-        DbUtil.executeUpdateDB(sqlStatement);
+        String sqlStatement = "SELECT * FROM locks WHERE docID = " + docID;
+        ResultSet resultSet = DbUtil.processQuery(sqlStatement);
+        try {
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public static void lockDocument(int docID,String userName)
+    {
+        String sqlStatement = "INSERT INTO locks (docID, userName) values (?,?)";
+        DbUtil.executeUpdateDB(sqlStatement,""+docID,userName);
     }
 
-    public static void unlockDocument(int docID)
+    public static void unlockDocument(int docID,String userName)
     {
-        String sqlStatement = "UPDATE documents SET isLocked = 0 where docID = "+docID;
-        DbUtil.executeUpdateDB(sqlStatement);
+        String sqlStatement = "DELETE FROM locks where docID=? AND userName=?";
+        if(documentIsLockedBy(docID,userName))
+            DbUtil.executeUpdateDB(sqlStatement,""+docID,userName);
     }
 
     public static boolean isShared(DocumentFile doc, String userName)
     {
         String selectStatement = "select * from documents natural join sharedDocs where userName = ? and docID = ?;";
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName, ""+doc.getID());
+            ResultSet resultSet = DbUtil.processQuery(selectStatement, statement-> {
+                statement.setString(1,userName);
+                statement.setInt(2, doc.getID());
+            });
             return resultSet.next();
 
         }catch (SQLException e){
@@ -168,17 +172,21 @@ public class DocumentDAO {
         return false;
     }
 
-    public static boolean canWrite(DocumentFile doc, String userName)
+    public static boolean canWrite(DocumentFile doc, UserObject user)
     {
+
+
+        String userName = user.getUserName();
         String sqlStatement = "SELECT * FROM documents WHERE docID = " + doc.getID();
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
             resultSet.next();
             int restricted = resultSet.getInt("restricted");
-            if(documentIsLocked(doc.getID()))
+            if(documentIsLocked(doc.getID()) && !documentIsLockedBy(doc.getID(),userName))
             {
-                //return false;
+                return false;
             }
+            if(user.getMembershipLevel() ==2) return true;
             if (restricted == 3) {
                 return true;
             }

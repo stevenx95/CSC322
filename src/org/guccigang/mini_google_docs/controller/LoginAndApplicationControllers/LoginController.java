@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.TabooControllers.TabooDocumentReviewController;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
@@ -34,7 +34,10 @@ public class LoginController {
         //postcondition: user is sent to a profile screen
         String sql = "SELECT * FROM users WHERE userName= ? and password= ?";
         try {
-            ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
+            ResultSet resultSet = DbUtil.processQuery(sql, statement-> {
+                statement.setString(1,userNameField.getText());
+                statement.setString(2,passwordField.getText());
+            });
             if(resultSet.next()) {
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
                 loadUserProfile(event, resultSet);

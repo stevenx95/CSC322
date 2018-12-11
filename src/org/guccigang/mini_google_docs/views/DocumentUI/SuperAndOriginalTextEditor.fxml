@@ -16,7 +16,7 @@
                <menus>
                   <Menu text="Options">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Change Document Type" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleChangeDocType" text="Change Document Type" />
                         <MenuItem onAction="#handleVersion" text="Retrieve Old Documents" />
                         <MenuItem onAction="#handleComplaint" text="File Document Complaint" />
                         <MenuItem onAction="#handleUserComplaint" text="File User Complaint" />

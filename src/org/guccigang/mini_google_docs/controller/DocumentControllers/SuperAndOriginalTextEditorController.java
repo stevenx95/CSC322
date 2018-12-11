@@ -12,6 +12,7 @@ import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorCom
 import org.guccigang.mini_google_docs.model.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SuperAndOriginalTextEditorController implements Initializable {
@@ -44,7 +45,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                         "Document contains taboo words", "Taboo Warning");
             }
 
-            if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
+            if (!DocumentDAO.canWrite(selectedDocument,currentUser)) {
                 this.areaText.setEditable(false);
                 GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
                         "Document is locked", "Warning");
@@ -60,7 +61,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void onSave(ActionEvent event)
     {
         //If text field contains taboo words
-        if(!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName()))
+        if(!DocumentDAO.canWrite(selectedDocument,currentUser))
         {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You do not have write permission for this document!",
                     "No Permission", "No Permission");
@@ -131,5 +132,26 @@ public class SuperAndOriginalTextEditorController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void handleChangeDocType() {
+        ArrayList<String> options = DocRestriction.stringValues();
+        options.removeIf(item -> item.equals("shared"));
+        String selectedOption = GuiUtil.createOptionAlert(
+                options,
+                "Select the document type: ",
+                "Change document type",
+                "Change document type"
+        );
+        DocRestriction restriction = DocRestriction.getDocRestriction(selectedOption);
+        String query = "UPDATE documents SET restricted=? WHERE docID=?";
+        DbUtil.executeUpdateDB(query, statement -> {
+            statement.setInt(1, restriction.id);
+            statement.setInt(2, selectedDocument.getID());
+        });
+        GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
+                "",
+                String.format("Document type has been changed to %s: ", restriction.string),
+                "Confirmation");
     }
 }

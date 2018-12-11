@@ -4,7 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 
 import java.util.Date;
 
@@ -85,11 +84,15 @@ public class DocumentFile {
         return this.isLock;
     }
 
-    public void setRestricted(int restricted){
+    public void setRestricted(DocRestriction restricted){
+        this.restricted.set(restricted.id);
+    }
+
+    public void setRestricted(int restricted) {
         this.restricted.set(restricted);
     }
-    public int getRestricted(){
-        return this.restricted.get();
+    public DocRestriction getRestricted(){
+        return DocRestriction.getDocRestriction(this.restricted.get());
     }
 
 //    public void setDate(Date date){
@@ -145,11 +148,11 @@ public class DocumentFile {
 
     public StringProperty restrictionLevelProperty(){
         //Returns a string representation of the restriction.
-        if(getRestricted() == 0){
+        if(getRestricted() == DocRestriction.PRIVATE){
             return new SimpleStringProperty("Private");
-        }else if(getRestricted() == 1){
+        }else if(getRestricted() == DocRestriction.SHARED){
             return new SimpleStringProperty("Shared");
-        }else if(getRestricted() == 2){
+        }else if(getRestricted() == DocRestriction.PUBLIC){
             return new SimpleStringProperty("Public");
         }else return new SimpleStringProperty("Restricted");
     }
