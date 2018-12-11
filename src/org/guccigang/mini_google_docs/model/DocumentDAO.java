@@ -176,8 +176,11 @@ public class DocumentDAO {
         return false;
     }
 
-    public static boolean canWrite(DocumentFile doc, String userName)
+    public static boolean canWrite(DocumentFile doc, UserObject user)
     {
+
+
+        String userName = user.getUserName();
         String sqlStatement = "SELECT * FROM documents WHERE docID = " + doc.getID();
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
@@ -187,6 +190,7 @@ public class DocumentDAO {
             {
                 return false;
             }
+            if(user.getMembershipLevel() ==2) return true;
             if (restricted == 3) {
                 return true;
             }
