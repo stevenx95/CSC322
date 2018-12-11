@@ -1,6 +1,8 @@
 package org.guccigang.mini_google_docs.model;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,9 +13,8 @@ public class SharingUtil {
         ArrayList<String> userNames = new ArrayList<>();
         try {
             ObservableList<UserObject> userObjects = UsersDAO.getAllUsers(currentUser);
-            userObjects.forEach(user -> {
-                userNames.add(user.getUserName());
-            });
+            System.out.println(userObjects.toString());
+            userObjects.forEach(user -> userNames.add(user.getUserName()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

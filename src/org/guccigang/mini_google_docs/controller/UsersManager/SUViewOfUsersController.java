@@ -1,11 +1,13 @@
 package org.guccigang.mini_google_docs.controller.UsersManager;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SUViewOfUsersController {
     private UserObject currentUser;
@@ -65,6 +67,15 @@ public class SUViewOfUsersController {
         try{
             documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(otherUser.getUserName()));
         }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void handleInviteToEdit() {
+        try {
+            ObservableList<DocumentFile>  allDocuments = DocumentDAO.getAllDocumentFilesDataForSuperUser();
+            ArrayList<DocumentFile> documentList = new ArrayList<>(allDocuments);
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

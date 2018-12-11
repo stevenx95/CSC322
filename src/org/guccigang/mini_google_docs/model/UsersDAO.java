@@ -16,7 +16,7 @@ public class UsersDAO {
         String selectStatementUsers = "select * from users where userName <> ? order by userName";
         //Execute select statement
         ResultSet resultSetUsers = DbUtil.processQuery(selectStatementUsers,statement -> {
-                statement.setString(0,currentUserName);
+                statement.setString(1,currentUserName);
         });
         users = getAllUsersList(resultSetUsers);
         return users;

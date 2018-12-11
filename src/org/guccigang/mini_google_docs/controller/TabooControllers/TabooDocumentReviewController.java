@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.UILocation;
+import org.guccigang.mini_google_docs.model.UILocation;
 
 import org.guccigang.mini_google_docs.model.*;
 
