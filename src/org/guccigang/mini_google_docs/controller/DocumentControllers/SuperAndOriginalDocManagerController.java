@@ -140,7 +140,7 @@ public class SuperAndOriginalDocManagerController {
     {
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-        documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictedProperty());
+        documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTableMyDocs();
     }
 
