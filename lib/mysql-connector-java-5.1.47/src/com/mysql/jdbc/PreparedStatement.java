@@ -1235,7 +1235,7 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements j
             }
 
             //
-            // Only apply max_rows to selects
+            // Only accept max_rows to selects
             //
             locallyScopedConn.setSessionMaxRows(this.firstCharOfStmt == 'S' ? this.maxRows : -1);
 
@@ -2110,7 +2110,7 @@ public class PreparedStatement extends com.mysql.jdbc.StatementImpl implements j
             }
 
             //
-            // Only apply max_rows to selects
+            // Only accept max_rows to selects
             //
             locallyScopedConn.setSessionMaxRows(-1);
 

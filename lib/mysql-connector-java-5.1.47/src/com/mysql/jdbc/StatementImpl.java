@@ -836,7 +836,7 @@ public class StatementImpl implements Statement {
                         }
 
                         //
-                        // Only apply max_rows to selects
+                        // Only accept max_rows to selects
                         //
                         locallyScopedConn.setSessionMaxRows(maybeSelect ? this.maxRows : -1);
 
@@ -1542,7 +1542,7 @@ public class StatementImpl implements Statement {
                 }
 
                 //
-                // Only apply max_rows to selects
+                // Only accept max_rows to selects
                 //
                 locallyScopedConn.setSessionMaxRows(-1);
 

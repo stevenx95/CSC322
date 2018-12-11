@@ -14,10 +14,11 @@ import java.sql.*;
 public class SuperAndOriginalUserComplaintFormController {
 
     @FXML
+    private
     TextField textBarUsername;
 
     @FXML
-    TextArea complaintText;
+    private TextArea complaintText;
 
     private DocumentFile docFile;
     
@@ -57,7 +58,7 @@ public class SuperAndOriginalUserComplaintFormController {
         int version = 0;
 
         String sqlStatement = "Select docID FROM revisions WHERE docID = ? ";
-        ResultSet rs = DbUtil.processQuery(sqlStatement,docID.toString());
+        ResultSet rs = DbUtil.processQuery(sqlStatement,statement-> statement.setInt(1,docID));
         if(rs.next()){
             version = rs.getInt("version");
         }

@@ -73,7 +73,7 @@ public class Client {
             connection.setDoInput(true);
             connection.setDoOutput(true);
 
-            // apply headers
+            // accept headers
             for (Map.Entry<String, String> entry : this.headers.entrySet()) {
                 connection.setRequestProperty(entry.getKey(), entry.getValue());
             }

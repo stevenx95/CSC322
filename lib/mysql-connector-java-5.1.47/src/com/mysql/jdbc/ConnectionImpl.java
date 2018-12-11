@@ -5241,7 +5241,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
      * @param cachedMetaData
      *            metadata (if it exists) to populate the cache.
      * @param resultSet
-     *            the result set to retreive metadata from, or apply to.
+     *            the result set to retreive metadata from, or accept to.
      * 
      * @throws SQLException
      */

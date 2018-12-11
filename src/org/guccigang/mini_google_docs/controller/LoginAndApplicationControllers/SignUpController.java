@@ -74,7 +74,7 @@ public class SignUpController {
     }
 
     private boolean isTaken(String userName) {
-        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", userName);
+        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", statement -> statement.setString(1,userName));
         try {
             if(!resultSet.next()) {
                 return false;

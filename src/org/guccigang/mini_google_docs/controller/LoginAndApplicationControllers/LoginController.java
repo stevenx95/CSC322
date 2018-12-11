@@ -34,7 +34,10 @@ public class LoginController {
         //postcondition: user is sent to a profile screen
         String sql = "SELECT * FROM users WHERE userName= ? and password= ?";
         try {
-            ResultSet resultSet = DbUtil.processQuery(sql, userNameField.getText(), passwordField.getText());
+            ResultSet resultSet = DbUtil.processQuery(sql, statement-> {
+                statement.setString(1,userNameField.getText());
+                statement.setString(2,passwordField.getText());
+            });
             if(resultSet.next()) {
                 GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "Login Successful!", null, "Success");
                 loadUserProfile(event, resultSet);

@@ -6,7 +6,7 @@ public class DebugUtil
     {
         if(args[0].equals("patch"))
             System.out.println(VersionUtil.getChanges(args[1], args[2]));
-        else if(args[0].equals("apply"))
+        else if(args[0].equals("accept"))
             System.out.println(VersionUtil.applyChanges(args[1],args[2]));
         else if(args[0].equals("patch-test"))
         {

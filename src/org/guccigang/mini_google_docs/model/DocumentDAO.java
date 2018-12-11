@@ -16,6 +16,10 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getAllDocumentFilesDataForVisitor() throws SQLException{
         String selectStatement = "SELECT * FROM documents where restricted >= 2";
         //Execute select statement
+        return getDocumentFiles(selectStatement);
+    }
+
+    private static ObservableList<DocumentFile> getDocumentFiles(String selectStatement) throws SQLException {
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement);
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
@@ -29,8 +33,12 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getTabooFlagedDocuments(String owner) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ? AND tabooFlag = 1";
         //Execute select statement
+        return getDocumentFiles(owner, selectStatement);
+    }
+
+    private static ObservableList<DocumentFile> getDocumentFiles(String owner, String selectStatement) throws SQLException {
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,owner);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement, statement -> statement.setString(1,owner));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
         }catch (SQLException e){
@@ -42,14 +50,7 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getAllDocumentFilesDataForSuperUser() throws SQLException{
         String selectStatement = "SELECT * FROM documents";
 
-        try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
-            return documentFiles;
-        }catch (SQLException e){
-            System.out.println("SQL query has failed" + e);
-            throw e;
-        }
+        return getDocumentFiles(selectStatement);
     }
 
     /**
@@ -62,7 +63,7 @@ public class DocumentDAO {
         String selectStatement = "SELECT * FROM documents where owner = ?";
         //Execute select statement
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
 
@@ -74,15 +75,7 @@ public class DocumentDAO {
     public static ObservableList<DocumentFile> getDocumentsForTabooReview(String userName) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ? AND tabooFlag = 1";
         //Execute select statement
-        try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
-            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
-            return documentFiles;
-
-        }catch (SQLException e){
-            System.out.println("SQL query has failed" + e);
-            throw e;
-        }
+        return getDocumentFiles(userName, selectStatement);
     }
 
     /**
@@ -97,7 +90,7 @@ public class DocumentDAO {
     {
         String selectStatement = "select * from documents natural join sharedDocs where userName = ?;";
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName);
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
             return documentFiles;
 
@@ -159,7 +152,10 @@ public class DocumentDAO {
     {
         String selectStatement = "select * from documents natural join sharedDocs where userName = ? and docID = ?;";
         try{
-            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName, ""+doc.getID());
+            ResultSet resultSet = DbUtil.processQuery(selectStatement, statement-> {
+                statement.setString(1,userName);
+                statement.setInt(2, doc.getID());
+            });
             return resultSet.next();
 
         }catch (SQLException e){

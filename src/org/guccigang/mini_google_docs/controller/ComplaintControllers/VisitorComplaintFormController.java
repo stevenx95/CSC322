@@ -55,7 +55,7 @@ public class VisitorComplaintFormController {
        int version = 0;
 
         String sqlStatement = "Select docID FROM revisions WHERE docID = ? ";
-        ResultSet rs =DbUtil.processQuery(sqlStatement,docID.toString());
+        ResultSet rs =DbUtil.processQuery(sqlStatement,statement -> statement.setInt(1,docID));
         if(rs.next()){
              version = rs.getInt("version");
         }
@@ -64,7 +64,7 @@ public class VisitorComplaintFormController {
     }
 
     private boolean isTaken(String userName) {
-        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", userName);
+        ResultSet resultSet = DbUtil.processQuery("SELECT * FROM users WHERE username = ?", statement-> statement.setString(1, userName));
         try {
             if(!resultSet.next()) {
                 return true;
