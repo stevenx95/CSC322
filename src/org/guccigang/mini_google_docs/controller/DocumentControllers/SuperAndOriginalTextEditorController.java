@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
-import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintFormController;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorComplaintFormController;
 import org.guccigang.mini_google_docs.model.*;
