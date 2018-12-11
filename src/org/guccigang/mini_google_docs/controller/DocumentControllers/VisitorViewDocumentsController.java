@@ -73,7 +73,7 @@ public class VisitorViewDocumentsController {
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-        documentViewColumn.setCellValueFactory(cellData -> cellData.getValue().counterProperty());
+      //  documentViewColumn.setCellValueFactory(cellData -> cellData.getValue().counterProperty());
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
          */

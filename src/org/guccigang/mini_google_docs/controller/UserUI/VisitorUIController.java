@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController;
+import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorViewDocumentsController;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UILocation;
@@ -35,6 +36,7 @@ public class VisitorUIController {
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
+        documentViewCountColumn.setCellValueFactory(cellData -> cellData.getValue().counterProperty());
 
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
@@ -62,7 +64,8 @@ public class VisitorUIController {
     }
     public void handleViewDocumentManager(ActionEvent event){
         try{
-            GuiUtil.changeScene(event, UILocation.VISITOR_VIEW_DOCUMENTS,"View Documents");
+            VisitorViewDocumentsController controller = new VisitorViewDocumentsController();
+            GuiUtil.changeScene(event, UILocation.VISITOR_VIEW_DOCUMENTS,"View Documents",controller);
         }catch (IOException e){
             e.printStackTrace();
         }

@@ -127,6 +127,7 @@ public class DocumentDAO {
             document.setRestricted(DocRestriction.getDocRestriction(resultSet.getInt("restricted")));
             //document.setDate(new Date(resultSet.getString("createdDate")));
             document.setTabooFlag(resultSet.getInt("tabooFlag"));
+            document.setCounter(resultSet.getInt("views"));
             documentFiles.add(document);
         }
         return documentFiles;
