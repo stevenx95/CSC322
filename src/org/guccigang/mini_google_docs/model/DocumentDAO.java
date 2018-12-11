@@ -18,6 +18,16 @@ public class DocumentDAO {
         //Execute select statement
         return getDocumentFiles(selectStatement);
     }
+    /**
+     * Queries the database for readable documents for visitor ONLY.
+     * @return documentFiles ObservableList
+     * @throws SQLException
+     */
+    public static ObservableList<DocumentFile> getTopViewDocumentForVisitor() throws SQLException{
+        String selectStatement = "SELECT * FROM documents where restricted >= 2 ORDER BY views DESC";
+        //Execute select statement
+        return getDocumentFiles(selectStatement);
+    }
 
     private static ObservableList<DocumentFile> getDocumentFiles(String selectStatement) throws SQLException {
         try{

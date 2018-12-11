@@ -23,7 +23,8 @@ public class VisitorViewDocumentsController {
     private TableColumn<DocumentFile, String> documentNameColumn;
     @FXML
     private TableColumn<DocumentFile, String> documentOwnerColumn;
-
+    @FXML
+    private TableColumn<DocumentFile, String> documentViewColumn;
 
     /**
      * The constructor.
@@ -72,7 +73,7 @@ public class VisitorViewDocumentsController {
         // Initialize the person table with the two columns.
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-
+        documentViewColumn.setCellValueFactory(cellData -> cellData.getValue().counterProperty());
         /**Listens for selection changes and when the user clicks open document on while
          *while document is highlighted then that exact document should open.
          */
@@ -92,7 +93,7 @@ public class VisitorViewDocumentsController {
      */
     private void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
+            documentFileTable.setItems(DocumentDAO.getTopViewDocumentForVisitor());
         }catch (Exception e){
             e.printStackTrace();
         }

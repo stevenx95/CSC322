@@ -105,8 +105,9 @@ public class DocumentFile {
     public int getCounter() {
         return this.counter.get();
     }
-    public IntegerProperty counterProperty(){
-        return this.counter;
+    public StringProperty counterProperty(){
+
+        return new SimpleStringProperty(this.counter.toString());
     }
     public void setCounter(int counter){
         this.counter.set(counter);
