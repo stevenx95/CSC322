@@ -133,10 +133,66 @@ public class DocumentDAO {
         String sqlStatement = "SELECT * FROM documents WHERE docID = " + docID;
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
+            resultSet.next();
             int lockStatus = resultSet.getInt("isLocked");
             if (lockStatus == 1) {
                 return true;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static void lockDocument(int docID)
+    {
+        String sqlStatement = "UPDATE documents SET isLocked = 1 where docID = "+docID;
+        DbUtil.executeUpdateDB(sqlStatement);
+    }
+
+    public static void unlockDocument(int docID)
+    {
+        String sqlStatement = "UPDATE documents SET isLocked = 0 where docID = "+docID;
+        DbUtil.executeUpdateDB(sqlStatement);
+    }
+
+    public static boolean isShared(DocumentFile doc, String userName)
+    {
+        String selectStatement = "select * from documents natural join sharedDocs where userName = ? and docID = ?;";
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,userName, ""+doc.getID());
+            return resultSet.next();
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+        }
+        return false;
+    }
+
+    public static boolean canWrite(DocumentFile doc, String userName)
+    {
+        String sqlStatement = "SELECT * FROM documents WHERE docID = " + doc.getID();
+        ResultSet resultSet = DbUtil.processQuery(sqlStatement);
+        try {
+            resultSet.next();
+            int restricted = resultSet.getInt("restricted");
+            if(documentIsLocked(doc.getID()))
+            {
+                //return false;
+            }
+            if (restricted == 3) {
+                return true;
+            }
+            System.out.println("The doc is not restricted");
+            if (isShared(doc,userName))
+            {
+                return true;
+            }
+            System.out.println("The doc is not shared");
+            if (doc.getOwner().equals(userName))
+            {
+                return true;
+            }
+            System.out.println("The doc is not owned");
         } catch (Exception e) {
             e.printStackTrace();
         }

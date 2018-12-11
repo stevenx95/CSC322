@@ -3,6 +3,9 @@
 This is a utility class for version control
  */
 package org.guccigang.mini_google_docs.model;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -10,7 +13,7 @@ public class VersionUtil
 {
     private static diff_match_patch dmp = new diff_match_patch();
 
-    public static void save(String docID, String newText, String author)// throws java.sql.SQLException
+    public static void save(int docID, String newText, String author)// throws java.sql.SQLException
     {
         int version;
         String currText;
@@ -25,8 +28,8 @@ public class VersionUtil
             currText = query.getString(1);
             diff = getChanges(newText,currText);
 
-            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",\"1941-12-07\",?,?)",author,diff);
-            DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",docID);
+            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
+            DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",Integer.toString(docID));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,12 +39,12 @@ public class VersionUtil
      *
      * @return an int which serves as the docID for the newly created document
      */
-    public static String create(String owner,String title)throws java.sql.SQLException
-    {
-        DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,\"1941-12-07\",0)",owner,title,"");
+    public static int create(String owner,String title) throws SQLException {
+
+        DbUtil.executeUpdateDB("INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE(?,?,?,0,1,CURRENT_DATE,0)",owner,title,"");
         java.sql.ResultSet query = DbUtil.processQuery("select max(docID) from documents where docName=? and owner=?;",title,owner);
         query.next();
-        return query.getString(1);
+        return Integer.parseInt(query.getString(1));
     }
 
     public static String create(DocumentFile docObject, List<String> usersToShare) throws java.sql.SQLException {
@@ -84,10 +87,10 @@ public class VersionUtil
      *
      * @return a string representing the contents of the given version of the doc
      */
-    public static String openVersion(String docID, int version) throws java.sql.SQLException
+    public static String openVersion(int docID, int version) throws java.sql.SQLException
     {
-        version++;//account for version off-by-one
-        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",docID);
+        //version++;//account for version off-by-one
+        java.sql.ResultSet query = DbUtil.processQuery("select content from documents where docID=?;",""+docID);
         query.next();
         String currVersion = query.getString(1);
         ArrayList<String> versions = new ArrayList<>();
@@ -101,10 +104,11 @@ public class VersionUtil
         }
 
 
-        for(int i=versions.size()-1; i>version;i--)
+        for(int i=versions.size()-1; i>=version;i--)
         {
             currVersion = applyChanges(currVersion,versions.get(i));
         }
+        System.out.println(currVersion);
         return currVersion;
     }
 
@@ -139,5 +143,21 @@ public class VersionUtil
         LinkedList<diff_match_patch.Patch> p = new LinkedList<>();
         p.addAll(pList);
         return (String) dmp.patch_apply(p,originalString)[0];
+    }
+    public static ArrayList<String> getVersionList(int docID)
+    {
+        ArrayList<String> ans = new ArrayList<>();
+        //ans.add("0");
+        ResultSet query = DbUtil.processQuery("SELECT version FROM revisions where docID="+docID+";");
+        try{
+            while (query.next())
+            {
+                ans.add(query.getString(1));
+            }
+        } catch (java.sql.SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ans;
     }
 }

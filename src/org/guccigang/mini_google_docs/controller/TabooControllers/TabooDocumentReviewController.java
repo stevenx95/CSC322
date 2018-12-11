@@ -34,7 +34,7 @@ public class TabooDocumentReviewController {
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
             TabooDocumentReviewEditorController controller = new TabooDocumentReviewEditorController(currentUser, selectedDocument);
-            GuiUtil.createWindow(event, UILocation.TABOO_DOCUMENT_REVIEW_EDITOR,"Document Editor");
+            GuiUtil.createWindow(UILocation.TABOO_DOCUMENT_REVIEW_EDITOR,"Document Editor", controller);
         }else {
             //Nothing selected.
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",

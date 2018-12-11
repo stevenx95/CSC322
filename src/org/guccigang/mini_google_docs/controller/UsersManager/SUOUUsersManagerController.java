@@ -26,6 +26,10 @@ public class SUOUUsersManagerController {
     @FXML
     private TableColumn<UserObject, String> MembershipColumn;
 
+    public SUOUUsersManagerController(){
+        this.currentUser = null;
+    }
+
     public SUOUUsersManagerController(UserObject currentUser){
         this.currentUser = currentUser;
     }
@@ -66,7 +70,7 @@ public class SUOUUsersManagerController {
                 }
             }else {
                 try{
-                    OUViewOfUsersController controller = new OUViewOfUsersController(currentUser, otherUser);
+                    SUViewOfUsersController controller = new SUViewOfUsersController(currentUser, otherUser);
                     GuiUtil.createWindow(UILocation.SU_VIEW_OF_USERS_WINDOW,otherUser.getUserName(),controller);
                 }catch (IOException e){
                     e.printStackTrace();

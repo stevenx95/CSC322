@@ -27,19 +27,20 @@ public class TabooDocumentReviewEditorController {
 
     public void handleSubmitChanges(){
         if (TabooUtil.containTabooAndUNK(textArea.getText())){
-            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,"Remove all Taboo Words AND 'UNK'","Please Change","Warning");
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING,"Remove all Taboo Words AND 'UNK'","Please Change","Warning");
         }else {
-            try {
-                String SQLStatement = "UPDATE documents set tabooFlag = 0 where owner = ? AND docID = ?";
-                DbUtil.executeUpdateDB(SQLStatement, currentUser.getUserName(), Integer.toString(currentFile.getID()));
-                VersionUtil.save(Integer.toString(currentFile.getID()),textArea.getText(),currentFile.getOwner());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            TabooUtil.unFlagDocument(currentFile.getOwner(),currentFile.getID());
+            VersionUtil.save(currentFile.getID(),textArea.getText(),currentFile.getOwner());
+            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION,"Thank You!","Taboo Document Review","Document Review");
+
         }
     }
     @FXML
     private void initialize(){
-        textArea.setText(currentFile.getContent());
+        try {
+            textArea.setText(VersionUtil.open(Integer.toString(currentFile.getID())));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

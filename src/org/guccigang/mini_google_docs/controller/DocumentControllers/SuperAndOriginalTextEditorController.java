@@ -4,12 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
-import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class SuperAndOriginalTextEditorController implements Initializable {
@@ -19,7 +18,6 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     private UserObject currentUser;
     private DocumentFile selectedDocument;
-    private List<String> usersToShare;
 
     public SuperAndOriginalTextEditorController() {
         this(null,null);
@@ -28,36 +26,56 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public SuperAndOriginalTextEditorController(UserObject currentUser, DocumentFile selectedDocument) {
         this.currentUser = currentUser;
         this.selectedDocument = selectedDocument;
-        this.usersToShare = null;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.areaText.setText(selectedDocument.getContent());
-        if (currentUser.getMembershipLevel() != 2 && DocumentDAO.documentIsLocked(selectedDocument.getID())) {
-            this.areaText.setEditable(false);
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
-                    "Document is locked", "Warning");
+        try {
+            String documentContent = VersionUtil.open(Integer.toString(selectedDocument.getID()));
+
+            if(TabooUtil.containTabooAndUNK(documentContent)){
+                selectedDocument.setContent(TabooUtil.censorTabooWords(documentContent));
+                TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+                VersionUtil.save(selectedDocument.getID(),selectedDocument.getContent(),currentUser.getUserName());
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                        "Document contains taboo words", "Taboo Warning");
+            }
+
+            if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
+                this.areaText.setEditable(false);
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
+                        "Document is locked", "Warning");
+            }
+            areaText.setText(documentContent);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        //DocumentDAO.lockDocument(selectedDocument.getID());//locks document once it's opened
     }
     public void onSave(ActionEvent event)
     {
-        if(selectedDocument.getID() == 0) {
-            handleFirstTimeSave();
-        }else{
-                VersionUtil.save(Integer.toString(selectedDocument.getID()), areaText.getText(), currentUser.getUserName());
-            }
-    }
-
-    private void handleFirstTimeSave()  {
-        FirstTimeSaveController controller = new FirstTimeSaveController(selectedDocument, usersToShare);
-        try {
-            GuiUtil.createWindow(UILocation.FIRST_TIME_SAVING, "Document Type", controller);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "An error occured creating the document. Try Again Later",
-                    "Cannot Save Document", "Error");
+        //If text field contains taboo words
+        if(!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName()))
+        {
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You do not have write permission for this document!",
+                    "No Permission", "No Permission");
+        }
+        if(TabooUtil.containTabooAndUNK(areaText.getText())){
+            areaText.setText(TabooUtil.censorTabooWords(areaText.getText()));
+            TabooUtil.flagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document contains taboo words. Document has been flaged. Next time the owner logs in he/she must review all flagged documents." ,
+                    "Document contains taboo words", "Taboo Warning");
+        }
+        //if document was previously flagged and the user changes it. it will not be unflagged.
+        else if(!TabooUtil.containTabooAndUNK(areaText.getText()) && TabooUtil.isDocumentFlagged(selectedDocument.getOwner(),selectedDocument.getID())){
+            TabooUtil.unFlagDocument(selectedDocument.getOwner(), selectedDocument.getID());
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION,"Thank You!","Taboo Detection","Document contains no taboo words");
+        }else {
+            VersionUtil.save(selectedDocument.getID(),areaText.getText(),currentUser.getUserName());
         }
     }
 
@@ -68,6 +86,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     public void onClose(ActionEvent event)
     {
+        //DocumentDAO.unlockDocument(selectedDocument.getID());
         System.out.println("Stub! OnClose");
     }
 
@@ -81,5 +100,16 @@ public class SuperAndOriginalTextEditorController implements Initializable {
         System.out.println("Stub! OnAbout");
     }
 
-
+    public void handleVersion(ActionEvent event)
+    {
+        String version = GuiUtil.createOptionAlert(VersionUtil.getVersionList(selectedDocument.getID()),
+                "Please select a version to load",
+                "Version",
+                "Version Selection");
+        try {
+            areaText.setText(VersionUtil.openVersion(selectedDocument.getID(),Integer.parseInt(version)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,20 +1,16 @@
 package org.guccigang.mini_google_docs.controller.DocumentControllers;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.model.UILocation;
+import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.UILocation;
 import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
 import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
-import org.guccigang.mini_google_docs.model.GuiUtil;
-import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.model.DocumentDAO;
+import org.guccigang.mini_google_docs.model.*;
 
 import javafx.fxml.FXML;
-import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
 
 
 public class SuperAndOriginalDocManagerController {
@@ -59,6 +55,7 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     public void handleOpenDocument()
     {
+
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
@@ -80,17 +77,30 @@ public class SuperAndOriginalDocManagerController {
         }
     }
 
-    @FXML
-    public void handleCreateNewDocument() {
-        DocumentFile newDoc = new DocumentFile();
-        try {
-            SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, newDoc);
-            GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
-        } catch (IOException e) {
-            e.printStackTrace();
-            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
-        }
+    public void handleCreateDocument(ActionEvent event)
+    {
+        String title = "untitled";
+        int restriction;
 
+        TextInputDialog dialog = new TextInputDialog("untitles");
+        dialog.setTitle("Creating a Document");
+        dialog.setHeaderText("Creating a Document");
+        dialog.setContentText("Please name your document:");
+        Optional<String> result = dialog.showAndWait();
+        if(result.isPresent()) title = result.get();
+        else
+        {
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Document creation failed",
+                    "Document Failed", "You did this. This is your fault");
+            return;
+        }
+        try {
+            VersionUtil.create(currentUser.getUserName(),title);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You've just created a document. Check your documents",
+                "Document Created", "New Document");
     }
 
     public void handleMyDocument(ActionEvent event)
@@ -103,9 +113,20 @@ public class SuperAndOriginalDocManagerController {
         fillTable();
     }
 
+    public void handleAllDocument(ActionEvent event)
+    {
+        if(currentUser.getMembershipLevel() == 2)
+        {
+            fillTableAll();
+        }
+        else
+        {
+            fillTable();
+        }
+    }
+
     public void handleSharedDocument(ActionEvent event)
     {
-        System.out.println("Yes");
         fillTableShared();
     }
 
@@ -119,7 +140,7 @@ public class SuperAndOriginalDocManagerController {
     {
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         documentOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-        documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictedProperty());
+        documentRestrictionColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTableMyDocs();
     }
 
@@ -143,6 +164,15 @@ public class SuperAndOriginalDocManagerController {
     {
         try{
             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void fillTableAll()
+    {
+        try{
+            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForSuperUser());
         }catch (Exception e){
             e.printStackTrace();
         }

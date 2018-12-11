@@ -1,12 +1,9 @@
 package org.guccigang.mini_google_docs.controller.UsersManager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.model.DocumentDAO;
-import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.model.UserObject;
+import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.model.*;
 
 import java.sql.SQLException;
 
@@ -22,6 +19,12 @@ public class SUViewOfUsersController {
     private Label listOfInterests;
     @FXML
     private Label usersDocumentLabel;
+    @FXML
+    private Button reportUserBTN;
+    @FXML
+    private Button inviteBTN;
+    @FXML
+    private Button upgradeMembershipBTN;
     @FXML
     private TableView<DocumentFile> documentFileTable;
     @FXML
@@ -42,10 +45,20 @@ public class SUViewOfUsersController {
         userNameLabel.setText("User Name: " + otherUser.getUserName());
         firstAndLastName.setText("Full Name: " + otherUser.getFirstName() + " " + otherUser.getLastName());
         listOfInterests.setText(otherUser.getInterests().toString());
-        usersDocumentLabel.setText(otherUser.getUserName() + "' Documents");
+        usersDocumentLabel.setText(otherUser.getUserName() + "'s Documents");
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
+    }
+
+    @FXML
+    public void handleUpgradeMembership(ActionEvent event){
+        if(otherUser.getMembershipLevel()>1){
+            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION,"User is already at max level.","Upgrade Membership","Information");
+        }else {
+            UsersDAO.upgradeUserMembership(otherUser.getUserName());
+            GuiUtil.createAlertWindow(Alert.AlertType.INFORMATION,"User has been upgraded","Upgrade Membership","Information");
+        }
     }
 
     private void fillTable(){

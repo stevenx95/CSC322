@@ -10,11 +10,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.guccigang.mini_google_docs.Main;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 public class GuiUtil {
@@ -39,6 +42,18 @@ public class GuiUtil {
         alert.showAndWait();
     }
 
+    public static String createOptionAlert(ArrayList<String> choices, String message, String header, String title)
+    {
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(choices.size()-1), choices);
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+        dialog.setContentText(message);
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            return result.get();
+        }
+        return choices.get(choices.size()-1);
+    }
     /**
      *
      * @param event

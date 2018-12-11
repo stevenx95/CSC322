@@ -61,6 +61,7 @@ public class UserObject {
             return "Ordinary User";
         }else return "Super User";
     }
+
     public StringProperty membershipProperty(){return new SimpleStringProperty(getMembership());}
 
     public StringProperty userNameProperty() {
