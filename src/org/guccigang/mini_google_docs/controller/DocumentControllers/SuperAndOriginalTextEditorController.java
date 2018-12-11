@@ -41,7 +41,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                         "Document contains taboo words", "Taboo Warning");
             }
 
-            if (!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName())) {
+            if (!DocumentDAO.canWrite(selectedDocument,currentUser)) {
                 this.areaText.setEditable(false);
                 GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
                         "Document is locked", "Warning");
@@ -57,7 +57,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void onSave(ActionEvent event)
     {
         //If text field contains taboo words
-        if(!DocumentDAO.canWrite(selectedDocument,currentUser.getUserName()))
+        if(!DocumentDAO.canWrite(selectedDocument,currentUser))
         {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You do not have write permission for this document!",
                     "No Permission", "No Permission");

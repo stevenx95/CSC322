@@ -122,30 +122,38 @@ public class DocumentDAO {
         return documentFiles;
     }
 
-    public static boolean documentIsLocked(int docID) {
-        String sqlStatement = "SELECT * FROM documents WHERE docID = " + docID;
+    public static boolean documentIsLockedBy(int docID,String userName) {
+        String sqlStatement = "SELECT * FROM locks WHERE docID = " + docID+ " AND userName = \""+ userName+"\"";
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
-            resultSet.next();
-            int lockStatus = resultSet.getInt("isLocked");
-            if (lockStatus == 1) {
-                return true;
-            }
+            return resultSet.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
-    public static void lockDocument(int docID)
+    public static boolean documentIsLocked(int docID)
     {
-        String sqlStatement = "UPDATE documents SET isLocked = 1 where docID = "+docID;
-        DbUtil.executeUpdateDB(sqlStatement);
+        String sqlStatement = "SELECT * FROM locks WHERE docID = " + docID;
+        ResultSet resultSet = DbUtil.processQuery(sqlStatement);
+        try {
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    public static void lockDocument(int docID,String userName)
+    {
+        String sqlStatement = "INSERT INTO locks (docID, userName) values (?,?)";
+        DbUtil.executeUpdateDB(sqlStatement,""+docID,userName);
     }
 
-    public static void unlockDocument(int docID)
+    public static void unlockDocument(int docID,String userName)
     {
-        String sqlStatement = "UPDATE documents SET isLocked = 0 where docID = "+docID;
-        DbUtil.executeUpdateDB(sqlStatement);
+        String sqlStatement = "DELETE FROM locks where docID=? AND userName=?";
+        if(documentIsLockedBy(docID,userName))
+            DbUtil.executeUpdateDB(sqlStatement,""+docID,userName);
     }
 
     public static boolean isShared(DocumentFile doc, String userName)
@@ -164,17 +172,21 @@ public class DocumentDAO {
         return false;
     }
 
-    public static boolean canWrite(DocumentFile doc, String userName)
+    public static boolean canWrite(DocumentFile doc, UserObject user)
     {
+
+
+        String userName = user.getUserName();
         String sqlStatement = "SELECT * FROM documents WHERE docID = " + doc.getID();
         ResultSet resultSet = DbUtil.processQuery(sqlStatement);
         try {
             resultSet.next();
             int restricted = resultSet.getInt("restricted");
-            if(documentIsLocked(doc.getID()))
+            if(documentIsLocked(doc.getID()) && !documentIsLockedBy(doc.getID(),userName))
             {
-                //return false;
+                return false;
             }
+            if(user.getMembershipLevel() ==2) return true;
             if (restricted == 3) {
                 return true;
             }
