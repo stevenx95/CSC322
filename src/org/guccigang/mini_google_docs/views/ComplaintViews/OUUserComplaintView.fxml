@@ -18,5 +18,6 @@
          </columns>
       </TableView>
       <Button fx:id="resolveDocumentComplaint" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#removeDocComplaintFromDB" prefHeight="30.0" prefWidth="117.0" text="Resolve" />
+      <Button layoutX="668.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="30.0" prefWidth="67.0" text="Home" />
    </children>
 </Pane>
