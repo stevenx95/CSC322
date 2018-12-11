@@ -1,5 +1,6 @@
 package org.guccigang.mini_google_docs.controller.ComplaintControllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.model.ComplaintDAO;
@@ -8,6 +9,8 @@ import org.guccigang.mini_google_docs.model.GuiUtil;
 import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.sql.SQLException;
+
+import static org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalDocManagerController.ReturnToProfile;
 
 public class SUDocumentComplaintController {
 
@@ -80,6 +83,11 @@ public class SUDocumentComplaintController {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a complaint from the table.",
                     "No Complaint Selected", "No Selection");
         }
+    }
+
+    @FXML
+    private void goBackHome(ActionEvent event) {
+        ReturnToProfile(event, currentUser);
     }
 
 
