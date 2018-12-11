@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="documentComplaintsTable" layoutY="62.0" prefHeight="412.0" prefWidth="776.0">
+         <columns>
+            <TableColumn fx:id="docIDColumn" prefWidth="81.60000896453857" text="DocID" />
+            <TableColumn fx:id="docVersionColumn" prefWidth="67.20004272460938" resizable="false" text="Version" />
+            <TableColumn fx:id="docOwnerColumn" prefWidth="112.79998779296875" resizable="false" text="Doc Owner" />
+            <TableColumn fx:id="docComplainerColumn" prefWidth="91.20001220703125" resizable="false" text="Complainer" />
+            <TableColumn fx:id="docViolatorColumn" prefWidth="112.0" resizable="false" text="Violator" />
+            <TableColumn fx:id="docComplaintColumn" prefWidth="308.79998779296875" resizable="false" text="Complaint" />
+         </columns>
+      </TableView>
+      <Button fx:id="resolveDocumentComplaint" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#removeDocComplaintFromDB" prefHeight="30.0" prefWidth="117.0" text="Resolve" />
+   </children>
+</Pane>
