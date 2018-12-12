@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="175.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Complaint Form">
          <font>
@@ -17,7 +17,7 @@
       <AnchorPane layoutX="81.1015625" layoutY="121.98828125" />
       <TextArea fx:id="complaintText" layoutX="111.0" layoutY="119.0" prefHeight="200.0" prefWidth="272.0" />
       <Text layoutX="173.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter your complaint" />
-      <Button layoutX="211.0" layoutY="354.0" mnemonicParsing="false" onAction="#submitUserComplaintToDB" text="Submit">
+      <Button layoutX="211.0" layoutY="354.0" mnemonicParsing="false" onAction="#submitComplaint" text="Submit">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

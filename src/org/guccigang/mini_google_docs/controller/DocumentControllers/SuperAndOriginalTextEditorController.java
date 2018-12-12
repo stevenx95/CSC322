@@ -103,8 +103,8 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void handleComplaint(ActionEvent event)
     {
         try {
-            VisitorComplaintFormController controller = new VisitorComplaintFormController(selectedDocument);
-            GuiUtil.createWindow(UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
+            OUUserComplaintFormController controller = new OUUserComplaintFormController(selectedDocument, currentUser);
+            GuiUtil.createWindow(UILocation.OUUSER_COMPLAINT_FORM, "Complaint Form", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,8 +114,8 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void handleUserComplaint(ActionEvent event){
 
         try {
-            OUUserComplaintFormController controller = new OUUserComplaintFormController(selectedDocument);
-            GuiUtil.createWindow(UILocation.ORIGINAL_USER_DOCUMENT_COMPLAINT_VIEW, "Complaint Form", controller);
+            OUUserComplaintFormController controller = new OUUserComplaintFormController(selectedDocument, currentUser);
+            GuiUtil.createWindow(UILocation.OUUSER_COMPLAINT_FORM, "Complaint Form", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }

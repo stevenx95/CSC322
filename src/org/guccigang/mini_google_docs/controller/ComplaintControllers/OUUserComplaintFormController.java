@@ -21,12 +21,16 @@ public class OUUserComplaintFormController {
 
     private UserObject currentUser;
 
-    public OUUserComplaintFormController(DocumentFile docFile){
+
+
+    public OUUserComplaintFormController(DocumentFile docFile, UserObject currentUser){
         this.docFile = docFile;
+        this.currentUser = currentUser;
     }
 
     public  OUUserComplaintFormController(){
-        this(null);
+        this.docFile = null;
+        this.currentUser = null;
     }
 
     public void submitUserComplaintToDB(ActionEvent event) throws SQLException {
@@ -61,6 +65,16 @@ public class OUUserComplaintFormController {
             e.printStackTrace();
         }
 
+
+    }
+    public void submitComplaint(ActionEvent actionEvent){
+        if(currentUser == null){
+            String SQLstatement = "INSERT INTO complaints (DocID, owner, complainer, message)values(?,?,?,?)";
+            DbUtil.executeUpdateDB(SQLstatement,String.valueOf(docFile.getiD()),docFile.getOwner(),"Visitor",complaintText.getText());
+        }else {
+            String SQLstatement = "INSERT INTO complaints (DocID, owner, complainer, message)values(?,?,?,?)";
+            DbUtil.executeUpdateDB(SQLstatement,String.valueOf(docFile.getiD()),docFile.getOwner(),currentUser.getUserName(),complaintText.getText());
+        }
 
     }
 

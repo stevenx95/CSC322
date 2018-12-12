@@ -167,15 +167,17 @@ public class SuperAndOriginalDocManagerController {
     }
     private void  unshareFile(int selectedIndex) {
         DocumentFile selectedFile = documentFileTable.getItems().get(selectedIndex);
-        ArrayList<String> userList = SharingUtil.getSharingUsers(currentUser.getFirstName());
+        ArrayList<String> userList = SharingUtil.getSharingUsers(documentFileTable.getItems().get(selectedIndex).getID());
         String selectedUser = GuiUtil.createCancellableOptionAlert(
                 userList,
                 "Share this document with: ",
                 "Share Document",
                 "Share document"
         );
+        System.out.println(selectedUser);
+        System.out.println(currentUser.getUserName());
         int result = 0;
-        if(!SharingUtil.isShared(selectedFile.getID())) {
+        if(SharingUtil.isShared(selectedFile.getID())) {
             result = SharingUtil.unshareDoc(selectedFile, currentUser.getUserName(), selectedUser);
         } else {
             GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "This document is not shared", "Cannot Unshare", "Error");

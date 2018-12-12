@@ -55,9 +55,7 @@ public class OUUserComplaintViewController {
         fillTable();
 
         docOwnerColumn.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
-        docVersionColumn.setCellValueFactory(cellData -> cellData.getValue().docComplaintDocVersionProperty());
         docComplainerColumn.setCellValueFactory(cellData -> cellData.getValue().complainerProperty());
-        docViolatorColumn.setCellValueFactory(cellData -> cellData.getValue().violatorProperty());
         docComplaintColumn.setCellValueFactory(cellData -> cellData.getValue().messageProperty());
         docIDColumn.setCellValueFactory(cellData -> cellData.getValue().docIDProperty());
 
@@ -72,7 +70,18 @@ public class OUUserComplaintViewController {
     }
 
     public  void removeDocComplaintFromDB(){
-        return;
+        int selectedIndex = documentComplaintsTable.getSelectionModel().getSelectedIndex();
+        System.out.println(selectedIndex);
+        if(selectedIndex >= 0){
+            UserComplaint complaint = documentComplaintsTable.getItems().get(selectedIndex);
+            DbUtil.executeUpdateDB("DELETE FROM complaints WHERE docID=?",
+                    pstmt -> {
+                System.out.println(complaint.getComplaintId());
+                pstmt.setInt(1, complaint.getDocID());
+                    });
+            documentComplaintsTable.getItems().remove(selectedIndex);
+        }
+        fillTable();
     }
 
     @FXML

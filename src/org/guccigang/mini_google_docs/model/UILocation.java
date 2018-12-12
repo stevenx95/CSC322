@@ -27,8 +27,9 @@ public enum UILocation {
     ORIGINAL_USER_USER_COMPLAINT_VIEW("views/ComplaintViews/OUUserComplaintView.fxml"),
     TABOO_DOCUMENT_REVIEW_EDITOR("views/TabooUI/TabooDocumentReviewEditor.fxml"),
     OU_AND_SU_INVITE_TO_EDIT("views/InvitationsUI/SuperAndOrdinaryInviteToEditUI.fxml"),
-    SU_TABOO_MANAGER_VIEWER("views/TabooUI/SUTabooMenuSelector.fxml"),
-    INVITATIONS_MANAGER("views/InvitationsUI/InvitationsManagerUI.fxml");
+    INVITATIONS_MANAGER("views/InvitationsUI/InvitationsManagerUI.fxml"),
+    OUUSER_COMPLAINT_FORM("views/ComplaintViews/OUUserComplaintFormView.fxml"),
+    SU_TABOO_MANAGER_VIEWER("views/TabooUI/SUTabooMenuSelector.fxml");
 
     public final String directory;
     UILocation(String location) {
