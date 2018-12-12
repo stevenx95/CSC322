@@ -42,6 +42,7 @@ public class InviteToEditController  implements Initializable {
         if(selectionIndex >= 0) {
             DocumentFile selectedDoc = documentsTable.getItems().get(selectionIndex);
                 SharingUtil.processInvitation(selectedDoc,inviteeUser.getUserName());
+                GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "", "Document Shared", "Confirmation");
         } else {
             GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "please make a selection in the applications table",
                     "No user selected", "Error");
