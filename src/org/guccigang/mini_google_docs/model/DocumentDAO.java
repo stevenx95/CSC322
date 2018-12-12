@@ -83,6 +83,22 @@ public class DocumentDAO {
         }
     }
 
+    public static ObservableList<DocumentFile> searchSpecificsUsersDocuments(String userName, String term) throws SQLException
+    {
+        String selectStatement = "SELECT * FROM documents where owner = \""+userName+"\" AND content LIKE '%"+term+"%';";
+        // SELECT * FROM documents where owner = "Jon" AND content LIKE '%Three%';
+        //Execute select statement
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement);
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            return documentFiles;
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
+    }
+
     public static ObservableList<DocumentFile> getSpecificsUsersReadableDocuments(String userName) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ? AND restricted >= 2";
         //Execute select statement
