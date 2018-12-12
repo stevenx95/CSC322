@@ -8,19 +8,27 @@ import org.guccigang.mini_google_docs.model.TabooWordDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.scene.control.TextField;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 public class OriginalAndVisitorReportTabooWordController {
 
-
-    @FXML
-    TextField userNameBar;
+    private UserObject currentUser;
 
     @FXML
     TextField tabooWordBar;
 
-
     private void tabooSuggestionToDB() throws IOException, SQLException {
-        TabooWordDAO.sendTabooSuggestion(userNameBar.getText(),tabooWordBar.getText());
+
+        String userNameInput = "";
+
+        if(currentUser == null){
+            userNameInput = "visitor";
+        }
+        else {
+            userNameInput = currentUser.getUserName();
+        }
+
+        TabooWordDAO.sendTabooSuggestion(userNameInput,tabooWordBar.getText());
     }
     public void submitAction(ActionEvent event) {
         try {
