@@ -3,7 +3,7 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 import javafx.event.ActionEvent;
 
 import org.guccigang.mini_google_docs.controller.Invitations.InvitationsManagerController;
-//import org.guccigang.mini_google_docs.controller.TabooControllers.SuperUserTabooMenuSelectorController;
+import org.guccigang.mini_google_docs.controller.TabooControllers.SuperUserTabooMenuSelectorController;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUComplaintTypeSelectionMenuController;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUDocumentComplaintController;
@@ -37,12 +37,12 @@ public class SuperUserUIController {
     }
 
     public void handleTabooList(ActionEvent event){
-//        try{
-//            SuperUserTabooMenuSelectorController controller = new SuperUserTabooMenuSelectorController(currentUser);
-//            GuiUtil.changeScene(event, UILocation.SU_TABOO_MANAGER_VIEWER, "Document Manager",controller);
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try{
+            SuperUserTabooMenuSelectorController controller = new SuperUserTabooMenuSelectorController(currentUser);
+            GuiUtil.changeScene(event, UILocation.SU_TABOO_MANAGER_VIEWER, "Document Manager",controller);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleDocumentManager(ActionEvent event) {

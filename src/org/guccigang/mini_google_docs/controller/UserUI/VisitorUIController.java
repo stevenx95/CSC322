@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorTextEditorController;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.VisitorViewDocumentsController;
+import org.guccigang.mini_google_docs.controller.TabooControllers.OriginalAndVisitorReportTabooWordController;
 import org.guccigang.mini_google_docs.model.DocumentDAO;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.UILocation;
@@ -94,7 +95,8 @@ public class VisitorUIController {
 
     public void reportTabooWordAction(ActionEvent event){
             try {
-                GuiUtil.createWindow(event, UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word");
+                OriginalAndVisitorReportTabooWordController controller = new OriginalAndVisitorReportTabooWordController();
+                GuiUtil.createWindow(UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word",controller);
             } catch (Exception e) {
                 e.printStackTrace();
             }
