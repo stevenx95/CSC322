@@ -8,18 +8,18 @@ import javafx.scene.control.TextField;
 import org.guccigang.mini_google_docs.model.DbUtil;
 import org.guccigang.mini_google_docs.model.DocumentFile;
 import org.guccigang.mini_google_docs.model.GuiUtil;
+import org.guccigang.mini_google_docs.model.UserObject;
 
 import java.sql.*;
 
 public class OUUserComplaintFormController {
 
     @FXML
-    TextField textBarUsername;
-
-    @FXML
     TextArea complaintText;
 
     private DocumentFile docFile;
+
+    private UserObject currentUser;
 
     public OUUserComplaintFormController(DocumentFile docFile){
         this.docFile = docFile;
@@ -34,8 +34,17 @@ public class OUUserComplaintFormController {
         int tempDocId = docFile.getID();
         int result = 0;
 
+        String userNameInput = "";
+
+        if(currentUser == null){
+            userNameInput = "visitor";
+        }
+        else {
+            userNameInput = currentUser.getUserName();
+        }
+
          try {
-            String sql = "INSERT INTO complaintsuser(owner,version,complainer,violator,message,DocID) VALUES ('" + docFile.getOwner() + "','" + getVersionOfDocument(tempDocId) + "', '" + textBarUsername.getText() + "', '" + getViolatorOfDocument(tempDocId) + "','" + complaintText.getText() + "','" + tempDocId+ "')";
+            String sql = "INSERT INTO complaintsuser(owner,version,complainer,violator,message,DocID) VALUES ('" + docFile.getOwner() + "','" + getVersionOfDocument(tempDocId) + "', '" + userNameInput + "', '" + getViolatorOfDocument(tempDocId) + "','" + complaintText.getText() + "','" + tempDocId+ "')";
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GucciGangDB", "root", "password");
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
