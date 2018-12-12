@@ -137,7 +137,6 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     public void handleChangeDocType() {
         ArrayList<String> options = DocRestriction.stringValues();
-        options.removeIf(item -> item.equals("shared"));
         options.add(0,null);
         String selectedOption = GuiUtil.createCancellableOptionAlert(
                 options,

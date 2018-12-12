@@ -33,6 +33,7 @@
                   <Button layoutX="8.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleSharedDocument" text="Shared with me" />
                   <TextField fx:id="searchMy" layoutX="8.0" layoutY="52.0" prefHeight="31.0" prefWidth="213.0" />
                   <Button layoutX="230.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleSearchMyDocuments" prefHeight="31.0" prefWidth="171.0" text="Search My Documents" />
+                  <Button layoutX="553.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleUnshare" prefHeight="25.0" prefWidth="128.0" text="Unshare Documet" />
                </children>
             </AnchorPane>
          </items>

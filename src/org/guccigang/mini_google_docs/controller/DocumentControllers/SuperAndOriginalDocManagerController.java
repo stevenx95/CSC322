@@ -154,6 +154,42 @@ public class SuperAndOriginalDocManagerController {
     {
         fillTableShared();
     }
+
+    public void handleUnshare() {
+        int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0) {
+            unshareFile(selectedIndex);
+        } else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
+        }
+    }
+    private void  unshareFile(int selectedIndex) {
+        DocumentFile selectedFile = documentFileTable.getItems().get(selectedIndex);
+        ArrayList<String> userList = SharingUtil.getSharingUsers(currentUser.getFirstName());
+        String selectedUser = GuiUtil.createCancellableOptionAlert(
+                userList,
+                "Share this document with: ",
+                "Share Document",
+                "Share document"
+        );
+        int result = 0;
+        if(!SharingUtil.isShared(selectedFile.getID())) {
+            result = SharingUtil.unshareDoc(selectedFile, currentUser.getUserName(), selectedUser);
+        } else {
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "This document is not shared", "Cannot Unshare", "Error");
+        }
+
+        if(result == 0) {
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "File cannot be unshared becasue you are not the owner",
+                    "Cannot unshare", "Error");
+        } else {
+            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION, "","File was successfully unshared",
+                    "Confirmation");
+        }
+    }
+
     @FXML
     private void handleSearchAllDocuments(ActionEvent event)
     {

@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="710.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.24623115577889448" layoutX="-1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="710.0" prefWidth="897.0">
          <items>
@@ -20,13 +20,13 @@
                   <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
                </children>
             </AnchorPane>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="896.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="887.0">
                <children>
-                  <TableView fx:id="invitationsTable" layoutX="-19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-321.0" AnchorPane.leftAnchor="-19.0" AnchorPane.rightAnchor="-198.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="invitationsTable" layoutX="1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="1092.0" AnchorPane.bottomAnchor="-321.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-198.0" AnchorPane.topAnchor="1.0">
                      <columns>
-                        <TableColumn fx:id="docNameColumn" prefWidth="225.0" text="Document Name" />
-                        <TableColumn fx:id="ownerColumn" prefWidth="199.0" text="Owner" />
-                        <TableColumn fx:id="dateColumn" prefWidth="173.0" text="Date Created" />
+                        <TableColumn fx:id="docNameColumn" prefWidth="435.0000305175781" text="Document Name" />
+                        <TableColumn fx:id="ownerColumn" prefWidth="212.0" text="Owner" />
+                        <TableColumn fx:id="dateColumn" prefWidth="179.0" text="Date Created" />
                      </columns>
                   </TableView>
                </children>
