@@ -17,6 +17,16 @@ public class OriginalAndVisitorReportTabooWordController {
     @FXML
     TextField tabooWordBar;
 
+    //Default constructor used for visitor
+    public OriginalAndVisitorReportTabooWordController(){
+        this.currentUser = null;
+    }
+
+    //For OU
+    public OriginalAndVisitorReportTabooWordController(UserObject currentUser){
+        this.currentUser = currentUser;
+    }
+
     private void tabooSuggestionToDB() throws IOException, SQLException {
 
         String userNameInput = "";
