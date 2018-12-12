@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -55,14 +56,34 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     public void handleOpenDocument()
     {
-
         int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
             DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
             try
             {
                 SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
-                GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
+                if(DocumentDAO.documentIsLocked(selectedDocument.getID()))
+                {
+                    if(selectedDocument.getOwner().equals(currentUser.getUserName()))
+                    {
+                        if(GuiUtil.createConfirmationAlert(Alert.AlertType.CONFIRMATION,
+                                "Would you like to unlock it?",
+                                "Locked Document","Locked"))
+                        {
+                            DocumentDAO.unlockDocument(selectedDocument.getID());
+                        }
+                    }
+                    else
+                    {
+                        GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.",
+                                "Locked Document", "Locked");
+                    }
+                }
+                else {
+                    DocumentDAO.lockDocument(selectedDocument.getID(), currentUser.getUserName());
+                    GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR, "Text Editor", controller);
+                    DocumentDAO.unlockDocument(selectedDocument.getID(), currentUser.getUserName());
+                }
             }catch (java.io.IOException e)
             {
                 e.printStackTrace();

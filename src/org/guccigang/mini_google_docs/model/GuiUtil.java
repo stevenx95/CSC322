@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,6 +55,21 @@ public class GuiUtil {
             return result.get();
         }
         return choices.get(choices.size()-1);
+    }
+
+    public static boolean createConfirmationAlert(AlertType alertType, String message, String header, String title)
+    {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            return true;
+        } else {
+            return false;
+        }
     }
     /**
      *
