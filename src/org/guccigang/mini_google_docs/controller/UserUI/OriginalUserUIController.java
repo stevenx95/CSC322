@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 
 import javafx.event.ActionEvent;
 
+import org.guccigang.mini_google_docs.controller.TabooControllers.OriginalAndVisitorReportTabooWordController;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintViewController;
 import org.guccigang.mini_google_docs.controller.UsersManager.SUOUUsersManagerController;
@@ -47,7 +48,8 @@ public class OriginalUserUIController {
 
     public void reportTabooWordAction(ActionEvent event){
         try {
-            GuiUtil.createWindow(event, UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word");
+            OriginalAndVisitorReportTabooWordController controller = new OriginalAndVisitorReportTabooWordController(user);
+            GuiUtil.createWindow(UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
