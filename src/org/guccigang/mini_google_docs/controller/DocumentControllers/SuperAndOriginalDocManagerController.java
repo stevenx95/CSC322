@@ -157,12 +157,12 @@ public class SuperAndOriginalDocManagerController {
     @FXML
     private void handleSearchAllDocuments(ActionEvent event)
     {
-        System.out.println(searchAll.getCharacters().toString());
+        System.out.println(searchAll.getText());
     }
     @FXML
     private void handleSearchMyDocuments(ActionEvent event)
     {
-
+        fillTableSearchMy(searchMy.getText());
     }
     /**
      * Initializes the controller class. This method is automatically called
@@ -209,5 +209,18 @@ public class SuperAndOriginalDocManagerController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void fillTableSearchMy(String term)
+    {
+        try{
+            documentFileTable.setItems(DocumentDAO.searchSpecificsUsersDocuments(currentUser.getUserName(),term));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void fillTableSearchAll()
+    {
+
     }
 }
