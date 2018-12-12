@@ -40,7 +40,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Report Commands" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Suggest Taboo Word" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
