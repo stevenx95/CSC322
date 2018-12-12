@@ -61,6 +61,17 @@ public class VisitorComplaintFormController {
         }
     }
 
+    public void submitComplaint(ActionEvent actionEvent){
+        if(currentUser == null){
+            String SQLstatement = "INSERT INTO complaints (DocID, owner, complainer, message)values(?,?,?,?)";
+            DbUtil.executeUpdateDB(SQLstatement,String.valueOf(docFile.getiD()),docFile.getOwner(),currentUser.getUserName(),complaintText.getText());
+        }else {
+            String SQLstatement = "INSERT INTO complaints (DocID, owner, complainer, message)values(?,?,?,?)";
+            DbUtil.executeUpdateDB(SQLstatement,String.valueOf(docFile.getiD()),docFile.getOwner(),"Visitor",complaintText.getText());
+        }
+
+    }
+
     private int getVersionOfDocument(Integer docID) throws SQLException {
        int version = 0;
 

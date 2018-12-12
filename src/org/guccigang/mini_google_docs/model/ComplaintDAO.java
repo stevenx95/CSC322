@@ -44,7 +44,7 @@ public class ComplaintDAO {
     }
 
     public static ObservableList<UserComplaint> getAllUserComplaintTexts(UserObject userObject) throws SQLException {
-        String selectStatement = "SELECT * FROM complaintsuser WHERE owner = ?";
+        String selectStatement = "SELECT * FROM complaints WHERE owner = ?";
 
         try{
             ResultSet rs = DbUtil.processQuery(selectStatement,userObject.getUserName());
@@ -64,9 +64,9 @@ public class ComplaintDAO {
             UserComplaint userComplaint = new UserComplaint();
 
             userComplaint.setOwner(resultSet.getString("owner"));
-            userComplaint.setVersion(resultSet.getInt("version"));
+//            userComplaint.setVersion(resultSet.getInt("version"));
             userComplaint.setComplainer(resultSet.getString("complainer"));
-            userComplaint.setViolator(resultSet.getString("violator"));
+//            userComplaint.setViolator(resultSet.getString("violator"));
             userComplaint.setMessage(resultSet.getString("message"));
             userComplaint.setDocID(resultSet.getInt("DocID"));
 
