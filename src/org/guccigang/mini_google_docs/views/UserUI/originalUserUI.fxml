@@ -56,6 +56,11 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
+                        <Button layoutX="20.0" layoutY="555.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="265.0" text="Invitations" textFill="#1389a7">
+                           <font>
+                              <Font name="Century Gothic Bold" size="18.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

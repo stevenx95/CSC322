@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 
 import javafx.event.ActionEvent;
 
+import org.guccigang.mini_google_docs.controller.Invitations.InvitationsManagerController;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUComplaintTypeSelectionMenuController;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.SUDocumentComplaintController;
@@ -75,6 +76,13 @@ public class SuperUserUIController {
             e.printStackTrace();
         }
     }
-
+    public void handleInvitations(ActionEvent event) {
+        try {
+            InvitationsManagerController controller = new InvitationsManagerController(currentUser);
+            GuiUtil.changeScene(event,UILocation.INVITATIONS_MANAGER, "Invitations Manager", controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

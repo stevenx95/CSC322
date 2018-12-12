@@ -2,6 +2,7 @@ package org.guccigang.mini_google_docs.controller.UserUI;
 
 import javafx.event.ActionEvent;
 
+import org.guccigang.mini_google_docs.controller.Invitations.InvitationsManagerController;
 import org.guccigang.mini_google_docs.controller.TabooControllers.OriginalAndVisitorReportTabooWordController;
 import org.guccigang.mini_google_docs.model.UILocation;
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintViewController;
@@ -60,6 +61,15 @@ public class OriginalUserUIController {
 
             OUUserComplaintViewController controller = new OUUserComplaintViewController(user);
             GuiUtil.changeScene(event, UILocation.ORIGINAL_USER_USER_COMPLAINT_VIEW, "User Complaints",controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleInvitations(ActionEvent event) {
+        try {
+            InvitationsManagerController controller = new InvitationsManagerController(user);
+            GuiUtil.changeScene(event,UILocation.INVITATIONS_MANAGER, "Invitations Manager", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }

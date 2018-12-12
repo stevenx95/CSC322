@@ -7,22 +7,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.views.InvitationsUI.InvitationsManagerUI">
+<AnchorPane prefHeight="710.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.24623115577889448" layoutX="-1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0">
+      <SplitPane dividerPositions="0.24623115577889448" layoutX="-1.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="710.0" prefWidth="897.0">
          <items>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="598.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="895.0">
                <children>
                   <TextField fx:id="searchBar" layoutX="94.0" layoutY="13.0" />
-                  <Button layoutX="281.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSearch" text="Search Invitations" />
+                  <Button layoutX="281.0" layoutY="13.0" mnemonicParsing="false" text="Search Invitations" />
                   <Button layoutX="14.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleInvitationAccept" text="Accept Invitation" />
-                  <Button layoutX="176.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleInvitationDecline" text="Recline Invitation" />
+                  <Button layoutX="176.0" layoutY="55.0" mnemonicParsing="false" onAction="#handleInvitationDecline" text="Decline Invitation" />
                   <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
                </children>
             </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="301.0" prefWidth="896.0">
                <children>
-                  <TableView fx:id="invitationsTable" layoutX="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="591.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="invitationsTable" layoutX="-19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="1090.0" AnchorPane.bottomAnchor="-321.0" AnchorPane.leftAnchor="-19.0" AnchorPane.rightAnchor="-198.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="docNameColumn" prefWidth="225.0" text="Document Name" />
                         <TableColumn fx:id="ownerColumn" prefWidth="199.0" text="Owner" />

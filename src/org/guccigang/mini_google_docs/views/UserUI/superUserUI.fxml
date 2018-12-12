@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -50,7 +50,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleTabooList" prefHeight="65.0" prefWidth="265.0" text="Taboo Manager" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleInvitations" prefHeight="65.0" prefWidth="265.0" text="Invitations" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>

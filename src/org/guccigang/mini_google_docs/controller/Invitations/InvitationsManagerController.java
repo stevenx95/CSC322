@@ -13,7 +13,7 @@ import org.guccigang.mini_google_docs.model.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InvitationsManager implements Initializable {
+public class InvitationsManagerController implements Initializable {
 
     private UserObject currentUser;
 
@@ -30,11 +30,11 @@ public class InvitationsManager implements Initializable {
     private TableColumn<InvitationObject, String> dateColumn;
 
 
-    public InvitationsManager() {
+    public InvitationsManagerController() {
         this(null);
     }
 
-    public InvitationsManager(UserObject currentUser) {
+    public InvitationsManagerController(UserObject currentUser) {
         this.currentUser = currentUser;
     }
 
