@@ -63,7 +63,7 @@
                               <TableColumn fx:id="documentViewCountColumn" prefWidth="113.0" text="View Count" />
                           </columns>
                         </TableView>
-                        <Label layoutX="13.0" layoutY="336.0" text="Top 3 Documents" />
+                        <Label layoutX="13.0" layoutY="336.0" text="Public Documents" />
                         <Button layoutX="14.0" layoutY="661.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
                      </children>
                   </AnchorPane>

@@ -102,7 +102,9 @@ public class VisitorUIController {
 
     private void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
+
+             documentFileTable.setItems(DocumentDAO.getAllDocumentFilesDataForVisitor());
+
         }catch (Exception e){
             e.printStackTrace();
         }
