@@ -26,6 +26,10 @@ public class SuperAndOriginalDocManagerController {
     private TableColumn<DocumentFile, String> documentRestrictionColumn;
     @FXML
     private Button homeButton;
+    @FXML
+    private TextField searchAll;
+    @FXML
+    private TextField searchMy;
 
     public SuperAndOriginalDocManagerController(UserObject currentUser) {
         this.currentUser = currentUser;
@@ -81,7 +85,6 @@ public class SuperAndOriginalDocManagerController {
                     }
                 }
                 else {
-                    DocumentDAO.lockDocument(selectedDocument.getID(), currentUser.getUserName());
                     GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR, "Text Editor", controller);
                     DocumentDAO.unlockDocument(selectedDocument.getID(), currentUser.getUserName());
                 }
@@ -151,8 +154,16 @@ public class SuperAndOriginalDocManagerController {
     {
         fillTableShared();
     }
+    @FXML
+    private void handleSearchAllDocuments(ActionEvent event)
+    {
+        System.out.println(searchAll.getCharacters().toString());
+    }
+    @FXML
+    private void handleSearchMyDocuments(ActionEvent event)
+    {
 
-
+    }
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.

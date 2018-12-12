@@ -12,12 +12,11 @@ import java.util.Calendar;
 public class VisitorComplaintFormController {
 
     @FXML
-    TextField textBarUsername;
-
-    @FXML
     TextArea complaintText;
 
     private DocumentFile docFile;
+
+    private UserObject currentUser;
 
     public VisitorComplaintFormController(){
         this(null);
@@ -31,8 +30,19 @@ public class VisitorComplaintFormController {
         int tempDocId = docFile.getID();
         int result = 0;
 
+
+
+        String userNameInput = "";
+
+        if(currentUser == null){
+            userNameInput = "visitor";
+        }
+        else {
+            userNameInput = currentUser.getUserName();
+        }
+
         try {
-            String sql = "INSERT INTO complaints(DocId,version,owner,complainer,message) VALUES ('" + tempDocId + "','" + getVersionOfDocument(tempDocId) + "', '" + docFile.getOwner() + "', '" + textBarUsername.getText() + "','" + complaintText.getText() + "')";
+            String sql = "INSERT INTO complaints(DocId,version,owner,complainer,message) VALUES ('" + tempDocId + "','" + getVersionOfDocument(tempDocId) + "', '" + docFile.getOwner() + "', '" + userNameInput + "','" + complaintText.getText() + "')";
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GucciGangDB", "root", "password");
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
