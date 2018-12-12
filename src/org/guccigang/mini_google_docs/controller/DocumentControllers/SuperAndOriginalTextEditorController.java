@@ -46,8 +46,8 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
             if (!DocumentDAO.canWrite(selectedDocument,currentUser)) {
                 this.areaText.setEditable(false);
-                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
-                        "Document is locked", "Warning");
+                GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "You don't have permission to write to this document" ,
+                        "Document is not writable", "Warning");
             }
             else
             {
