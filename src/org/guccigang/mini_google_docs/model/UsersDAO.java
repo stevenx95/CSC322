@@ -98,10 +98,24 @@ public class UsersDAO {
      */
     public static ObservableList<UserObject> getAllApplications() {
         String sqlStatement = "SELECT * FROM application";
-        ObservableList<UserObject> applications = null;
+        UserObject temp = new UserObject();
+        ObservableList<UserObject> applications = FXCollections.observableArrayList();
         try {
             ResultSet resultSet = DbUtil.processQuery(sqlStatement);
-            applications = createUserList(resultSet);
+            //applications = createUserList(resultSet);
+            while(resultSet.next())
+            {
+                temp = new UserObject(resultSet.getString("userName"),
+                        resultSet.getString("password"),
+                        resultSet.getString("firstName"),
+                        resultSet.getString("lastName"),
+                        resultSet.getInt("membershipLevel"));
+                temp.addInterest(resultSet.getString("interest0"));
+                temp.addInterest(resultSet.getString("interest1"));
+                temp.addInterest(resultSet.getString("interest2"));
+                applications.add(temp);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

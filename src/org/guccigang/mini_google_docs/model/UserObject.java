@@ -17,6 +17,15 @@ public class UserObject {
     final private int membershipLevel;
     private List<String> interests;
 
+    public UserObject() {
+        this.userName = "user";
+        this.password = "pass";
+        this.firstName = "first";
+        this.lastName = "last";
+        this.membershipLevel = 0;
+        this.interests = new ArrayList<>();
+    }
+
     public UserObject(String userName, String password, String firstName, String lastName, int membershipLevel) {
         this.userName = userName;
         this.password = password;
@@ -85,6 +94,6 @@ public class UserObject {
      }
 
      public StringProperty interestProperty(int i) {
-        return new SimpleStringProperty(this.interests.toString());
+        return new SimpleStringProperty(this.interests.get(i).toString());
      }
 }
