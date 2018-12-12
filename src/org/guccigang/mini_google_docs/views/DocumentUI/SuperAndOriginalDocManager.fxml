@@ -26,15 +26,15 @@
                      </columns>
                   </TableView>
                   <Button layoutX="140.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
-                  <TextField layoutX="8.0" layoutY="14.0" prefHeight="31.0" prefWidth="213.0" />
-                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" text="Search All Documents" />
+                  <TextField fx:id="searchAll" layoutX="8.0" layoutY="14.0" onAction="#handleSearchAllDocuments" prefHeight="31.0" prefWidth="213.0" />
+                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearchAllDocuments" prefHeight="31.0" prefWidth="171.0" text="Search All Documents" />
                   <Button layoutX="8.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleCreateDocument" text="New Document" />
                   <Button layoutX="280.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleMyDocument" text="My Documents" />
                   <Button layoutX="561.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleAllDocument" text="All Documents" />
                   <Button layoutX="413.0" layoutY="93.0" mnemonicParsing="false" onAction="#handlePublicDocument" text="Public Documents" />
                   <Button layoutX="8.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleSharedDocument" text="Shared with me" />
-                  <TextField layoutX="8.0" layoutY="52.0" prefHeight="31.0" prefWidth="213.0" />
-                  <Button layoutX="230.0" layoutY="52.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="171.0" text="Search My Documents" />
+                  <TextField fx:id="searchMy" layoutX="8.0" layoutY="52.0" prefHeight="31.0" prefWidth="213.0" />
+                  <Button layoutX="230.0" layoutY="52.0" mnemonicParsing="false" onAction="#handleSearchMyDocuments" prefHeight="31.0" prefWidth="171.0" text="Search My Documents" />
                </children>
             </AnchorPane>
          </items>
