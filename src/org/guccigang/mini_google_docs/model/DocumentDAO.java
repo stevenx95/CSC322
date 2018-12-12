@@ -128,7 +128,7 @@ public class DocumentDAO {
 
     public static ObservableList<DocumentFile> getSharedUsersDocuments(String userName) throws SQLException
     {
-        String selectStatement = "select * from documents natural join sharedDocs where userName = ?;";
+        String selectStatement = "select * from documents natural join sharedDocs where userName = ? AND restricted = 1;";
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
             ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
