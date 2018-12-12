@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalTextEditorController;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.sql.SQLException;
@@ -51,6 +52,31 @@ public class SUViewOfUsersController {
         documentNameColumn.setCellValueFactory(cellData -> cellData.getValue().documentNameProperty());
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
+    }
+
+    @FXML
+    public void handleOpenDocument()
+    {
+
+        int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0){
+            DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
+            try
+            {
+                SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
+                GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
+            }catch (java.io.IOException e)
+            {
+                e.printStackTrace();
+                GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
+
+            }
+
+        }else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
+        }
     }
 
     @FXML

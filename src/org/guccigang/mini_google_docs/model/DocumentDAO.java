@@ -18,6 +18,16 @@ public class DocumentDAO {
         //Execute select statement
         return getDocumentFiles(selectStatement);
     }
+    /**
+     * Queries the database for readable documents for visitor ONLY.
+     * @return documentFiles ObservableList
+     * @throws SQLException
+     */
+    public static ObservableList<DocumentFile> getTopViewDocumentForVisitor() throws SQLException{
+        String selectStatement = "SELECT * FROM documents where restricted >= 2 ORDER BY views DESC";
+        //Execute select statement
+        return getDocumentFiles(selectStatement);
+    }
 
     private static ObservableList<DocumentFile> getDocumentFiles(String selectStatement) throws SQLException {
         try{
@@ -61,6 +71,20 @@ public class DocumentDAO {
      */
     public static ObservableList<DocumentFile> getSpecificsUsersDocuments(String userName) throws SQLException{
         String selectStatement = "SELECT * FROM documents where owner = ?";
+        //Execute select statement
+        try{
+            ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
+            ObservableList<DocumentFile> documentFiles = getAllDocumentFilesDataList(resultSet);
+            return documentFiles;
+
+        }catch (SQLException e){
+            System.out.println("SQL query has failed" + e);
+            throw e;
+        }
+    }
+
+    public static ObservableList<DocumentFile> getSpecificsUsersReadableDocuments(String userName) throws SQLException{
+        String selectStatement = "SELECT * FROM documents where owner = ? AND restricted >= 2";
         //Execute select statement
         try{
             ResultSet resultSet = DbUtil.processQuery(selectStatement,statement -> statement.setString(1,userName));
@@ -117,6 +141,7 @@ public class DocumentDAO {
             document.setRestricted(DocRestriction.getDocRestriction(resultSet.getInt("restricted")));
             //document.setDate(new Date(resultSet.getString("createdDate")));
             document.setTabooFlag(resultSet.getInt("tabooFlag"));
+            document.setCounter(resultSet.getInt("views"));
             documentFiles.add(document);
         }
         return documentFiles;

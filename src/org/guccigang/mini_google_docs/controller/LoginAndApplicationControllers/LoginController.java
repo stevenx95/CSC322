@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.guccigang.mini_google_docs.controller.UserUI.VisitorUIController;
 import org.guccigang.mini_google_docs.model.UILocation;
 
 import org.guccigang.mini_google_docs.controller.TabooControllers.TabooDocumentReviewController;
@@ -93,7 +94,8 @@ public class LoginController {
 
     public void visitorAction(ActionEvent event) {
         try {
-            GuiUtil.createWindowAndDestroy(event, UILocation.VISITOR_UI, "Visitor");
+            VisitorUIController controller = new VisitorUIController();
+            GuiUtil.createWindowAndDestroy(event, UILocation.VISITOR_UI, "Visitor",controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
