@@ -74,7 +74,7 @@ public class TabooWordDAO {
     }
 
     public static void sendTabooSuggestion(String userName, String tabooWord) throws SQLException, IOException {
-        String selectStatement = "SELECT tabooWord FROM taboosuggestions";
+        String selectStatement = "SELECT tabooWord FROM tabooSuggestions";
         ArrayList<String> list = new ArrayList<>();
 
         try{
@@ -83,7 +83,7 @@ public class TabooWordDAO {
                 list.add(rs.getString(1));
             }
             if(!list.contains(tabooWord)){
-                String selectStatment2 = "INSERT INTO taboosuggestions VALUES (?,?)";
+                String selectStatment2 = "INSERT INTO tabooSuggestions VALUES (?,?)";
                 DbUtil.executeUpdateDB(selectStatment2,userName,tabooWord);
             }
             else {

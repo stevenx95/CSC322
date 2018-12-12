@@ -3,6 +3,8 @@ package org.guccigang.mini_google_docs.controller.TabooControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.controller.UserUI.OriginalUserUIController;
+import org.guccigang.mini_google_docs.controller.UserUI.SuperUserUIController;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.io.IOException;
@@ -39,7 +41,8 @@ public class SUApprovalTabooWordController {
     @FXML
     public void handleHome(ActionEvent event){
         try{
-            GuiUtil.changeScene(event, UILocation.SUPER_USER_UI,"Visitor");
+            SuperUserUIController controller = new SuperUserUIController(currentUser);
+            GuiUtil.changeScene(event,UILocation.SUPER_USER_UI,"Home",controller);
         }catch (IOException e){
             e.printStackTrace();
         }

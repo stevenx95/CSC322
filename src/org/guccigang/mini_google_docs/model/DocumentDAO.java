@@ -261,4 +261,10 @@ public class DocumentDAO {
         }
         return false;
     }
+
+    public static void incrementView(DocumentFile doc)
+    {//UPDATE TheTable SET RevisionId = RevisionId + 1 WHERE Id=@id
+        String sqlStatement = "UPDATE documents SET views = views+1 WHERE docID ="+doc.getID();
+        DbUtil.executeUpdateDB(sqlStatement);
+    }
 }
