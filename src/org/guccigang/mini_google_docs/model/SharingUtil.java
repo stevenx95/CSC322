@@ -27,9 +27,11 @@ public class SharingUtil {
 
     public static int unshareDoc(DocumentFile selectedDoc, String currentUser, String selectedUser) {
         int deletions = 0;
+        System.out.println(selectedUser);
+        System.out.println(selectedDoc.getOwner());
         if(selectedDoc.getOwner().equals(currentUser)) {
             deletions = DbUtil.executeUpdateDB(
-                    "DELETE FROM sharedDocs WHERE username=? AND docdID = ?",
+                    "DELETE FROM sharedDocs WHERE username=? AND docID = ?",
                     pstmt -> {
                         pstmt.setString(1, selectedUser);
                         pstmt.setInt(2, selectedDoc.getID());
@@ -41,11 +43,11 @@ public class SharingUtil {
 
     public static boolean isShared(int docId) {
         ResultSet ressultset = DbUtil.processQuery(
-                "SELECT * FROM documents WHERE docId=?",
+                "SELECT * FROM sharedDocs WHERE docId=?",
                 pstmt-> pstmt.setInt(1, docId)
                 );
         try {
-            if(ressultset.next() && ressultset.getInt("membershiplevel") == DocRestriction.SHARED.id) {
+            if(ressultset.next()) {
                 return true;
             }
         } catch (SQLException e) {
@@ -91,13 +93,12 @@ public class SharingUtil {
         }
         return userNames;
     }
-    public static ArrayList<String> getSharingUsers(String currentUser){
+    public static ArrayList<String> getSharingUsers(int docId){
         ArrayList<String> userList = new ArrayList<>();
         ResultSet resultSet = DbUtil.processQuery(
-                "SELECT * FROM documents WHERE owner=? AND restrictionlevel=?",
+                "select distinct * from sharedDocs where docId=?",
                 pstmt -> {
-                    pstmt.setString(1, currentUser);
-                    pstmt.setInt(2, DocRestriction.SHARED.id);
+                    pstmt.setInt(1,docId);
                 }
         );
         try {

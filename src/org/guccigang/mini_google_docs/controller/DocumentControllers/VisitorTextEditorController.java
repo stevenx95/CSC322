@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 
+import org.guccigang.mini_google_docs.controller.ComplaintControllers.OUUserComplaintFormController;
 import org.guccigang.mini_google_docs.model.UILocation;
 
 import org.guccigang.mini_google_docs.controller.ComplaintControllers.VisitorComplaintFormController;
@@ -37,8 +38,8 @@ public class VisitorTextEditorController  implements Initializable {
     @FXML
     private void handleComplaint(){
         try {
-            VisitorComplaintFormController controller = new VisitorComplaintFormController(selectedDocument);
-            GuiUtil.createWindow(UILocation.VISITOR_COMPLAINT_FORM_VIEW, "Complaint Form", controller);
+            OUUserComplaintFormController controller = new OUUserComplaintFormController(selectedDocument,null);
+            GuiUtil.createWindow(UILocation.OUUSER_COMPLAINT_FORM, "Complaint Form", controller);
         } catch (Exception e) {
             e.printStackTrace();
         }
