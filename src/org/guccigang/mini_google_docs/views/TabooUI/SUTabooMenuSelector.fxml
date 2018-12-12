@@ -4,12 +4,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="100.0" layoutY="155.0" mnemonicParsing="false" onAction="#openApprovalManager" prefHeight="77.0" prefWidth="106.0" text="Taboo Word Approval Manager" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="369.0" layoutY="155.0" mnemonicParsing="false" onAction="#openApprovedList" prefHeight="77.0" prefWidth="99.0" text="Taboo List View" textAlignment="CENTER" wrapText="true" />
       <Text layoutX="103.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approve or Deny taboo word suggestions" textAlignment="CENTER" wrappingWidth="100.0" />
-      <Text layoutX="369.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of apporved taboo words" textAlignment="CENTER" wrappingWidth="100.0" />
+      <Text layoutX="369.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of approved taboo words" textAlignment="CENTER" wrappingWidth="100.0" />
    </children>
 </Pane>
