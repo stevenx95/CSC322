@@ -44,8 +44,6 @@ public class DocumentFile {
        // this.dateCreated = dateCreated;
         this.counter = new SimpleIntegerProperty(counter);
 
-
-
     }
 
     public String getOwner(){
@@ -105,8 +103,8 @@ public class DocumentFile {
     public int getCounter() {
         return this.counter.get();
     }
-    public IntegerProperty counterProperty(){
-        return this.counter;
+    public StringProperty counterProperty(){
+        return new SimpleStringProperty(String.valueOf(this.counter.get()));
     }
     public void setCounter(int counter){
         this.counter.set(counter);

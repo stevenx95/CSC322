@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="com.sun.rowset">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/com.sun.rowset.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

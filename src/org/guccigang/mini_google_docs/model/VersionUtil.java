@@ -3,7 +3,6 @@
 This is a utility class for version control
  */
 package org.guccigang.mini_google_docs.model;
-//import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,28 +17,18 @@ public class VersionUtil
         int version;
         String currText;
         String diff;
-        java.sql.ResultSet query = DbUtil.processQuery("SELECT COUNT(*) FROM revisions where docID=?", sql-> sql.setInt(1,docID));
+        java.sql.ResultSet query = DbUtil.processQuery("SELECT COUNT(*) FROM revisions where docID="+docID+";");
         try {
             query.next();
             version = query.getInt(1)+1;//the current version is the number of past versions + 1
 
-            query = DbUtil.processQuery("SELECT content FROM documents where docID=?", sql-> sql.setInt(1,docID));
+            query = DbUtil.processQuery("SELECT content FROM documents where docID="+docID+";");
             query.next();
             currText = query.getString(1);
             diff = getChanges(newText,currText);
 
-//            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
-            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE(?,?,CURRENT_DATE,?,?)", statement -> {
-                statement.setInt(1, docID);
-                statement.setInt(2,version);
-                statement.setString(3, author);
-                statement.setString(4, diff);
-            });
-//            DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",Integer.toString(docID));
-            DbUtil.executeUpdateDB("UPDATE documents SET content = ? WHERE docID= ?", statement -> {
-                statement.setString(1, newText);
-                statement.setInt(2, docID);
-            });
+            DbUtil.executeUpdateDB("INSERT INTO revisions VALUE("+docID+","+version+",CURRENT_DATE,?,?)",author,diff);
+            DbUtil.executeUpdateDB("UPDATE documents SET content = \""+newText+"\" WHERE docID = ?",Integer.toString(docID));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,29 +47,6 @@ public class VersionUtil
         return Integer.parseInt(query.getString(1));
     }
 
-    public static String create(DocumentFile docObject, List<String> usersToShare) throws java.sql.SQLException {
-        String sqlStatement1 = "INSERT INTO documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag) VALUE (?,?,?,0,"+docObject.getRestricted()+",\"1941-12-07\",0)";
-        DbUtil.executeUpdateDB(sqlStatement1, docObject.getOwner(), docObject.getDocumentName(), docObject.getContent());
-
-        java.sql.ResultSet query = DbUtil.processQuery("select max(docID) from documents where docName=? and owner=?;",docObject.getDocumentName(),docObject.getOwner());
-        query.next();
-        addSharedUsers(usersToShare, query.getString(1));
-        return query.getString(1);
-    }
-
-    private static void addSharedUsers(List<String> usersToShare, String docID) {
-        if (usersToShare != null) {
-            String sqlStatement2 = "INSERT INTO sharedDocs VALUE(?,?)";
-            usersToShare.forEach(item -> {
-                try {
-                    DbUtil.executeUpdateDB(sqlStatement2, docID, item);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-    }
-
     /**This function returns the contents of the current version of the document
      *
      * @return a string representing the contents of the current version of the doc
@@ -92,7 +58,6 @@ public class VersionUtil
         query.next();
         return query.getString(1);
     }
-
 
     /**This function creates an empty document in the database and
      *
@@ -111,7 +76,7 @@ public class VersionUtil
         {
             String temp = query.getString(1);
             versions.add(temp);
-            System.out.println(temp);
+            //System.out.println(temp);
         }
 
 
@@ -119,7 +84,7 @@ public class VersionUtil
         {
             currVersion = applyChanges(currVersion,versions.get(i));
         }
-        System.out.println(currVersion);
+        //System.out.println(currVersion);
         return currVersion;
     }
 

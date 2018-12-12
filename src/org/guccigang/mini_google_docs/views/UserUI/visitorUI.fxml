@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.UserUI.VisitorUIController">
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="897.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -40,7 +40,7 @@
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Report Commands" textAlignment="CENTER" textFill="#1389a7">
+                        <Button layoutX="20.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportTabooWordAction" prefHeight="65.0" prefWidth="265.0" text="Suggest Taboo Word" textAlignment="CENTER" textFill="#1389a7">
                            <font>
                               <Font name="Century Gothic Bold" size="18.0" />
                            </font>
@@ -56,14 +56,15 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
                         <TextArea layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="558.0" text="Document Manager&#10;      &gt;All actions related to with Documents within the UI.&#10;&#10;Report Commands&#10;      &gt;Report taboo words&#10;&#10;Upgrade Membership&#10;      &gt;Upgrade from a peasant Visitor account to a regular Original User Account&#10;&#10;" />
-                        <TableView layoutX="12.0" layoutY="354.0" prefHeight="307.0" prefWidth="558.0" AnchorPane.rightAnchor="12.800000000000068">
+                        <TableView fx:id="documentFileTable" layoutX="12.0" layoutY="354.0" prefHeight="307.0" prefWidth="558.0" AnchorPane.rightAnchor="12.800000000000068">
                           <columns>
-                            <TableColumn prefWidth="85.59994506835938" text="Title" />
-                            <TableColumn prefWidth="85.59994506835938" text="Owner" />
-                              <TableColumn prefWidth="85.59994506835938" text="View Amount" />
+                            <TableColumn fx:id="documentNameColumn" prefWidth="294.99998784065247" text="Document Name" />
+                            <TableColumn fx:id="documentOwnerColumn" prefWidth="148.99993896484375" text="Owner" />
+                              <TableColumn fx:id="documentViewCountColumn" prefWidth="113.0" text="View Count" />
                           </columns>
                         </TableView>
-                        <Label layoutX="13.0" layoutY="336.0" text="Top 3 Documents" />
+                        <Label layoutX="13.0" layoutY="336.0" text="Public Documents" />
+                        <Button layoutX="14.0" layoutY="661.0" mnemonicParsing="false" onAction="#handleOpenDocument" text="Open Document" />
                      </children>
                   </AnchorPane>
               </items>

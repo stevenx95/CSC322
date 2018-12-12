@@ -1,16 +1,14 @@
 package org.guccigang.mini_google_docs.controller.UsersManager;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import org.guccigang.mini_google_docs.model.DbUtil;
-import org.guccigang.mini_google_docs.model.DocumentDAO;
-import org.guccigang.mini_google_docs.model.DocumentFile;
-import org.guccigang.mini_google_docs.model.UserObject;
+import javafx.scene.control.*;
+import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalTextEditorController;
+import org.guccigang.mini_google_docs.model.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * This controller is for when we open another user's profile.
@@ -52,9 +50,34 @@ public class OUViewOfUsersController {
         restrictionLevelColumn.setCellValueFactory(cellData -> cellData.getValue().restrictionLevelProperty());
         fillTable();
     }
+
+    @FXML
+    public void handleOpenDocument()
+    {
+
+        int selectedIndex = documentFileTable.getSelectionModel().getSelectedIndex();
+        if(selectedIndex >= 0){
+            DocumentFile selectedDocument = documentFileTable.getItems().get(selectedIndex);
+            try
+            {
+                SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
+                GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR,"Text Editor", controller);
+            }catch (java.io.IOException e)
+            {
+                e.printStackTrace();
+                GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please try again later.", "An error occurred.", "Error");
+
+            }
+
+        }else {
+            //Nothing selected.
+            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+                    "No Document Selected", "No Selection");
+        }
+    }
     private void fillTable(){
         try{
-            documentFileTable.setItems(DocumentDAO.getSpecificsUsersDocuments(otherUser.getUserName()));
+            documentFileTable.setItems(DocumentDAO.getSpecificsUsersReadableDocuments(otherUser.getUserName()));
         }catch (SQLException e){
             e.printStackTrace();
         }

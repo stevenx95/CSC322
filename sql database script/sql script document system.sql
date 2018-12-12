@@ -1,12 +1,15 @@
 drop table if exists revisions;
 drop table if exists sharedDocs;
 drop table if exists interests;
-drop table if exists documents;
-drop table if exists users;
 drop table if exists complaints;
+drop table if exists complaintsuser;
+
 drop table if exists tabooList;
 drop table if exists tabooSuggestions;
 drop table if exists application;
+drop table if exists locks;
+drop table if exists documents;
+drop table if exists users;
 
 CREATE TABLE complaints (
     complaintID int PRIMARY KEY AUTO_INCREMENT,
@@ -24,7 +27,7 @@ CREATE TABLE complaintsuser (
     complainer varchar(20),
     violator varchar(20),
     message text,
-    docID int,
+    docID int
 );
 
 
@@ -63,7 +66,8 @@ CREATE TABLE documents (
     isLocked int NOT NULL,
     restricted int NOT NULL,
     createdDate date NOT NULL,
-    tabooFlag int
+    tabooFlag int,
+    views int
 );
 
 CREATE TABLE revisions (
@@ -129,16 +133,16 @@ insert into interests values
 ("kduggan15","Bowery"),
 ("kduggan15","Coffee");
 
-insert into documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag)values
-("Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0),
-("Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0),
-("Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0),
-("Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0),
-("Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0),
-("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0),
-("Ant","Food Bank","Pizza\nSoda\nChips",0,3,"2011-08-12",0),
-("Jon","No no Words","Pizza\nfuck\nUNK",0,3,"2011-08-12",1),
-("Jon","No no Words2","fuck\nfuck\nUNK",0,3,"2011-08-12",1);
+insert into documents (owner,docName,content,isLocked,restricted,createdDate,tabooFlag,views)values
+("Jon","My Shopping List","World\nWar\nThree",0,1,"2011-08-12",0,10),
+("Jon","My Hello List","World\nGood\nThree",0,1,"2011-08-12",0,20),
+("Jon","My Good Job List","MAN\nWar\nThree",0,1,"2011-08-12",0,30),
+("Jon","The Jefferson's","Walter\nAccount\n112233",0,2,"2011-08-12",0,22),
+("Jon","Good list","World\nGood\nThree",0,3,"2011-08-12",0,2),
+("Jon","Food Bank","Pizza\nSoda\nChips",0,2,"2011-08-12",0,55),
+("Ant","Food Bank","Pizza\nSoda\nChips",0,3,"2011-08-12",0,43),
+("Jon","No no Words","Pizza\nfuck\nUNK",0,3,"2011-08-12",1,33),
+("Jon","No no Words2","fuck\nfuck\nUNK",0,3,"2011-08-12",1,100);
 
 insert into tabooList values
  ('fuck'),
