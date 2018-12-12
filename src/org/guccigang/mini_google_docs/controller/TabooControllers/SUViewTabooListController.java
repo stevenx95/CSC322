@@ -62,6 +62,7 @@ public class SUViewTabooListController {
     private void insertTabooDB(ActionEvent actionEvent) throws SQLException, IOException {
 
         TabooWordDAO.insertTabooWord(addTextBar.getText());
+        fillTable();
     }
 
     @FXML
@@ -73,13 +74,14 @@ public class SUViewTabooListController {
         }
 
         if (tabooWord != null){
-            TabooWordDAO.removeTabooWord(tabooWord.toString());
+            TabooWordDAO.removeTabooWord(tabooWord.getTabooText());
         }
         else {
             //Nothing selected.
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a word from the table.",
                     "No Taboo Word Selected", "No Selection");
         }
+        fillTable();
     }
 
 
