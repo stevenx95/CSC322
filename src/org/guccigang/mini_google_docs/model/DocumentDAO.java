@@ -163,6 +163,7 @@ public class DocumentDAO {
         return documentFiles;
     }
 
+
     public static boolean documentIsLockedBy(int docID,String userName) {
         //System.out.println("Your username is: "+userName);
         String sqlStatement = "SELECT * FROM locks WHERE docID = " + docID+ " AND userName = \""+ userName+"\"";

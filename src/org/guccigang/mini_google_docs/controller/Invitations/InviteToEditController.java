@@ -1,4 +1,4 @@
-package org.guccigang.mini_google_docs.controller.UsersManager;
+package org.guccigang.mini_google_docs.controller.Invitations;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,7 +41,7 @@ public class InviteToEditController  implements Initializable {
         int selectionIndex = documentsTable.getSelectionModel().getSelectedIndex();
         if(selectionIndex >= 0) {
             DocumentFile selectedDoc = documentsTable.getItems().get(selectionIndex);
-                SharingUtil.processInvitation(selectedDoc.getID(),inviteeUser.getUserName());
+                SharingUtil.processInvitation(selectedDoc,inviteeUser.getUserName());
         } else {
             GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "please make a selection in the applications table",
                     "No user selected", "Error");

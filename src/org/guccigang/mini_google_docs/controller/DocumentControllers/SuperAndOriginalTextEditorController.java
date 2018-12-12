@@ -169,7 +169,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                 "Share document"
         );
         if (selectedUser != null) {
-            SharingUtil.processInvitation(selectedDocument.getID(), currentUser.getUserName());
+            SharingUtil.processInvitation(selectedDocument, selectedUser);
             UserObject selectedUserObject = UsersDAO.getSearchedResult(selectedUser, currentUser.getUserName()).get(0);
             GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
                     "This user can make updates to this document once he accepts invitation",

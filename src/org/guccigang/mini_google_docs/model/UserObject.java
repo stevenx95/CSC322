@@ -79,6 +79,7 @@ public class UserObject {
     public StringProperty lastNameProperty() {
         return new SimpleStringProperty(this.lastName);
     }
+
     public IntegerProperty membershipLevelProperty() {
         return new SimpleIntegerProperty(this.membershipLevel);
      }

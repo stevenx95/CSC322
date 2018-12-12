@@ -1,14 +1,13 @@
 package org.guccigang.mini_google_docs.controller.UsersManager;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.guccigang.mini_google_docs.controller.DocumentControllers.SuperAndOriginalTextEditorController;
+import org.guccigang.mini_google_docs.controller.Invitations.InviteToEditController;
 import org.guccigang.mini_google_docs.model.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class SUViewOfUsersController {
     private UserObject currentUser;
