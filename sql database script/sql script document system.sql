@@ -3,6 +3,7 @@ drop table if exists sharedDocs;
 drop table if exists interests;
 drop table if exists complaints;
 drop table if exists complaintsuser;
+drop table if exists approvedtaboowords;
 
 drop table if exists tabooList;
 drop table if exists tabooSuggestions;
