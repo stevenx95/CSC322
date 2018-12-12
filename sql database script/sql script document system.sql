@@ -98,11 +98,8 @@ CREATE TABLE sharedDocs (
 );
 
 CREATE TABLE invitations (
-    docID int NOT NULL,
-    owner varchar(20) NOT NULL,
     userName varchar(20) NOT NULL,
-    docName varchar(20),
-    createdDate date NOT NULL,
+    docID int NOT NULL,
     FOREIGN KEY(userName) REFERENCES users(userName),
     FOREIGN KEY(docID) REFERENCES documents(docID)
 );

@@ -11,7 +11,20 @@ import java.util.ArrayList;
 public class TabooWordDAO {
 
     public static ObservableList<TabooWord> getAllTabooWords() throws SQLException {
-        String selectStatement = "SELECT * FROM taboolist";
+        String selectStatement = "SELECT * FROM taboosuggestions";
+
+        try{
+            ResultSet rs = DbUtil.processQuery(selectStatement);
+            ObservableList<TabooWord> tabooWordsData = getTabooWordList(rs);
+            return tabooWordsData;
+        }catch (SQLException e){
+            System.out.println("SQL query has failed " + e);
+            throw e;
+        }
+    }
+
+    public static ObservableList<TabooWord> getAllApprovedTabooWords() throws SQLException {
+        String selectStatement = "SELECT * FROM approvedtaboowords";
 
         try{
             ResultSet rs = DbUtil.processQuery(selectStatement);
@@ -36,7 +49,7 @@ public class TabooWordDAO {
     }
 
     public static void insertTabooWord(String word) throws SQLException, IOException {
-        String selectStatement = "SELECT * FROM taboolist";
+        String selectStatement = "SELECT * FROM approvedtaboowords";
         ArrayList<String> list = new ArrayList<>();
 
         try {
@@ -45,7 +58,7 @@ public class TabooWordDAO {
                 list.add(rs.getString(1));
             }
             if(!list.contains(word)){
-                String selectStatement2 = "INSERT INTO taboolist(tabooWord) VALUES ('"+word+"')";
+                String selectStatement2 = "INSERT INTO approvedtaboowords(tabooWord) VALUES ('"+word+"')";
                 DbUtil.executeUpdateDB(selectStatement2);
             }
 
@@ -56,7 +69,7 @@ public class TabooWordDAO {
     }
 
     public static void removeTabooWord(String word) throws SQLException{
-        String selectStatement = "DELETE FROM taboolist WHERE tabooWord = ?";
+        String selectStatement = "DELETE FROM approvedtaboowords WHERE tabooWord = ?";
         DbUtil.executeUpdateDB(selectStatement,word);
     }
 
@@ -81,6 +94,42 @@ public class TabooWordDAO {
         }
 
     }
+
+
+
+
+
+
+
+    public static void insertIntoApprovedTable(String word) throws SQLException, IOException {
+        String selectStatement = "SELECT * FROM approvedtaboowords";
+        ArrayList<String> list = new ArrayList<>();
+
+        try {
+            ResultSet rs = DbUtil.processQuery(selectStatement);
+            while(rs.next()){
+                list.add(rs.getString(1));
+            }
+            if(!list.contains(word)){
+                String selectStatement2 = "INSERT INTO approvedtaboowords(tabooWord) VALUES ('"+word+"')";
+                DbUtil.executeUpdateDB(selectStatement2);
+            }
+
+        }catch (SQLException e){
+            throw e;
+        }
+
+    }
+
+
+
+
+    public static void removeTabooWordApproval(String word) throws SQLException{
+        String selectStatement = "DELETE FROM taboosuggestions WHERE tabooWord = ?";
+        DbUtil.executeUpdateDB(selectStatement,word);
+    }
+
+
 
 
 

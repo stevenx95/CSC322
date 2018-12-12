@@ -8,16 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.TabooControllers.SUViewTabooListController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.2809364548494983" prefHeight="400.0" prefWidth="600.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="addButton" layoutX="49.0" layoutY="40.0" mnemonicParsing="false" onAction="#insertTabooDB" prefHeight="26.0" prefWidth="68.0" text="Add" />
+                  <Button fx:id="addButton" layoutX="49.0" layoutY="40.0" mnemonicParsing="false" onAction="#approveTabooWord" prefHeight="26.0" prefWidth="68.0" text="Approve" />
                   <TextField fx:id="addTextBar" alignment="CENTER" layoutX="9.0" layoutY="76.0" prefHeight="26.0" prefWidth="149.0" promptText="Taboo Word" />
                   <Button fx:id="removeTabooButton" layoutX="49.0" layoutY="144.0" mnemonicParsing="false" onAction="#removeTabooFromDB" prefHeight="31.0" prefWidth="79.0" text="Remove" />
                   <Text layoutX="26.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a word from the table and click remove to delete " textAlignment="CENTER" wrappingWidth="113.99999976158142" />
+                  <Button layoutX="57.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleHome" text="Home" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
