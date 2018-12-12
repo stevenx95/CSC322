@@ -33,6 +33,7 @@ public class SuperAndOriginalTextEditorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DocumentDAO.incrementView(selectedDocument);
         try {
             String documentContent = VersionUtil.open(Integer.toString(selectedDocument.getID()));
 

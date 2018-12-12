@@ -7,7 +7,7 @@ public enum UILocation {
     VISITOR_TEXT_EDITOR("views/DocumentUI/VisitorTextEditor.fxml"),
     VISITOR_VIEW_DOCUMENTS("views/DocumentUI/VisitorViewDocuments.fxml"),
     LOGIN("views/LoginAndApplicationUI/login.fxml"),
-    SIGNUP("views/LoginAndApplicationUI/signup.fxml"),
+    SIGNUP("views/LoginAndApplicationUI/signUp.fxml"),
     TABOO_SU_LIST_MANAGER("views/LoginAndApplicationUI/tabooSUListView.fxml"),
     APPROVED_TABOO_SU_LIST_MANAGER("views/TabooUI/SUApprovedWordList.fxml"),
     TABOO_SU_LIST_VIEW("views/TabooUI/tabooSUListView.fxml"),
