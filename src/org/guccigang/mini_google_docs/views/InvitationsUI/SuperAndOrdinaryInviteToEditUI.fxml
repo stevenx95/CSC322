@@ -23,12 +23,15 @@
          <font>
             <Font size="35.0" />
          </font></Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="55.0" prefWidth="153.0" text="Button" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSendInvitation" prefHeight="55.0" prefWidth="153.0" text="Send Invitation" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TableView fx:id="documentsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
         <columns>
-          <TableColumn prefWidth="240.0" text="Name" />
-          <TableColumn minWidth="0.0" prefWidth="192.0" text="Owner" />
-          <TableColumn prefWidth="167.0" text="Restriction" />
+          <TableColumn fx:id="docName" prefWidth="240.0" text="Name" />
+          <TableColumn fx:id="owner" minWidth="0.0" prefWidth="192.0" text="Owner" />
+          <TableColumn fx:id="restriction" prefWidth="167.0" text="Restriction" />
         </columns>
       </TableView>
    </children>

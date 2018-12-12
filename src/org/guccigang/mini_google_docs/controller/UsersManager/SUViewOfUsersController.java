@@ -74,7 +74,7 @@ public class SUViewOfUsersController {
 
         }else {
             //Nothing selected.
-            GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a document in the table.",
+            GuiUtil.createAlertWindow(Alert.AlertType.ERROR, "Please select a document in the table.",
                     "No Document Selected", "No Selection");
         }
     }
@@ -97,12 +97,11 @@ public class SUViewOfUsersController {
         }
     }
     public void handleInviteToEdit() {
-        try {
-            ObservableList<DocumentFile>  allDocuments = DocumentDAO.getAllDocumentFilesDataForSuperUser();
-            ArrayList<DocumentFile> documentList = new ArrayList<>(allDocuments);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+       try {
+           InviteToEditController controller = new InviteToEditController(currentUser, otherUser);
+           GuiUtil.createWindow(UILocation.OU_AND_SU_INVITE_TO_EDIT, "Invire To Edit", controller);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
     }
 }

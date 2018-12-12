@@ -1,6 +1,5 @@
 package org.guccigang.mini_google_docs.model;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
@@ -20,7 +19,6 @@ public class SharingUtil {
         }
         return userNames;
     }
-
     public static void shareDoc(int docId, String userName) {
         String query1 = "INSERT INTO sharedDocs VALUE (?,?)",
                 query2 = "UPDATE documents SET restricted= ? WHERE docId=?";
@@ -30,6 +28,14 @@ public class SharingUtil {
         });
         DbUtil.executeUpdateDB(query2, pstmt-> {
             pstmt.setInt(1,1);
+            pstmt.setInt(2,docId);
+        });
+    }
+
+    public static void processInvitation(int docId, String userName) {
+        String query = "INSERT INTO invitations VALUE(?,?)";
+        DbUtil.executeUpdateDB(query, pstmt -> {
+            pstmt.setString(1, userName);
             pstmt.setInt(2,docId);
         });
     }

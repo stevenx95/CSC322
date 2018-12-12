@@ -82,6 +82,13 @@ public class OUViewOfUsersController {
             e.printStackTrace();
         }
     }
-
+    public void handleInviteToEdit() {
+        try {
+            InviteToEditController controller = new InviteToEditController(currentUser, otherUser);
+            GuiUtil.createWindow(UILocation.OU_AND_SU_INVITE_TO_EDIT, "Invire To Edit", controller);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

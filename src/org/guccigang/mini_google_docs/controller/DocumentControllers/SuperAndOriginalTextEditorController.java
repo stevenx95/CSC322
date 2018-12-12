@@ -136,37 +136,43 @@ public class SuperAndOriginalTextEditorController implements Initializable {
     public void handleChangeDocType() {
         ArrayList<String> options = DocRestriction.stringValues();
         options.removeIf(item -> item.equals("shared"));
-        String selectedOption = GuiUtil.createOptionAlert(
+        options.add(0,null);
+        String selectedOption = GuiUtil.createCancellableOptionAlert(
                 options,
                 "Select the document type: ",
                 "Change document type",
                 "Change document type"
         );
-        DocRestriction restriction = DocRestriction.getDocRestriction(selectedOption);
-        String query = "UPDATE documents SET restricted=? WHERE docID=?";
-        DbUtil.executeUpdateDB(query, statement -> {
-            statement.setInt(1, restriction.id);
-            statement.setInt(2, selectedDocument.getID());
-        });
-        GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
-                "",
-                String.format("Document type has been changed to %s: ", restriction.string),
-                "Confirmation");
+        if(selectedOption != null) {
+            DocRestriction restriction = DocRestriction.getDocRestriction(selectedOption);
+            String query = "UPDATE documents SET restricted=? WHERE docID=?";
+            DbUtil.executeUpdateDB(query, statement -> {
+                statement.setInt(1, restriction.id);
+                statement.setInt(2, selectedDocument.getID());
+            });
+            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
+                    "",
+                    String.format("Document type has been changed to %s: ", restriction.string),
+                    "Confirmation");
+        }
     }
 
     public void handleShareOfDoc() {
         ArrayList<String> userList = SharingUtil.getAllUsers(currentUser.getUserName());
-        String selectedUser = GuiUtil.createOptionAlert(
+        userList.add(0, null);
+        String selectedUser = GuiUtil.createCancellableOptionAlert(
                 userList,
                 "Share this document with: ",
                 "Share Document",
                 "Share document"
         );
-        SharingUtil.shareDoc(selectedDocument.getID(), selectedUser);
-        UserObject selectedUserObject = UsersDAO.getSearchedResult(selectedUser,currentUser.getUserName()).get(0);
-        GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
-                "This user can now make updates to this document",
-                String.format("Shared with %s %s", selectedUserObject.getFirstName(), selectedUserObject.getLastName()),
-                "Confirmation");
+        if (selectedUser != null) {
+            SharingUtil.processInvitation(selectedDocument.getID(), currentUser.getUserName());
+            UserObject selectedUserObject = UsersDAO.getSearchedResult(selectedUser, currentUser.getUserName()).get(0);
+            GuiUtil.createAlertWindow(Alert.AlertType.CONFIRMATION,
+                    "This user can make updates to this document once he accepts invitation",
+                    String.format("Invitation sent to %s %s", selectedUserObject.getFirstName(), selectedUserObject.getLastName()),
+                    "Confirmation");
+        }
     }
 }
