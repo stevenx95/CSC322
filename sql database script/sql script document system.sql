@@ -10,6 +10,7 @@ drop table if exists application;
 drop table if exists locks;
 drop table if exists documents;
 drop table if exists users;
+drop table if exists invitations;
 
 CREATE TABLE complaints (
     complaintID int PRIMARY KEY AUTO_INCREMENT,
@@ -90,6 +91,13 @@ CREATE TABLE tabooSuggestions(
 );
 
 CREATE TABLE sharedDocs (
+    userName varchar(20) NOT NULL,
+    docID int NOT NULL,
+    FOREIGN KEY(userName) REFERENCES users(userName),
+    FOREIGN KEY(docID) REFERENCES documents(docID)
+);
+
+CREATE TABLE invitations (
     userName varchar(20) NOT NULL,
     docID int NOT NULL,
     FOREIGN KEY(userName) REFERENCES users(userName),

@@ -57,6 +57,19 @@ public class GuiUtil {
         return choices.get(choices.size()-1);
     }
 
+    public static String createCancellableOptionAlert(ArrayList<String> choices, String message, String header, String title) {
+        ChoiceDialog<String> dialog = new ChoiceDialog<>(null, choices);
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
+        dialog.setContentText(message);
+        dialog.getDialogPane().
+                lookupButton(ButtonType.OK).
+                disableProperty().
+                bind(dialog.selectedItemProperty().isNull());
+        Optional<String> result = dialog.showAndWait();
+        return result.orElse(null);
+    }
+
     public static boolean createConfirmationAlert(AlertType alertType, String message, String header, String title)
     {
         Alert alert = new Alert(alertType);
