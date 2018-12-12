@@ -29,12 +29,10 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label fx:id="userNameLabel" text="User's Name" />
                               <Label fx:id="firstAndLastName" text="First and Last Name" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" prefHeight="136.0" prefWidth="214.0" text="Report User" GridPane.rowIndex="3" />
                               <Button mnemonicParsing="false" onAction="#handleInviteToEdit" prefHeight="175.0" prefWidth="291.0" text="Invite To Edit" GridPane.rowIndex="2" />
                               <Button mnemonicParsing="false" prefHeight="175.0" prefWidth="291.0" text="Invite To Edit" GridPane.rowIndex="2" />
                            </children>
