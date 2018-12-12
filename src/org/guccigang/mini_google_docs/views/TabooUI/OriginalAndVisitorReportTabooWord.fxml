@@ -6,21 +6,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.TabooControllers.OriginalAndVisitorReportTabooWordController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.guccigang.mini_google_docs.controller.TabooControllers.OriginalAndVisitorReportTabooWordController">
    <children>
       <Text layoutX="95.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your taboo word suggestion">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="tabooWordBar" alignment="CENTER" layoutX="125.0" layoutY="226.0" promptText="Taboo Word" />
-      <Button layoutX="173.0" layoutY="277.0" mnemonicParsing="false" onAction="#submitAction" text="Submit" />
-      <Text layoutX="174.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <TextField fx:id="userNameBar" alignment="CENTER" layoutX="128.0" layoutY="121.0" promptText="Username" />
-      <Text layoutX="152.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you are a visitor, enter visitor!" textAlignment="CENTER" wrappingWidth="99.39453125" />
+      <TextField fx:id="tabooWordBar" alignment="CENTER" layoutX="125.0" layoutY="114.0" promptText="Taboo Word" />
+      <Button layoutX="172.0" layoutY="180.0" mnemonicParsing="false" onAction="#submitAction" text="Submit" />
    </children>
 </Pane>
