@@ -81,7 +81,6 @@ public class SuperAndOriginalDocManagerController {
                     }
                 }
                 else {
-                    DocumentDAO.lockDocument(selectedDocument.getID(), currentUser.getUserName());
                     GuiUtil.createWindow(UILocation.SUPER_AND_ORIGINAL_TEXT_EDITOR, "Text Editor", controller);
                     DocumentDAO.unlockDocument(selectedDocument.getID(), currentUser.getUserName());
                 }

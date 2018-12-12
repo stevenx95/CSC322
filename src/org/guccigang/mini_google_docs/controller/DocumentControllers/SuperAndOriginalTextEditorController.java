@@ -49,13 +49,15 @@ public class SuperAndOriginalTextEditorController implements Initializable {
                 GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "While locked, this document is in View-Only mode" ,
                         "Document is locked", "Warning");
             }
+            else
+            {
+                DocumentDAO.lockDocument(selectedDocument.getID(), currentUser.getUserName());
+            }
             areaText.setText(documentContent);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        //DocumentDAO.lockDocument(selectedDocument.getID());//locks document once it's opened
     }
     public void onSave(ActionEvent event)
     {
