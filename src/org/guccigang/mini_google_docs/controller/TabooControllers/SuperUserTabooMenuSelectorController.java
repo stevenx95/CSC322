@@ -12,8 +12,13 @@ import java.io.IOException;
 public class SuperUserTabooMenuSelectorController {
 
     private UserObject currentUser;
+    public SuperUserTabooMenuSelectorController() {
+        this(null);
+    }
 
-    public SuperUserTabooMenuSelectorController(UserObject currentUser){}
+    public SuperUserTabooMenuSelectorController(UserObject currentUser){
+        this.currentUser = currentUser;
+    }
 
 
 
@@ -22,7 +27,7 @@ public class SuperUserTabooMenuSelectorController {
 
         try{
 
-
+            System.out.println(currentUser.getUserName());
             SUViewTabooListController controller = new SUViewTabooListController(currentUser);
             GuiUtil.changeScene(event,UILocation.APPROVED_TABOO_SU_LIST_MANAGER, "Document Manager",controller);
 

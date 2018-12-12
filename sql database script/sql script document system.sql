@@ -85,6 +85,10 @@ CREATE TABLE tabooList (
     tabooWord varchar(20) NOT NULL
 );
 
+CREATE TABLE approvedtaboowords(
+    tabooWord varchar(20) NOT NULL
+);
+
 CREATE TABLE tabooSuggestions(
     userName varchar(20) NOT NULL,
     tabooWord varchar(20) NOT NULL

@@ -35,7 +35,7 @@ public class TabooUtil {
     public static boolean containsTaboo (String string){
         String tempStr = string.replace("\n", " ");
         String[] documentContents = tempStr.split(" ");
-        String SQLStatement = "select * from tabooList where tabooWord = ?";
+        String SQLStatement = "select * from approvedtaboowords where tabooWord = ?";
 
         for (String word : documentContents){
             try{
@@ -53,7 +53,7 @@ public class TabooUtil {
     public static boolean containTabooAndUNK (String string){
         String tempStr = string.replace("\n", " ");
         String[] documentContents = tempStr.split(" ");
-        String SQLStatement = "select * from tabooList where tabooWord = ?";
+        String SQLStatement = "select * from approvedtaboowords where tabooWord = ?";
 
         for (String word : documentContents){
             if (word.equals("UNK") || containsTaboo(string)){
@@ -69,7 +69,7 @@ public class TabooUtil {
      */
     private static HashSet<String> getTabooList(){
         HashSet<String> tabooSet = new HashSet<>();
-        String SQLStatement = "select * from tabooList";
+        String SQLStatement = "select * from approvedtaboowords";
         ResultSet resultSet = DbUtil.processQuery(SQLStatement);
         try{
             while (resultSet.next()){
