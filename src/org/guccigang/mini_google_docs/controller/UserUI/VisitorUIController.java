@@ -96,8 +96,7 @@ public class VisitorUIController {
     public void reportTabooWordAction(ActionEvent event){
             try {
                 OriginalAndVisitorReportTabooWordController controller = new OriginalAndVisitorReportTabooWordController();
-                GuiUtil.createWindow(UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word",controller);
-            } catch (Exception e) {
+                GuiUtil.createWindow(UILocation.ORIGINAL_AND_VISITOR_REPORT_TABOO_WORD, "Report Taboo Word",controller);            } catch (Exception e) {
                 e.printStackTrace();
             }
     }
