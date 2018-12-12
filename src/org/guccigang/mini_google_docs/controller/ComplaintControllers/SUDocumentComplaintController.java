@@ -83,6 +83,8 @@ public class SUDocumentComplaintController {
             GuiUtil.createAlertWindow(Alert.AlertType.WARNING, "Please select a complaint from the table.",
                     "No Complaint Selected", "No Selection");
         }
+
+        fillTable();
     }
 
     @FXML
