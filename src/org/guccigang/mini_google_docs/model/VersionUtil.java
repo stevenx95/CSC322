@@ -3,7 +3,6 @@
 This is a utility class for version control
  */
 package org.guccigang.mini_google_docs.model;
-//import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

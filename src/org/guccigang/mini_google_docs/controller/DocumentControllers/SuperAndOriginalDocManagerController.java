@@ -64,13 +64,14 @@ public class SuperAndOriginalDocManagerController {
                 SuperAndOriginalTextEditorController controller = new SuperAndOriginalTextEditorController(currentUser, selectedDocument);
                 if(DocumentDAO.documentIsLocked(selectedDocument.getID()))
                 {
-                    if(selectedDocument.getOwner().equals(currentUser.getUserName()))
+                    if(selectedDocument.getOwner().equals(currentUser.getUserName()) || currentUser.getMembershipLevel() == 2)
                     {
                         if(GuiUtil.createConfirmationAlert(Alert.AlertType.CONFIRMATION,
                                 "Would you like to unlock it?",
                                 "Locked Document","Locked"))
                         {
                             DocumentDAO.unlockDocument(selectedDocument.getID());
+                            handleOpenDocument();
                         }
                     }
                     else
