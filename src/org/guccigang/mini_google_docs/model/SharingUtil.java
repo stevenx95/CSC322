@@ -131,7 +131,7 @@ public class SharingUtil {
                     resultSet.getString("owner"),
                     resultSet.getString("userName"),
                     resultSet.getString("docName"),
-                    resultSet.getDate("createdDate").toString()
+                    resultSet.getDate("dateCreated").toString()
             );
             invitationsList.add(invitationObject);
         }
